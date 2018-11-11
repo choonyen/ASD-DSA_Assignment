@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author LENOVO
@@ -12,9 +14,17 @@ package Model;
 public class CorporateCustomer extends Customer{
     
     private double creditLimit;
-
+    
+    public CorporateCustomer(){
+    }
+    
     public CorporateCustomer(double creditLimit, String custID, String name, char gender, int age, String contact) {
         super(custID, name, gender, age, contact);
+        this.creditLimit = creditLimit;
+    }
+
+    public CorporateCustomer(double  creditLimit,String custID, String name, char gender, int age, String contact, Date lastOrderDate) {
+        super(custID, name, gender, age, contact, lastOrderDate);
         this.creditLimit = creditLimit;
     }
 
@@ -30,5 +40,4 @@ public class CorporateCustomer extends Customer{
     public void add() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

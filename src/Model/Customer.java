@@ -18,6 +18,9 @@ public abstract class Customer {
     private int age;
     private String contact;
     private Date lastOrderDate;
+    
+    public Customer(){
+    }
 
     public Customer(String custID, String name, char gender, int age, String contact) {
         this.custID = custID;
@@ -25,6 +28,15 @@ public abstract class Customer {
         this.gender = gender;
         this.age = age;
         this.contact = contact;
+    }
+
+    public Customer(String custID, String name, char gender, int age, String contact, Date lastOrderDate) {
+        this.custID = custID;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.contact = contact;
+        this.lastOrderDate = lastOrderDate;
     }
 
     public String getCustID() {
@@ -75,6 +87,8 @@ public abstract class Customer {
         this.lastOrderDate = lastOrderDate;
     }
     
+    public abstract double getCreditLimit();
+    public abstract void setCreditLimit(double creditLimit);
     public abstract void add();
     
         
