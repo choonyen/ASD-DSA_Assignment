@@ -20,6 +20,8 @@ public class CustomerMaintenance extends javax.swing.JFrame {
      */
     public CustomerMaintenance() {
         initComponents();
+        jlblCreditLimit.setVisible(false);
+        jtfCreditLimit.setVisible(false);
     }
 
     /**
@@ -44,6 +46,9 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         jtfContact = new javax.swing.JTextField();
         jbAdd = new javax.swing.JButton();
         jbCancel = new javax.swing.JButton();
+        jcboxCorporateCustomer = new javax.swing.JCheckBox();
+        jlblCreditLimit = new javax.swing.JLabel();
+        jtfCreditLimit = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,6 +101,22 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         jbCancel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jbCancel.setText("Cancel");
 
+        jcboxCorporateCustomer.setBackground(new java.awt.Color(255, 204, 204));
+        jcboxCorporateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jcboxCorporateCustomer.setText("Corporate Customer");
+        jcboxCorporateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcboxCorporateCustomerActionPerformed(evt);
+            }
+        });
+
+        jlblCreditLimit.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblCreditLimit.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblCreditLimit.setText("Credit Limit:");
+
+        jtfCreditLimit.setEditable(false);
+        jtfCreditLimit.setToolTipText("exp: 0xx-xxxxxxx");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -103,6 +124,8 @@ public class CustomerMaintenance extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcboxCorporateCustomer)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jlblGender, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlblName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,11 +140,12 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                             .addComponent(jtfContact, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jcbAge, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jcbGender, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jcbGender, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,7 +166,13 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jlblContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfContact))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jcboxCorporateCustomer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfCreditLimit)
+                    .addComponent(jlblCreditLimit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,6 +225,11 @@ public class CustomerMaintenance extends javax.swing.JFrame {
             warningMsg += "*Invalid Contact No format\n";
             valid = false;
         }
+        if(jcboxCorporateCustomer.isSelected() && jtfCreditLimit.getText().equals("")){
+            warningMsg += "*Credit Limit cannot be empty.\n";
+            valid = false;
+        }
+        
         if(valid){
             CountDA countDA = new CountDA();
             Count count = countDA.getCount();
@@ -207,11 +242,30 @@ public class CustomerMaintenance extends javax.swing.JFrame {
             int age;
             age = jcbAge.getSelectedIndex()+18;
             String contact = jtfContact.getText();
-            Customer customer = new Consumer("C"+String.format("%03d", count.getCustomerCount()),name, gender, age, contact);
             
             
-            AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
-            addCustomerConfirm.setVisible(true);
+            if(jcboxCorporateCustomer.isSelected()){
+                double creditLimit = 0;
+                try{
+                    creditLimit = Double.parseDouble(jtfCreditLimit.getText());
+                }catch(NumberFormatException ex){
+                    JOptionPane.showMessageDialog(null, "Invalid amount, must be number", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+                if(creditLimit!=0){
+                    Customer customer = new CorporateCustomer(creditLimit,"C"+String.format("%03d", count.getCustomerCount()),name, gender, age, contact);
+                    AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
+                    addCustomerConfirm.setVisible(true);
+                }
+            }
+            else{
+                Customer customer = new Consumer("C"+String.format("%03d", count.getCustomerCount()),name, gender, age, contact);
+                AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
+                addCustomerConfirm.setVisible(true);
+            }
+            
+            
+            
+            
             
             
         }
@@ -220,6 +274,20 @@ public class CustomerMaintenance extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jbAddActionPerformed
+
+    private void jcboxCorporateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboxCorporateCustomerActionPerformed
+        // TODO add your handling code here:
+        if(jcboxCorporateCustomer.isSelected()){
+            jlblCreditLimit.setVisible(true);
+            jtfCreditLimit.setVisible(true);
+            jtfCreditLimit.setEditable(true);
+        }
+        else{
+            jlblCreditLimit.setVisible(false);
+            jtfCreditLimit.setVisible(false);
+            jtfCreditLimit.setEditable(false);
+        }
+    }//GEN-LAST:event_jcboxCorporateCustomerActionPerformed
 
     private boolean contactValidation(String contact){
         if(contact.matches("[\\d]{3}-[\\d]{7,8}")){
@@ -270,13 +338,16 @@ public class CustomerMaintenance extends javax.swing.JFrame {
     private javax.swing.JButton jbCancel;
     private javax.swing.JComboBox<String> jcbAge;
     private javax.swing.JComboBox<String> jcbGender;
+    private javax.swing.JCheckBox jcboxCorporateCustomer;
     private javax.swing.JLabel jlblAge;
     private javax.swing.JLabel jlblContact;
+    private javax.swing.JLabel jlblCreditLimit;
     private javax.swing.JLabel jlblGender;
     private javax.swing.JLabel jlblHeader;
     private javax.swing.JLabel jlblName;
     private javax.swing.JLabel jlblTitle;
     private javax.swing.JTextField jtfContact;
+    private javax.swing.JTextField jtfCreditLimit;
     private javax.swing.JTextField jtfName;
     // End of variables declaration//GEN-END:variables
 }
