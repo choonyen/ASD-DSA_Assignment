@@ -20,10 +20,10 @@ public class CustomizedFloral {
     private double price;
     private String priority;
     
-    public CustomizedFloral(String orderID, String custID, String arrStyle,String arrSize, String flower, String accessories, double price, String priority)
+    public CustomizedFloral(String custID,String orderID, String arrStyle,String arrSize, String flower, String accessories, double price, String priority)
     {
-        this.orderID = orderID;
         this.custID = custID;
+        this.orderID = orderID;    
         this.arrStyle = arrStyle;
         this.arrSize = arrSize;
         this.flower = flower;

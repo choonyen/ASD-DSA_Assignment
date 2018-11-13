@@ -56,32 +56,6 @@ public class CustomizedDA {
         
     }
     
-    public CustomizedFloral getCustById(String id){
-        String queryStr = "SELECT * FROM " + tableName + " WHERE ID = ?";
-        CustomizedFloral custFloral = null;
-        try{
-            stmt = conn.prepareStatement(queryStr);
-            stmt.setString(1,id);
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
-                custFloral = new CustomizedFloral(
-                        rs.getString("CORDERNO"),
-                        rs.getString("CUSTID"),
-                        rs.getString("ARRANGEMENTSTYLE"),
-                        rs.getString("SIZE"),
-                        rs.getString("FLOWER"),
-                        rs.getString("ACCESSORY"),
-                        rs.getDouble("PRICE"),
-                        rs.getString("PRIORITY")           
-                );
-            }
-            
-        }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        return custFloral;
-    }
-    
     public void addCustOrder(CustomizedFloral custFloral){
         String insertStr = "INSERT INTO " + tableName + " VALUES(?,?,?,?,?,?,?,?)";
         try{

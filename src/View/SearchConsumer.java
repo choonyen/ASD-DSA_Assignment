@@ -54,7 +54,7 @@ public class SearchConsumer extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -81,6 +81,11 @@ public class SearchConsumer extends javax.swing.JFrame {
         });
 
         jbtReset.setText("Reset");
+        jbtReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtResetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,8 +122,8 @@ public class SearchConsumer extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,8 +139,20 @@ public class SearchConsumer extends javax.swing.JFrame {
     private void jbtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSearchActionPerformed
         // TODO add your handling code here:
         String id = jtfCustID.getText();
-        CustomizedFloral custFloral = maintenanceCustomerControl.searchCustomer(id);
+        Customer customer = maintenanceCustomerControl.searchCustomer(id);
+        
+        if(customer != null)
+        {
+            CustomizedHome customizedHome = new CustomizedHome(customer);
+            customizedHome.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jbtSearchActionPerformed
+
+    private void jbtResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtResetActionPerformed
+        // TODO add your handling code here:
+        jtfCustID.setText("");
+    }//GEN-LAST:event_jbtResetActionPerformed
 
     /**
      * @param args the command line arguments

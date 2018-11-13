@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package Control;
-import Model.CustomizedFloral;
-import DA.CustomizedDA;
+import Model.*;
+import DA.*;
 import DA.*;
 import Model.*;
 import javax.swing.*;
@@ -17,10 +17,12 @@ import java.util.*;
  */
 public class MaintenanceCustomerControl {
     CustomizedDA customizedDA;
+    CustomerDA customerDA;
     
     public MaintenanceCustomerControl()
     {
         customizedDA = new CustomizedDA();
+        customerDA = new CustomerDA();
     }
     
     private boolean idValidation(String id)
@@ -49,31 +51,31 @@ public class MaintenanceCustomerControl {
         }
     }
     
-    public CustomizedFloral searchCustomer(String id)
+    public Customer searchCustomer(String id)
     {
-        CustomizedFloral custFloral = null;
+        Customer customer = null;
         if(!id.equals(""))
         {
             if(idValidation(id))
             {
-                custFloral = customizedDA.getCustById(id);
-                if(custFloral==null)
+                customer = customerDA.getConsumer(id);
+                if(customer==null)
                 {
                     JOptionPane.showMessageDialog(null,"Wrong ID!! Cannot Find Customer.","Error", JOptionPane.ERROR_MESSAGE);
-                    return custFloral;
+                    return customer;
                 }
             }
             else
             {
                 JOptionPane.showMessageDialog(null,"Invalid ID format!!! example:C000 or c000","ERROR",JOptionPane.ERROR_MESSAGE);
-                return custFloral;
+                return customer;
             }
         }
         else
         {
             JOptionPane.showMessageDialog(null,"ERROR!! Cannot be Blank","ERROR",JOptionPane.ERROR_MESSAGE);
         }
-        return custFloral;    
+        return customer;    
     }
     
     

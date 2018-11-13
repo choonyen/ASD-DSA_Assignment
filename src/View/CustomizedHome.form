@@ -32,7 +32,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel2" max="32767" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,7 +50,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabelTitle" pref="521" max="32767" attributes="0"/>
+                  <Component id="jLabelTitle" pref="407" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -90,108 +90,96 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <Component id="jLabelOption" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jbtDisplay" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabelAccessories" min="-2" pref="135" max="-2" attributes="0"/>
-                              <Component id="jLabelPriority" min="-2" pref="135" max="-2" attributes="0"/>
-                              <Component id="jLabelFlower" min="-2" pref="135" max="-2" attributes="0"/>
-                              <Component id="jLabelSize" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                              <Component id="jLabelStyle" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                              <Component id="jLabelOrderID" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                              <Component id="jLabelName" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jComboBoxPriority" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxAccessories" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxFlower" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxSize" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxStyle" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jtfOrderID" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtfCustName" alignment="0" pref="100" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabelFlower" min="-2" pref="135" max="-2" attributes="0"/>
+                                      <Component id="jLabelSize" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                                      <Component id="jLabelGender" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                                      <Component id="jLabelCustID" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                                      <Component id="jLabelName" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jButtonConfirm" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jtfCustomerID" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfCustName" alignment="0" pref="100" max="32767" attributes="0"/>
+                                  <Component id="jtfGender" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfAge" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfContact" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jButtonBack" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="jLabelOption" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelName" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="jtfCustName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelOrderID" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jtfOrderID" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelCustID" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="jtfCustomerID" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelStyle" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jComboBoxStyle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelGender" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="jtfGender" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelSize" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jComboBoxSize" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfAge" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBoxFlower" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelFlower" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="jtfContact" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelAccessories" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jComboBoxAccessories" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonBack" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBoxPriority" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelPriority" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbtDisplay" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabelStyle">
+        <Component class="javax.swing.JLabel" name="jLabelGender">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Arrangement Style"/>
+            <Property name="text" type="java.lang.String" value="Gender"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelSize">
@@ -200,7 +188,7 @@
               <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Arrangement Size"/>
+            <Property name="text" type="java.lang.String" value="Age"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
@@ -212,126 +200,21 @@
               <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Flower"/>
+            <Property name="text" type="java.lang.String" value="Contact"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelAccessories">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="13" style="1"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Accessories"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelPriority">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="13" style="1"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Pickup Priority"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="jButtonBack">
           <Properties>
             <Property name="text" type="java.lang.String" value="Back To Home Page"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="jButtonConfirm">
           <Properties>
             <Property name="text" type="java.lang.String" value="Confirm"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelOption">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="ff" type="rgb"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Please select the desire product in the following option"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBoxStyle">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="8">
-                <StringItem index="0" value="Elliptical flower arrangement"/>
-                <StringItem index="1" value="Vertical flower arrangement"/>
-                <StringItem index="2" value="Horizontal flower arrangement"/>
-                <StringItem index="3" value="Triangular flower arrangement"/>
-                <StringItem index="4" value="Crescent flower arrangement"/>
-                <StringItem index="5" value="&apos;S&apos; shaped flower arrangement"/>
-                <StringItem index="6" value="Oval shaped flower arrangement"/>
-                <StringItem index="7" value="Cascade flower arrangement"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBoxSize">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Big"/>
-                <StringItem index="1" value="Medium"/>
-                <StringItem index="2" value="Small"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBoxFlower">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBoxAccessories">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="None"/>
-                <StringItem index="1" value="Letter"/>
-                <StringItem index="2" value="Doll"/>
-                <StringItem index="3" value="Love Shape Card"/>
-                <StringItem index="4" value="Today&apos;s Specials"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBoxPriority">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Express "/>
-                <StringItem index="1" value="Normal"/>
-                <StringItem index="2" value="Flexi "/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConfirmActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelName">
           <Properties>
@@ -342,36 +225,65 @@
             <Property name="text" type="java.lang.String" value="Customer Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelOrderID">
+        <Component class="javax.swing.JLabel" name="jLabelCustID">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Order ID"/>
+            <Property name="text" type="java.lang.String" value="Customer ID"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfCustName">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="custName"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfOrderID">
+        <Component class="javax.swing.JTextField" name="jtfCustomerID">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="orderID"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfOrderIDActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCustomerIDActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbtDisplay">
+        <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Display Queue"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="18" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="User Profile"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfGender">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfGenderActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfAge">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfAgeActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfContact">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfContactActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

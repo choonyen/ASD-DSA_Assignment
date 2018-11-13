@@ -5,6 +5,9 @@
  */
 package View;
 import javax.swing.*;
+import DA.*;
+import Model.*;
+import Control.*;
 
 /**
  *
@@ -12,11 +15,23 @@ import javax.swing.*;
  */
 public class CustomizedHome extends javax.swing.JFrame {
 
+    Customer customer;
     /**
      * Creates new form CustomizedHome
      */
     public CustomizedHome() {
         initComponents();
+    }
+    
+    public CustomizedHome(Customer customer)
+    {
+        this.customer = customer;
+        initComponents();
+        jtfCustName.setText(customer.getName());
+        jtfCustomerID.setText(customer.getCustID());
+        jtfGender.setText("" + customer.getGender());
+        jtfAge.setText("" + customer.getAge());
+        jtfContact.setText(customer.getContact());
     }
 
     /**
@@ -31,24 +46,19 @@ public class CustomizedHome extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabelTitle = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabelStyle = new javax.swing.JLabel();
+        jLabelGender = new javax.swing.JLabel();
         jLabelSize = new javax.swing.JLabel();
         jLabelFlower = new javax.swing.JLabel();
-        jLabelAccessories = new javax.swing.JLabel();
-        jLabelPriority = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabelOption = new javax.swing.JLabel();
-        jComboBoxStyle = new javax.swing.JComboBox<>();
-        jComboBoxSize = new javax.swing.JComboBox<>();
-        jComboBoxFlower = new javax.swing.JComboBox<>();
-        jComboBoxAccessories = new javax.swing.JComboBox<>();
-        jComboBoxPriority = new javax.swing.JComboBox<>();
+        jButtonBack = new javax.swing.JButton();
+        jButtonConfirm = new javax.swing.JButton();
         jLabelName = new javax.swing.JLabel();
-        jLabelOrderID = new javax.swing.JLabel();
+        jLabelCustID = new javax.swing.JLabel();
         jtfCustName = new javax.swing.JTextField();
-        jtfOrderID = new javax.swing.JTextField();
-        jbtDisplay = new javax.swing.JButton();
+        jtfCustomerID = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jtfGender = new javax.swing.JTextField();
+        jtfAge = new javax.swing.JTextField();
+        jtfContact = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +75,7 @@ public class CustomizedHome extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -78,145 +88,139 @@ public class CustomizedHome extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        jLabelStyle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabelStyle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelStyle.setText("Arrangement Style");
+        jLabelGender.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabelGender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGender.setText("Gender");
 
         jLabelSize.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabelSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelSize.setText("Arrangement Size");
+        jLabelSize.setText("Age");
 
         jLabelFlower.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabelFlower.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelFlower.setText("Flower");
+        jLabelFlower.setText("Contact");
 
-        jLabelAccessories.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabelAccessories.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelAccessories.setText("Accessories");
+        jButtonBack.setText("Back To Home Page");
 
-        jLabelPriority.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabelPriority.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelPriority.setText("Pickup Priority");
-
-        jButton1.setText("Back To Home Page");
-
-        jButton2.setText("Confirm");
-
-        jLabelOption.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelOption.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelOption.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelOption.setText("Please select the desire product in the following option");
-
-        jComboBoxStyle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elliptical flower arrangement", "Vertical flower arrangement", "Horizontal flower arrangement", "Triangular flower arrangement", "Crescent flower arrangement", "'S' shaped flower arrangement", "Oval shaped flower arrangement", "Cascade flower arrangement" }));
-
-        jComboBoxSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Big", "Medium", "Small" }));
-
-        jComboBoxFlower.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBoxAccessories.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Letter", "Doll", "Love Shape Card", "Today's Specials" }));
-
-        jComboBoxPriority.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Express ", "Normal", "Flexi " }));
+        jButtonConfirm.setText("Confirm");
+        jButtonConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmActionPerformed(evt);
+            }
+        });
 
         jLabelName.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabelName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelName.setText("Customer Name");
 
-        jLabelOrderID.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabelOrderID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelOrderID.setText("Order ID");
+        jLabelCustID.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabelCustID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCustID.setText("Customer ID");
 
         jtfCustName.setEditable(false);
         jtfCustName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtfCustName.setText("custName");
 
-        jtfOrderID.setEditable(false);
-        jtfOrderID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtfOrderID.setText("orderID");
-        jtfOrderID.addActionListener(new java.awt.event.ActionListener() {
+        jtfCustomerID.setEditable(false);
+        jtfCustomerID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfCustomerID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfOrderIDActionPerformed(evt);
+                jtfCustomerIDActionPerformed(evt);
             }
         });
 
-        jbtDisplay.setText("Display Queue");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("User Profile");
+
+        jtfGender.setEditable(false);
+        jtfGender.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfGender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfGenderActionPerformed(evt);
+            }
+        });
+
+        jtfAge.setEditable(false);
+        jtfAge.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfAge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfAgeActionPerformed(evt);
+            }
+        });
+
+        jtfContact.setEditable(false);
+        jtfContact.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfContact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfContactActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabelOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbtDisplay))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelAccessories, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelPriority, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelFlower, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelSize, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelStyle, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxPriority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxAccessories, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxFlower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxStyle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelFlower, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelSize, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelGender, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelCustID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButtonConfirm)
+                                .addGap(8, 8, 8)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jtfOrderID, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfCustName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jtfCustomerID, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtfCustName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(jtfGender, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtfAge, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtfContact, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jButtonBack))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabelOption)
-                .addGap(38, 38, 38)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelCustID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelStyle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxStyle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelGender, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSize, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxFlower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelFlower, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabelFlower, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAccessories, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAccessories, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxPriority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelPriority, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jbtDisplay))
-                .addContainerGap())
+                    .addComponent(jButtonConfirm)
+                    .addComponent(jButtonBack))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabelSize.getAccessibleContext().setAccessibleName("");
@@ -233,15 +237,34 @@ public class CustomizedHome extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfOrderIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfOrderIDActionPerformed
+    private void jtfCustomerIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCustomerIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfOrderIDActionPerformed
+    }//GEN-LAST:event_jtfCustomerIDActionPerformed
+
+    private void jtfGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfGenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfGenderActionPerformed
+
+    private void jtfAgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfAgeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfAgeActionPerformed
+
+    private void jtfContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfContactActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfContactActionPerformed
+
+    private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
+        // TODO add your handling code here:
+        CustomizedOrder customizedOrder = new CustomizedOrder(customer);
+        customizedOrder.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonConfirmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,26 +302,21 @@ public class CustomizedHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBoxAccessories;
-    private javax.swing.JComboBox<String> jComboBoxFlower;
-    private javax.swing.JComboBox<String> jComboBoxPriority;
-    private javax.swing.JComboBox<String> jComboBoxSize;
-    private javax.swing.JComboBox<String> jComboBoxStyle;
-    private javax.swing.JLabel jLabelAccessories;
+    private javax.swing.JButton jButtonBack;
+    private javax.swing.JButton jButtonConfirm;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelCustID;
     private javax.swing.JLabel jLabelFlower;
+    private javax.swing.JLabel jLabelGender;
     private javax.swing.JLabel jLabelName;
-    private javax.swing.JLabel jLabelOption;
-    private javax.swing.JLabel jLabelOrderID;
-    private javax.swing.JLabel jLabelPriority;
     private javax.swing.JLabel jLabelSize;
-    private javax.swing.JLabel jLabelStyle;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton jbtDisplay;
+    private javax.swing.JTextField jtfAge;
+    private javax.swing.JTextField jtfContact;
     private javax.swing.JTextField jtfCustName;
-    private javax.swing.JTextField jtfOrderID;
+    private javax.swing.JTextField jtfCustomerID;
+    private javax.swing.JTextField jtfGender;
     // End of variables declaration//GEN-END:variables
 }
