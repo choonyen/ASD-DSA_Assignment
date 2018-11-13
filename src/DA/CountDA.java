@@ -51,11 +51,24 @@ public class CountDA {
         return count;
     }
     
-    public void increateCustomerCount(){
+    public void increaseCustomerCount(){
         Count count = this.getCount();
         int customerCount = count.getCustomerCount()+1;
         try{
             stmt = conn.prepareStatement(("Update Count set CUSTOMERCOUNT = " + customerCount));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
+     public void increaseCorporateCustomerCount(){
+        increaseCustomerCount(); 
+        Count count = this.getCount();
+        int corporateCustomerCount = count.getCorporateCustomerCount()+1;
+        try{
+            stmt = conn.prepareStatement(("Update Count set CORPORATECUSTOMERCOUNT = " + corporateCustomerCount));
             stmt.executeUpdate();
                   
         }catch (SQLException ex) {

@@ -51,6 +51,22 @@ public class CustomerDA {
         }
     }
     
+    public void addCorporateCustomer(Customer customer){
+        String insertStr = "INSERT INTO " + "CORPORATE_CUSTOMER" + " VALUES(?,?)";
+        this.addConsumer(customer);
+        try{
+            stmt = conn.prepareStatement(insertStr);
+            stmt.setString(1, customer.getCustID());
+            stmt.setDouble(2, customer.getCreditLimit());
+            
+            stmt.executeUpdate();
+            
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public Customer getConsumer(String id){
         String queryStr = "SELECT * FROM " + tableName + " WHERE CUSTID = ?";
         Customer customer = null;

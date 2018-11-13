@@ -86,9 +86,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jlblCreditLimit" min="-2" pref="172" max="-2" attributes="0"/>
+                      <Component id="jcboxCorporateCustomer" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jlblGender" min="-2" pref="172" max="-2" attributes="0"/>
                           <Component id="jlblName" min="-2" pref="172" max="-2" attributes="0"/>
@@ -107,6 +109,7 @@
                                   <Component id="jcbAge" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jcbGender" alignment="0" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="jtfCreditLimit" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -114,7 +117,7 @@
                           <Component id="jbCancel" min="-2" pref="116" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -141,7 +144,14 @@
                       <Component id="jlblContact" max="32767" attributes="0"/>
                       <Component id="jtfContact" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="90" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jcboxCorporateCustomer" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jtfCreditLimit" max="32767" attributes="0"/>
+                      <Component id="jlblCreditLimit" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbAdd" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="jbCancel" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
@@ -325,6 +335,35 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cancel"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="jcboxCorporateCustomer">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Corporate Customer"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcboxCorporateCustomerActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblCreditLimit">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="24" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Credit Limit:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfCreditLimit">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="toolTipText" type="java.lang.String" value="exp: 0xx-xxxxxxx"/>
           </Properties>
         </Component>
       </SubComponents>
