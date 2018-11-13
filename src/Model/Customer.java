@@ -28,6 +28,7 @@ public abstract class Customer {
         this.gender = gender;
         this.age = age;
         this.contact = contact;
+        lastOrderDate = null;
     }
 
     public Customer(String custID, String name, char gender, int age, String contact, Date lastOrderDate) {
