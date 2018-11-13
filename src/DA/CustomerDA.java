@@ -39,8 +39,10 @@ public class CustomerDA {
             stmt.setString(3, String.valueOf(customer.getGender()));
             stmt.setInt(4, customer.getAge());
             stmt.setString(5, customer.getContact());
-            stmt.setDate(6, new java.sql.Date(customer.getLastOrderDate().getTime()));
-        
+            if(customer.getLastOrderDate()!=null)
+                stmt.setDate(6, new java.sql.Date(customer.getLastOrderDate().getTime()));
+            else
+                stmt.setDate(6, null);
             stmt.executeUpdate();
             
             
