@@ -63,7 +63,7 @@ public class MaintainCatalogControl {
             }
             else
             {
-                JOptionPane.showMessageDialog(null,"Invalid ID format!!! example:P000 or c000","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Invalid ID format!!! example:P000 or p000","ERROR",JOptionPane.ERROR_MESSAGE);
                 return catalog;
             }
         }

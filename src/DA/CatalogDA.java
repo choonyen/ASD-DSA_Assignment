@@ -1,5 +1,4 @@
 package DA;
-
 import Model.Catalog;
 import java.sql.*;
 import javax.swing.*;

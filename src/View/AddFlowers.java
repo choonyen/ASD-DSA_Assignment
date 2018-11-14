@@ -183,10 +183,8 @@ public class AddFlowers extends javax.swing.JFrame {
         if(jtfStock.getText().equals("")){
             warningMsg += "*Stock No cannot be empty.\n";
             valid = false;
-        }
-        if(!priceValidation(jtfPrice.getText()) && !jtfPrice.getText().equals("")){
-            warningMsg += "*Invalid Price No Follow the format\n";
-            valid = false;
+       
+      
         }
         if(!stockValidation(jtfStock.getText()) && !jtfStock.getText().equals("")){
             warningMsg += "*Invalid Stock No Follow the format\n";
@@ -217,20 +215,15 @@ public class AddFlowers extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_jConfirmActionPerformed
-private boolean priceValidation(String price){
-            if(price.matches("[[0-9] + .[0-9]{2}]")){
-                if(price.charAt(0) == '0' && price.charAt(1) == '1')
-                return true;
-            }
-            return false;
-        }
+
 
         private boolean stockValidation(String stock){
-            if(stock.matches("[0-9]{2}")){
-                if(stock.charAt(0) == '0' && stock.charAt(1) == '1')
-                return true;
-            }
+             if(Character.isDigit(stock.charAt(0)))
+                    {
+                        return true;
+                    }
             return false;
+            
         }
     private void jCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelActionPerformed
         // TODO add your handling code here:
