@@ -6,6 +6,7 @@
 package View;
 import Model.*;
 import DA.*;
+import Control.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -124,12 +125,9 @@ public class AddFlowers extends javax.swing.JFrame {
                             .addComponent(jtfStock))
                         .addGap(0, 123, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jlblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jlblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))))
+                        .addGap(22, 22, 22)
+                        .addComponent(jlblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jlblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -204,7 +202,8 @@ public class AddFlowers extends javax.swing.JFrame {
 
             Catalog catalog;
             catalog = new Catalog("P"+String.format("%03d", count.getProductCount()),name, type, price, stock);
-
+            MaintainCatalogControl mc =new MaintainCatalogControl();
+            mc.AddRecord(catalog);
         }
         else{
             JOptionPane.showMessageDialog(null, warningMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);

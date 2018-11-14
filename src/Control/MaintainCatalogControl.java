@@ -2,7 +2,6 @@ package Control;
 
 import Model.*;
 import DA.*;
-import DA.*;
 import Model.*;
 import javax.swing.*;
 import java.util.*;
@@ -74,5 +73,8 @@ public class MaintainCatalogControl {
         return catalog;    
     }
     
+    public void AddRecord(Catalog catalog){
+        catalogDA.addRecord(catalog);
+    }
     
 }
