@@ -30,7 +30,7 @@ public class CustomizedHome extends javax.swing.JFrame {
         jtfCustName.setText(customer.getName());
         jtfCustomerID.setText(customer.getCustID());
         jtfGender.setText("" + customer.getGender());
-        jtfAge.setText("" + customer.getAge());
+        jtfIc.setText("" + customer.getIc());
         jtfContact.setText(customer.getContact());
     }
 
@@ -57,7 +57,7 @@ public class CustomizedHome extends javax.swing.JFrame {
         jtfCustomerID = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jtfGender = new javax.swing.JTextField();
-        jtfAge = new javax.swing.JTextField();
+        jtfIc = new javax.swing.JTextField();
         jtfContact = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,7 +94,7 @@ public class CustomizedHome extends javax.swing.JFrame {
 
         jLabelSize.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabelSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelSize.setText("Age");
+        jLabelSize.setText("IC");
 
         jLabelFlower.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabelFlower.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -140,11 +140,11 @@ public class CustomizedHome extends javax.swing.JFrame {
             }
         });
 
-        jtfAge.setEditable(false);
-        jtfAge.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtfAge.addActionListener(new java.awt.event.ActionListener() {
+        jtfIc.setEditable(false);
+        jtfIc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfIc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfAgeActionPerformed(evt);
+                jtfIcActionPerformed(evt);
             }
         });
 
@@ -182,7 +182,7 @@ public class CustomizedHome extends javax.swing.JFrame {
                                 .addComponent(jtfCustomerID, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jtfCustName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                 .addComponent(jtfGender, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfAge, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtfIc, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jtfContact, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(jButtonBack))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -211,7 +211,7 @@ public class CustomizedHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSize, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfIc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFlower, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,9 +251,9 @@ public class CustomizedHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfGenderActionPerformed
 
-    private void jtfAgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfAgeActionPerformed
+    private void jtfIcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIcActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfAgeActionPerformed
+    }//GEN-LAST:event_jtfIcActionPerformed
 
     private void jtfContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfContactActionPerformed
         // TODO add your handling code here:
@@ -261,7 +261,7 @@ public class CustomizedHome extends javax.swing.JFrame {
 
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
         // TODO add your handling code here:
-        CustomizedOrder customizedOrder = new CustomizedOrder(customer);
+        CustomizedStyleSize customizedOrder = new CustomizedStyleSize(customer);
         customizedOrder.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonConfirmActionPerformed
@@ -313,10 +313,10 @@ public class CustomizedHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jtfAge;
     private javax.swing.JTextField jtfContact;
     private javax.swing.JTextField jtfCustName;
     private javax.swing.JTextField jtfCustomerID;
     private javax.swing.JTextField jtfGender;
+    private javax.swing.JTextField jtfIc;
     // End of variables declaration//GEN-END:variables
 }

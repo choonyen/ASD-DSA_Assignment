@@ -67,7 +67,7 @@ public class MaintenanceCustomerControl {
             }
             else
             {
-                JOptionPane.showMessageDialog(null,"Invalid ID format!!! example:C000 or c000","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Invalid ID format!!! example:C000 ","ERROR",JOptionPane.ERROR_MESSAGE);
                 return customer;
             }
         }

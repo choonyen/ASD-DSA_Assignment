@@ -76,6 +76,19 @@ public class CountDA {
         }
  
     }
+     
+     public void increaseCustomizedCount(){
+        Count count = this.getCount();
+        int customizedCount = count.getCustomizedOrderCount()+1;
+        try{
+            stmt = conn.prepareStatement(("Update Count set CUSTOMERCOUNT = " + customizedCount));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
     
     private void createConnection() {
         try {

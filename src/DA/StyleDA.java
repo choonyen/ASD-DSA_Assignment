@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package DA;
-
 import Model.*;
 import java.sql.*;
 import javax.swing.*;
@@ -14,67 +13,40 @@ import java.util.*;
  *
  * @author Choonyen
  */
-public class CustomizedDA {
+public class StyleDA {
     private String host = "jdbc:derby://localhost:1527/DSA_Database";
     private String user = "nbuser";
     private String password = "nbuser";
-    private String tableName = "CUSTOMIZED_ORDER";
+    private String tableName = "CUSTOM_ARRANGEMENTSTYLE";
     private Connection conn;
     private PreparedStatement stmt;
     
-    public CustomizedDA()
+    public StyleDA()
     {
         createConnection();
     }
     
-    
-    public List<CustomizedFloral> getCustomizedOrder(){
+    public List<Style> getStyleList(){
         String queryStr = "SELECT * FROM " + tableName;
-        List<CustomizedFloral> custFloralList = new ArrayList<CustomizedFloral>();
+        List<Style> styleList = new ArrayList<Style>();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                CustomizedFloral custFloral = null;
-                custFloral = new CustomizedFloral(
-                        rs.getString("CUSTOMOMORDERNO"),
-                        rs.getString("CUSTID"),
+                Style style = null;
+                style = new Style(
                         rs.getString("STYLENO"),
-                        rs.getString("SIZECODE"),
-                        rs.getString("FLOWERNO"),
-                        rs.getString("ACCESSORYNO"),
+                        rs.getString("STYLENAME"),
                         rs.getDouble("PRICE"),
-                        rs.getString("PRIORITY")
+                        rs.getString("DESCRIPTION")
                 );
-                custFloralList.add(custFloral);
+                styleList.add(style);
             }
             
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        return custFloralList;
-        
-    }
-    
-    public void addCustOrder(CustomizedFloral custFloral){
-        String insertStr = "INSERT INTO " + tableName + " VALUES(?,?,?,?,?,?,?,?)";
-        try{
-            stmt = conn.prepareStatement(insertStr);
-            stmt.setString(1, custFloral.getOrderID());
-            stmt.setString(2, custFloral.getCustID());
-            stmt.setString(3, custFloral.getStyleNo());
-            stmt.setString(4, custFloral.getSizeCode());
-            stmt.setString(5, custFloral.getFlowerNo());
-            stmt.setString(6, custFloral.getAccessoryNo());
-            stmt.setDouble(7, custFloral.getPrice());
-            stmt.setString(8, custFloral.getPriority());
-            
-            stmt.executeUpdate();
-            
-            
-        }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+        return styleList;
     }
     
     private void createConnection() {
@@ -95,4 +67,3 @@ public class CustomizedDA {
         }
     }
 }
-

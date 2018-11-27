@@ -72,6 +72,11 @@ public class SearchConsumer extends javax.swing.JFrame {
         jLabelCustID.setText("Customer ID");
 
         jtfCustID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfCustID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCustIDActionPerformed(evt);
+            }
+        });
 
         jbtSearch.setText("Search");
         jbtSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +158,19 @@ public class SearchConsumer extends javax.swing.JFrame {
         // TODO add your handling code here:
         jtfCustID.setText("");
     }//GEN-LAST:event_jbtResetActionPerformed
+
+    private void jtfCustIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCustIDActionPerformed
+        // TODO add your handling code here:
+        String id = jtfCustID.getText();
+        Customer customer = maintenanceCustomerControl.searchCustomer(id);
+        
+        if(customer != null)
+        {
+            CustomizedHome customizedHome = new CustomizedHome(customer);
+            customizedHome.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jtfCustIDActionPerformed
 
     /**
      * @param args the command line arguments
