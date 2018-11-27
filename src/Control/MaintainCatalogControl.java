@@ -24,7 +24,7 @@ public class MaintainCatalogControl {
     {
         if(id.length() == 4)
         {
-            if(id.charAt(0) == 'C' || id.charAt(0) == 'c')
+            if(id.charAt(0) == 'P' || id.charAt(0) == 'p')
             {
                 for(int i=1;i<id.length();i++)
                 {
@@ -73,8 +73,6 @@ public class MaintainCatalogControl {
         return catalog;    
     }
     
-    public void AddRecord(Catalog catalog){
-        catalogDA.addRecord(catalog);
-    }
+  
     
 }

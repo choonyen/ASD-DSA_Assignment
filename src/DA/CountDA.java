@@ -64,6 +64,21 @@ public class CountDA {
  
     }
     
+      public void increateProductCount(){
+        Count count = this.getCount();
+        int productCount = count.getProductCount()+1;
+        try{
+            stmt = conn.prepareStatement(("Update Count set PRODUCTCOUNT = " + productCount));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
+      
+      
+    
     private void createConnection() {
         try {
             conn = DriverManager.getConnection(host, user, password);

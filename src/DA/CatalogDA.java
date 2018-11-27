@@ -1,9 +1,15 @@
 package DA;
 import Model.Catalog;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.*;
+import java.util.*;
 
 public class CatalogDA {
+
     private String host = "jdbc:derby://localhost:1527/DSA_Database";
     private String user = "nbuser";
     private String password = "nbuser";
@@ -24,7 +30,7 @@ public class CatalogDA {
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-                catalog = new Catalog(ID, rs.getString("Name"), rs.getString("Type"), rs.getDouble("Price"), rs.getInt("Stock")) {};
+                catalog = new Catalog(ID, rs.getString("Name"), rs.getString("Type"), rs.getDouble("Price"),rs.getString("Description"), rs.getInt("Stock")) {};
                 //customer.setCustid(ID);
                 //customer.setCustname(rs.getString("Name"));
                 //customer.setCustphoneno(rs.getString("PhoneNo"));
@@ -36,8 +42,8 @@ public class CatalogDA {
         return catalog;
     }
    
-     public void addRecord(Catalog catalog) {
-       String insertStr = "INSERT INTO "+ tableName +" VALUES(?,?,?,?,?)";
+     public void addCatalog(Catalog catalog) {
+       String insertStr = "INSERT INTO "+ tableName +" VALUES(?,?,?,?,?,?)";
         try {
               //insert a new table row refer chap 5 slides 28, change .getText to getCode refer programme.java in domain
               
@@ -48,7 +54,8 @@ public class CatalogDA {
                stmt.setString(2, catalog.getName());
                stmt.setString(3, catalog.getType());
                stmt.setDouble(4, catalog.getPrice());
-               stmt.setInt(5, catalog.getStock());
+               stmt.setString(5, catalog.getDescription());
+               stmt.setInt(6, catalog.getStock());
                stmt.executeUpdate();
           
             
@@ -57,6 +64,35 @@ public class CatalogDA {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
+     public void DeleteCatalog(Catalog catalog){
+         String insertStr ="DELETE FROM CATALOG WHERE Prodid = ?";
+          try {
+
+              stmt = conn.prepareStatement(insertStr);
+                stmt.setString(1,  catalog.getProdid());
+              stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+     }  
+     public void updateCatalog(Catalog catalog){
+       String insertStr = "UPDATE " + tableName + " SET Name = ?, Type = ?, Price = ?, Description = ?, Stock = ? WHERE Prodid = ?";
+          try {
+
+               stmt = conn.prepareStatement(insertStr);
+               stmt.setString(6, catalog.getProdid());
+               stmt.setString(1, catalog.getName());
+               stmt.setString(2, catalog.getType());
+               stmt.setDouble(3, catalog.getPrice());
+               stmt.setString(4, catalog.getDescription());
+               stmt.setInt(5, catalog.getStock());
+               
+               stmt.executeUpdate();
+    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+     }  
     
     private void createConnection() {
         try {

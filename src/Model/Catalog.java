@@ -15,17 +15,19 @@ public class Catalog {
     private String Name;
     private String Type;
     private double Price;
+    private String Description;
     private int Stock;
   
     
     public Catalog(){
     }
 
-    public Catalog(String Prodid, String Name, String Type,double Price, int Stock){
+    public Catalog(String Prodid, String Name, String Type,double Price,String Description, int Stock){
         this.Prodid = Prodid;
         this.Name = Name;
         this.Type = Type;
         this.Price = Price;
+        this.Description = Description;
         this.Stock = Stock;
  
     }
@@ -63,7 +65,15 @@ public class Catalog {
     public void setPrice(double Price) {
         this.Price = Price;
     }
+    
+      public String getDescription() {
+        return Description;
+    }
 
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
+    
     public int getStock() {
         return Stock;
     }
