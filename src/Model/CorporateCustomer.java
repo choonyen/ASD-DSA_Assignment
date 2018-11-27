@@ -17,16 +17,18 @@ public class CorporateCustomer extends Customer{
     
     public CorporateCustomer(){
     }
-    
-    public CorporateCustomer(double creditLimit, String custID, String name, char gender, int age, String contact) {
-        super(custID, name, gender, age, contact);
+
+    public CorporateCustomer(double creditLimit, String custID, String name, String ic, char gender, String contact) {
+        super(custID, name, ic, gender, contact);
         this.creditLimit = creditLimit;
     }
 
-    public CorporateCustomer(double  creditLimit,String custID, String name, char gender, int age, String contact, Date lastOrderDate) {
-        super(custID, name, gender, age, contact, lastOrderDate);
+    public CorporateCustomer(double creditLimit, String custID, String name, String ic, char gender, String contact, Date lastOrderDate) {
+        super(custID, name, ic, gender, contact, lastOrderDate);
         this.creditLimit = creditLimit;
     }
+    
+
 
     public double getCreditLimit() {
         return creditLimit;

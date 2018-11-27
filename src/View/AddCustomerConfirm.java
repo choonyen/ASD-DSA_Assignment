@@ -25,9 +25,16 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         this.customer = customer;
         jtfCustID.setText(customer.getCustID());
         jtfName.setText(customer.getName());
+        jtfIC.setText(customer.getIc());
         jtfGender.setText(String.valueOf(customer.getGender()));
-        jtfAge.setText(String.valueOf(customer.getAge()));
         jtfContactNo.setText(customer.getContact());
+        if(customer instanceof CorporateCustomer){
+            jtfCreditLimit.setText(String.valueOf(customer.getCreditLimit()));
+        }
+        else{
+            jlblCreditLimit.setVisible(false);
+            jtfCreditLimit.setVisible(false);
+        }
         
     }
     public AddCustomerConfirm() {
@@ -49,16 +56,18 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jlblHeader = new javax.swing.JLabel();
         jlblCustID = new javax.swing.JLabel();
         jlblGender = new javax.swing.JLabel();
-        jlblAge = new javax.swing.JLabel();
         jlblContact = new javax.swing.JLabel();
         jlblName = new javax.swing.JLabel();
         jtfCustID = new javax.swing.JTextField();
         jtfName = new javax.swing.JTextField();
         jtfGender = new javax.swing.JTextField();
-        jtfAge = new javax.swing.JTextField();
         jtfContactNo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jlblCreditLimit = new javax.swing.JLabel();
+        jtfCreditLimit = new javax.swing.JTextField();
+        jlblIC = new javax.swing.JLabel();
+        jtfIC = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,10 +91,6 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jlblGender.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlblGender.setText("Gender:");
 
-        jlblAge.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblAge.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblAge.setText("Age:");
-
         jlblContact.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblContact.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlblContact.setText("Contact No:");
@@ -99,8 +104,6 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jtfName.setEditable(false);
 
         jtfGender.setEditable(false);
-
-        jtfAge.setEditable(false);
 
         jtfContactNo.setEditable(false);
 
@@ -120,6 +123,18 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
             }
         });
 
+        jlblCreditLimit.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblCreditLimit.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblCreditLimit.setText("Credit Limit:");
+
+        jtfCreditLimit.setEditable(false);
+
+        jlblIC.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblIC.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblIC.setText("IC No:");
+
+        jtfIC.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,30 +148,31 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
                             .addComponent(jlblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlblCustID, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlblName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlblGender, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlblAge, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlblContact, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtfGender, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addComponent(jtfCustID)
-                                        .addComponent(jtfAge)
-                                        .addComponent(jtfContactNo))
-                                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(181, 181, 181)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jlblCustID, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlblName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlblGender, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlblContact, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtfGender, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(jtfCustID)
+                                .addComponent(jtfContactNo)
+                                .addComponent(jtfCreditLimit))
+                            .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,35 +186,38 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jlblCustID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfCustID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1))
                     .addComponent(jlblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jtfGender, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1))
-                    .addComponent(jlblGender))
+                        .addComponent(jlblIC)
+                        .addGap(7, 7, 7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlblGender)
+                    .addComponent(jtfGender, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlblAge, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jtfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlblContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jtfContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtfCreditLimit, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jlblCreditLimit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -217,9 +236,17 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        customerDA.addConsumer(customer);
-        countDA.increateCustomerCount();
-        JOptionPane.showMessageDialog(null, "Consumer Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        if(customer instanceof Consumer){
+            customerDA.addConsumer(customer);
+            countDA.increaseCustomerCount();
+            JOptionPane.showMessageDialog(null, "Consumer Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            customerDA.addCorporateCustomer(customer);
+            countDA.increaseCorporateCustomerCount();
+            JOptionPane.showMessageDialog(null, "Corporate Customer Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
         this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -269,17 +296,19 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel jlblAge;
     private javax.swing.JLabel jlblContact;
+    private javax.swing.JLabel jlblCreditLimit;
     private javax.swing.JLabel jlblCustID;
     private javax.swing.JLabel jlblGender;
     private javax.swing.JLabel jlblHeader;
+    private javax.swing.JLabel jlblIC;
     private javax.swing.JLabel jlblName;
     private javax.swing.JLabel jlblTitle;
-    private javax.swing.JTextField jtfAge;
     private javax.swing.JTextField jtfContactNo;
+    private javax.swing.JTextField jtfCreditLimit;
     private javax.swing.JTextField jtfCustID;
     private javax.swing.JTextField jtfGender;
+    private javax.swing.JTextField jtfIC;
     private javax.swing.JTextField jtfName;
     // End of variables declaration//GEN-END:variables
 }

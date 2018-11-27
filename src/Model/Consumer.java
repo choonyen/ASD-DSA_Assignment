@@ -15,17 +15,15 @@ public class Consumer extends Customer{
     
     public Consumer(){
     }
-    
-    public Consumer(String custID, String name, char gender, int age, String contact) {
-        super(custID, name, gender, age, contact);
+
+    public Consumer(String custID, String name, String ic, char gender, String contact) {
+        super(custID, name, ic, gender, contact);
     }
 
-    public Consumer(String custID, String name, char gender, int age, String contact, Date lastOrderDate) {
-        super(custID, name, gender, age, contact, lastOrderDate);
+    public Consumer(String custID, String name, String ic, char gender, String contact, Date lastOrderDate) {
+        super(custID, name, ic, gender, contact, lastOrderDate);
     }
-    
-    
-    
+
 
     @Override
     public void add() {
