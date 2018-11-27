@@ -26,11 +26,6 @@ public class Consumer extends Customer{
 
 
     @Override
-    public void add() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public double getCreditLimit() {
         throw new UnsupportedOperationException("Consumer no Credit Limit."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -38,6 +33,26 @@ public class Consumer extends Customer{
     @Override
     public void setCreditLimit(double creditLimit) {
         throw new UnsupportedOperationException("Consumer no Credit Limit."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getCompanyName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setCompanyName(String companyName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getLocation() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setLocation(String location) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

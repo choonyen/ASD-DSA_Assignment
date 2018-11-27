@@ -91,7 +91,10 @@ public abstract class Customer {
     
     public abstract double getCreditLimit();
     public abstract void setCreditLimit(double creditLimit);
-    public abstract void add();
+    public abstract String getCompanyName();
+    public abstract void setCompanyName(String companyName);
+    public abstract String getLocation();
+    public abstract void setLocation(String location);
     
         
 }

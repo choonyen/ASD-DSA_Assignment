@@ -52,12 +52,14 @@ public class CustomerDA {
     }
     
     public void addCorporateCustomer(Customer customer){
-        String insertStr = "INSERT INTO " + "CORPORATE_CUSTOMER" + " VALUES(?,?)";
+        String insertStr = "INSERT INTO " + "CORPORATE_CUSTOMER" + " VALUES(?,?,?,?)";
         this.addConsumer(customer);
         try{
             stmt = conn.prepareStatement(insertStr);
             stmt.setString(1, customer.getCustID());
-            stmt.setDouble(2, customer.getCreditLimit());
+            stmt.setString(2, customer.getCompanyName());
+            stmt.setString(3, customer.getLocation());
+            stmt.setDouble(4, customer.getCreditLimit());
             
             stmt.executeUpdate();
             
@@ -119,7 +121,8 @@ public class CustomerDA {
     
     public Customer getCorporateCustomer(String id){
         String queryStr = "SELECT * FROM " + "CORPORATE_CUSTOMER" + " WHERE CUSTID = ?";
-        Customer customer = this.getConsumer(id);
+        Customer customer = null;
+        customer = this.getConsumer(id);
         if(customer!=null){
             try{
             
@@ -128,6 +131,8 @@ public class CustomerDA {
                 ResultSet rs = stmt.executeQuery();
                 if(rs.next()){
                    customer = new CorporateCustomer(
+                            rs.getString("COMPANYNAME"),
+                            rs.getString("LOCATION"),
                             rs.getDouble("CREDITLIMIT"),
                             customer.getCustID(),
                             customer.getName(),
@@ -149,15 +154,18 @@ public class CustomerDA {
     
     public Customer getCorporateCustomerByIC(String ic){
         String queryStr = "SELECT * FROM " + "CORPORATE_CUSTOMER" + " WHERE CUSTID = ?";
-        Customer customer = this.getConsumerByIC(ic);
+        Customer customer = null;
+        customer = this.getConsumerByIC(ic);
         if(customer!=null){
             try{
             
                 stmt = conn.prepareStatement(queryStr);
-                stmt.setString(1,ic);
+                stmt.setString(1,customer.getCustID());
                 ResultSet rs = stmt.executeQuery();
                 if(rs.next()){
                    customer = new CorporateCustomer(
+                            rs.getString("COMPANYNAME"),
+                            rs.getString("LOCATION"),
                             rs.getDouble("CREDITLIMIT"),
                             customer.getCustID(),
                             customer.getName(),
@@ -175,6 +183,48 @@ public class CustomerDA {
         }
         
         return customer;
+    }
+    
+    public void updateConsumer(Customer customer){
+        String updateStr = "UPDATE " + tableName + " SET "
+                + " NAME = ?, IC = ?, GENDER = ?, CONTACT = ?, LASTORDERDATE = ? WHERE CUSTID = ?";
+        try{
+            stmt = conn.prepareStatement(updateStr);
+            stmt.setString(6, customer.getCustID());
+            stmt.setString(1, customer.getName());
+            stmt.setString(2, customer.getIc());
+            stmt.setString(3, String.valueOf(customer.getGender()));
+            stmt.setString(4, customer.getContact());
+            if(customer.getLastOrderDate()!=null)
+                stmt.setDate(5, new java.sql.Date(customer.getLastOrderDate().getTime()));
+            else
+                stmt.setDate(5, null);
+
+            stmt.executeUpdate();
+            
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void updateCorporateCustomer(Customer customer){
+        String updateStr = "UPDATE " + "CORPORATE_CUSTOMER" + " SET "
+                + " COMPANYNAME = ?, LOCATION = ?, CREDITLIMIT = ? WHERE CUSTID = ?";
+        this.updateConsumer(customer);
+        try{
+            stmt = conn.prepareStatement(updateStr);
+            stmt.setString(4, customer.getCustID());
+            stmt.setString(1, customer.getCompanyName());
+            stmt.setString(2, customer.getLocation());
+            stmt.setDouble(3, customer.getCreditLimit());
+            
+            stmt.executeUpdate();
+            
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     

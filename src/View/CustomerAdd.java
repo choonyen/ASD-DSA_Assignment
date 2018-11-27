@@ -13,15 +13,21 @@ import javax.swing.JOptionPane;
  *
  * @author LENOVO
  */
-public class CustomerMaintenance extends javax.swing.JFrame {
+public class CustomerAdd extends javax.swing.JFrame {
 
     /**
      * Creates new form CustomerMaintenance
      */
-    public CustomerMaintenance() {
+    public CustomerAdd() {
         initComponents();
         jlblCreditLimit.setVisible(false);
         jtfCreditLimit.setVisible(false);
+        jlblCompanyName.setVisible(false);
+        jtfCompanyName.setVisible(false);
+        jlblLocation.setVisible(false);
+        jtaLocation.setVisible(false);
+        jScrollPane1.setVisible(false);
+        
     }
 
     /**
@@ -46,9 +52,14 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         jbCancel = new javax.swing.JButton();
         jcboxCorporateCustomer = new javax.swing.JCheckBox();
         jlblCreditLimit = new javax.swing.JLabel();
-        jtfCreditLimit = new javax.swing.JTextField();
+        jtfCompanyName = new javax.swing.JTextField();
         jlblIC = new javax.swing.JLabel();
         jtfIC = new javax.swing.JTextField();
+        jlblLocation = new javax.swing.JLabel();
+        jlblCompanyName = new javax.swing.JLabel();
+        jtfCreditLimit = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtaLocation = new javax.swing.JTextArea();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,7 +73,7 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         jlblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblHeader.setForeground(new java.awt.Color(153, 0, 0));
         jlblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlblHeader.setText("Customer Maintenance");
+        jlblHeader.setText("Add Customer ");
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
 
@@ -93,6 +104,11 @@ public class CustomerMaintenance extends javax.swing.JFrame {
 
         jbCancel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jbCancel.setText("Cancel");
+        jbCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelActionPerformed(evt);
+            }
+        });
 
         jcboxCorporateCustomer.setBackground(new java.awt.Color(255, 204, 204));
         jcboxCorporateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -107,28 +123,48 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         jlblCreditLimit.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlblCreditLimit.setText("Credit Limit:");
 
-        jtfCreditLimit.setEditable(false);
-        jtfCreditLimit.setToolTipText("exp: 0xx-xxxxxxx");
+        jtfCompanyName.setEditable(false);
+        jtfCompanyName.setToolTipText("");
 
         jlblIC.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblIC.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlblIC.setText("IC No:");
+
+        jtfIC.setToolTipText("exp: 001230-08-2341");
+
+        jlblLocation.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblLocation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblLocation.setText("Location:");
+
+        jlblCompanyName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblCompanyName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblCompanyName.setText("Company Name:");
+
+        jtfCreditLimit.setEditable(false);
+        jtfCreditLimit.setToolTipText("");
+
+        jtaLocation.setEditable(false);
+        jtaLocation.setColumns(20);
+        jtaLocation.setRows(5);
+        jScrollPane1.setViewportView(jtaLocation);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jlblLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcboxCorporateCustomer)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jlblGender, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlblName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlblContact, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcboxCorporateCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlblCompanyName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -136,12 +172,14 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                             .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfContact, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addGap(64, 64, 64)
                         .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,20 +203,28 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jlblContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfContact))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jcboxCorporateCustomer)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfCreditLimit)
-                    .addComponent(jlblCreditLimit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(46, 46, 46)
+                    .addComponent(jlblLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                    .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jtfIC.getAccessibleContext().setAccessibleDescription("exp: 001230-08-2341");
+        jtfIC.getAccessibleContext().setAccessibleDescription("");
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 51));
 
@@ -190,7 +236,7 @@ public class CustomerMaintenance extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                .addComponent(jlblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -222,7 +268,7 @@ public class CustomerMaintenance extends javax.swing.JFrame {
             warningMsg += "*IC No cannot be empty.\n";
             valid = false;
         }
-        if(icValidation(jtfIC.getText())){
+        if(!icValidation(jtfIC.getText())){
             warningMsg += "*Invalid IC No. format.\n";
             valid = false;
         }
@@ -234,9 +280,19 @@ public class CustomerMaintenance extends javax.swing.JFrame {
             warningMsg += "*Invalid Contact No. format\n";
             valid = false;
         }
-        if(jcboxCorporateCustomer.isSelected() && jtfCreditLimit.getText().equals("")){
-            warningMsg += "*Credit Limit cannot be empty.\n";
-            valid = false;
+        if(jcboxCorporateCustomer.isSelected()){
+            if(jtfCreditLimit.getText().equals("")){
+                warningMsg += "*Credit Limit cannot be empty.\n";
+                valid = false;
+            }
+            if(jtfCompanyName.getText().equals("")){
+                warningMsg += "*Company Name cannot be empty.\n";
+                valid = false;
+            }
+            if(jtaLocation.getText().equals("")){
+                warningMsg += "*Location cannot be empty.\n";
+                valid = false;
+            }
         }
         
         if(valid){
@@ -249,11 +305,12 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                 gender = 'M';
             else
                 gender = 'F';
-            int age;
             String contact = jtfContact.getText();
             
             
             if(jcboxCorporateCustomer.isSelected()){
+                String companyName = jtfCreditLimit.getText();
+                String location = jtaLocation.getText();
                 double creditLimit = 0;
                 try{
                     creditLimit = Double.parseDouble(jtfCreditLimit.getText());
@@ -261,22 +318,22 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Invalid amount, must be number", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
                 if(creditLimit!=0){
-                    Customer customer = new CorporateCustomer(creditLimit,"C"+String.format("%03d", count.getCustomerCount()),name,ic, gender, contact);
+                    Customer customer = new CorporateCustomer(companyName, location, creditLimit,"C"+String.format("%03d", count.getCustomerCount()),name,ic, gender, contact);
                     AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
                     addCustomerConfirm.setVisible(true);
+                    clear();
                 }
             }
             else{
                 Customer customer = new Consumer("C"+String.format("%03d", count.getCustomerCount()),name,ic, gender, contact);
                 AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
                 addCustomerConfirm.setVisible(true);
+                clear();
+
             }
             
             
-            
-            
-            
-            
+
         }
         else{
             JOptionPane.showMessageDialog(null, warningMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
@@ -289,14 +346,33 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         if(jcboxCorporateCustomer.isSelected()){
             jlblCreditLimit.setVisible(true);
             jtfCreditLimit.setVisible(true);
+            jlblCompanyName.setVisible(true);
+            jtfCompanyName.setVisible(true);
+            jlblLocation.setVisible(true);
+            jtaLocation.setVisible(true);
             jtfCreditLimit.setEditable(true);
+            jtfCompanyName.setEditable(true);
+            jtaLocation.setEditable(true);
+            jScrollPane1.setVisible(true);
         }
         else{
             jlblCreditLimit.setVisible(false);
             jtfCreditLimit.setVisible(false);
+            jlblCompanyName.setVisible(false);
+            jtfCompanyName.setVisible(false);
+            jlblLocation.setVisible(false);
+            jtaLocation.setVisible(false);
             jtfCreditLimit.setEditable(false);
+            jtfCompanyName.setEditable(false);
+            jtaLocation.setEditable(false);
+            jScrollPane1.setVisible(false);
         }
     }//GEN-LAST:event_jcboxCorporateCustomerActionPerformed
+
+    private void jbCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jbCancelActionPerformed
 
     private boolean contactValidation(String contact){
         if(contact.matches("[\\d]{3}-[\\d]{7,8}")){
@@ -327,6 +403,14 @@ public class CustomerMaintenance extends javax.swing.JFrame {
             return false;
         }
     }
+    private void clear(){
+        jtfName.setText("");
+        jtfIC.setText("");
+        jtfContact.setText("");
+        jtfCompanyName.setText("");
+        jtaLocation.setText("");
+        jtfCreditLimit.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -344,38 +428,44 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerMaintenance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerMaintenance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerMaintenance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerMaintenance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerMaintenance().setVisible(true);
+                new CustomerAdd().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbAdd;
     private javax.swing.JButton jbCancel;
     private javax.swing.JComboBox<String> jcbGender;
     private javax.swing.JCheckBox jcboxCorporateCustomer;
+    private javax.swing.JLabel jlblCompanyName;
     private javax.swing.JLabel jlblContact;
     private javax.swing.JLabel jlblCreditLimit;
     private javax.swing.JLabel jlblGender;
     private javax.swing.JLabel jlblHeader;
     private javax.swing.JLabel jlblIC;
+    private javax.swing.JLabel jlblLocation;
     private javax.swing.JLabel jlblName;
     private javax.swing.JLabel jlblTitle;
+    private javax.swing.JTextArea jtaLocation;
+    private javax.swing.JTextField jtfCompanyName;
     private javax.swing.JTextField jtfContact;
     private javax.swing.JTextField jtfCreditLimit;
     private javax.swing.JTextField jtfIC;
