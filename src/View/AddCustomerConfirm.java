@@ -25,8 +25,8 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         this.customer = customer;
         jtfCustID.setText(customer.getCustID());
         jtfName.setText(customer.getName());
+        jtfIC.setText(customer.getIc());
         jtfGender.setText(String.valueOf(customer.getGender()));
-        jtfAge.setText(String.valueOf(customer.getAge()));
         jtfContactNo.setText(customer.getContact());
         if(customer instanceof CorporateCustomer){
             jtfCreditLimit.setText(String.valueOf(customer.getCreditLimit()));
@@ -56,18 +56,18 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jlblHeader = new javax.swing.JLabel();
         jlblCustID = new javax.swing.JLabel();
         jlblGender = new javax.swing.JLabel();
-        jlblAge = new javax.swing.JLabel();
         jlblContact = new javax.swing.JLabel();
         jlblName = new javax.swing.JLabel();
         jtfCustID = new javax.swing.JTextField();
         jtfName = new javax.swing.JTextField();
         jtfGender = new javax.swing.JTextField();
-        jtfAge = new javax.swing.JTextField();
         jtfContactNo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jlblCreditLimit = new javax.swing.JLabel();
         jtfCreditLimit = new javax.swing.JTextField();
+        jlblIC = new javax.swing.JLabel();
+        jtfIC = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,10 +91,6 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jlblGender.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlblGender.setText("Gender:");
 
-        jlblAge.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblAge.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblAge.setText("Age:");
-
         jlblContact.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblContact.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlblContact.setText("Contact No:");
@@ -108,8 +104,6 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jtfName.setEditable(false);
 
         jtfGender.setEditable(false);
-
-        jtfAge.setEditable(false);
 
         jtfContactNo.setEditable(false);
 
@@ -135,6 +129,12 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
 
         jtfCreditLimit.setEditable(false);
 
+        jlblIC.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblIC.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblIC.setText("IC No:");
+
+        jtfIC.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,18 +153,18 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
                             .addComponent(jlblCustID, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblGender, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlblAge, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblContact, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jtfGender, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                 .addComponent(jtfCustID)
-                                .addComponent(jtfAge)
                                 .addComponent(jtfContactNo)
                                 .addComponent(jtfCreditLimit))
-                            .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -193,18 +193,17 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
                         .addGap(1, 1, 1))
                     .addComponent(jlblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jtfGender, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1))
-                    .addComponent(jlblGender))
+                        .addComponent(jlblIC)
+                        .addGap(7, 7, 7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlblGender)
+                    .addComponent(jtfGender, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlblAge, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jtfAge, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlblContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -297,19 +296,19 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel jlblAge;
     private javax.swing.JLabel jlblContact;
     private javax.swing.JLabel jlblCreditLimit;
     private javax.swing.JLabel jlblCustID;
     private javax.swing.JLabel jlblGender;
     private javax.swing.JLabel jlblHeader;
+    private javax.swing.JLabel jlblIC;
     private javax.swing.JLabel jlblName;
     private javax.swing.JLabel jlblTitle;
-    private javax.swing.JTextField jtfAge;
     private javax.swing.JTextField jtfContactNo;
     private javax.swing.JTextField jtfCreditLimit;
     private javax.swing.JTextField jtfCustID;
     private javax.swing.JTextField jtfGender;
+    private javax.swing.JTextField jtfIC;
     private javax.swing.JTextField jtfName;
     // End of variables declaration//GEN-END:variables
 }

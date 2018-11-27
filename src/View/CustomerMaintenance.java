@@ -39,9 +39,7 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         jlblName = new javax.swing.JLabel();
         jtfName = new javax.swing.JTextField();
         jlblGender = new javax.swing.JLabel();
-        jlblAge = new javax.swing.JLabel();
         jlblContact = new javax.swing.JLabel();
-        jcbAge = new javax.swing.JComboBox<>();
         jcbGender = new javax.swing.JComboBox<>();
         jtfContact = new javax.swing.JTextField();
         jbAdd = new javax.swing.JButton();
@@ -49,6 +47,8 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         jcboxCorporateCustomer = new javax.swing.JCheckBox();
         jlblCreditLimit = new javax.swing.JLabel();
         jtfCreditLimit = new javax.swing.JTextField();
+        jlblIC = new javax.swing.JLabel();
+        jtfIC = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,16 +74,9 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         jlblGender.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlblGender.setText("Gender:");
 
-        jlblAge.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblAge.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblAge.setText("Age:");
-
         jlblContact.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblContact.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jlblContact.setText("Contact No:");
-
-        jcbAge.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcbAge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" }));
 
         jcbGender.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
@@ -117,6 +110,10 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         jtfCreditLimit.setEditable(false);
         jtfCreditLimit.setToolTipText("exp: 0xx-xxxxxxx");
 
+        jlblIC.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblIC.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblIC.setText("IC No:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -129,8 +126,8 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jlblGender, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlblName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jlblAge, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jlblContact, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jlblContact, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -138,10 +135,9 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfContact, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jcbAge, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jcbGender, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jcbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -154,15 +150,18 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblName)
                     .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jlblIC)
+                        .addGap(9, 9, 9))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlblGender)
                     .addComponent(jcbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblAge, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbAge, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jlblContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfContact))
@@ -178,6 +177,8 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                     .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
+
+        jtfIC.getAccessibleContext().setAccessibleDescription("exp: 001230-08-2341");
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 51));
 
@@ -217,12 +218,20 @@ public class CustomerMaintenance extends javax.swing.JFrame {
             warningMsg += "*Name cannot be empty.\n";
             valid = false;
         }
+        if(jtfIC.getText().equals("")){
+            warningMsg += "*IC No cannot be empty.\n";
+            valid = false;
+        }
+        if(icValidation(jtfIC.getText())){
+            warningMsg += "*Invalid IC No. format.\n";
+            valid = false;
+        }
         if(jtfContact.getText().equals("")){
-            warningMsg += "*Contact No cannot be empty.\n";
+            warningMsg += "*Contact No. cannot be empty.\n";
             valid = false;
         }
         if(!contactValidation(jtfContact.getText()) && !jtfContact.getText().equals("")){
-            warningMsg += "*Invalid Contact No format\n";
+            warningMsg += "*Invalid Contact No. format\n";
             valid = false;
         }
         if(jcboxCorporateCustomer.isSelected() && jtfCreditLimit.getText().equals("")){
@@ -296,6 +305,28 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         }
         return false;
     }
+    
+    private boolean icValidation(String ic){       
+        if(ic.length() == 14){
+            if(ic.charAt(6) == '-' && ic.charAt(9) == '-'){
+                for(int i = 0; i < ic.length(); i++){
+                    if(i!=6 && i != 9){
+                        if(!Character.isDigit(ic.charAt(i))){
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            
+            }
+            else{
+                return false;
+            } 
+        }
+        else{
+            return false;
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -336,18 +367,18 @@ public class CustomerMaintenance extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbAdd;
     private javax.swing.JButton jbCancel;
-    private javax.swing.JComboBox<String> jcbAge;
     private javax.swing.JComboBox<String> jcbGender;
     private javax.swing.JCheckBox jcboxCorporateCustomer;
-    private javax.swing.JLabel jlblAge;
     private javax.swing.JLabel jlblContact;
     private javax.swing.JLabel jlblCreditLimit;
     private javax.swing.JLabel jlblGender;
     private javax.swing.JLabel jlblHeader;
+    private javax.swing.JLabel jlblIC;
     private javax.swing.JLabel jlblName;
     private javax.swing.JLabel jlblTitle;
     private javax.swing.JTextField jtfContact;
     private javax.swing.JTextField jtfCreditLimit;
+    private javax.swing.JTextField jtfIC;
     private javax.swing.JTextField jtfName;
     // End of variables declaration//GEN-END:variables
 }
