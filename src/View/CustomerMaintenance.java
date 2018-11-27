@@ -243,13 +243,13 @@ public class CustomerMaintenance extends javax.swing.JFrame {
             CountDA countDA = new CountDA();
             Count count = countDA.getCount();
             String name = jtfName.getText();
+            String ic = jtfIC.getText();
             char gender;
             if(jcbGender.getSelectedIndex()==0)
                 gender = 'M';
             else
                 gender = 'F';
             int age;
-            age = jcbAge.getSelectedIndex()+18;
             String contact = jtfContact.getText();
             
             
@@ -261,13 +261,13 @@ public class CustomerMaintenance extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Invalid amount, must be number", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
                 if(creditLimit!=0){
-                    Customer customer = new CorporateCustomer(creditLimit,"C"+String.format("%03d", count.getCustomerCount()),name, gender, age, contact);
+                    Customer customer = new CorporateCustomer(creditLimit,"C"+String.format("%03d", count.getCustomerCount()),name,ic, gender, contact);
                     AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
                     addCustomerConfirm.setVisible(true);
                 }
             }
             else{
-                Customer customer = new Consumer("C"+String.format("%03d", count.getCustomerCount()),name, gender, age, contact);
+                Customer customer = new Consumer("C"+String.format("%03d", count.getCustomerCount()),name,ic, gender, contact);
                 AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
                 addCustomerConfirm.setVisible(true);
             }
