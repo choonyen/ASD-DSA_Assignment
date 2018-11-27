@@ -14,28 +14,28 @@ import java.util.Date;
 public abstract class Customer {
     private String custID;
     private String name;
+    private String ic;
     private char gender;
-    private int age;
     private String contact;
     private Date lastOrderDate;
     
     public Customer(){
     }
 
-    public Customer(String custID, String name, char gender, int age, String contact) {
+    public Customer(String custID, String name,String ic, char gender, String contact) {
         this.custID = custID;
         this.name = name;
+        this.ic = ic;
         this.gender = gender;
-        this.age = age;
         this.contact = contact;
         lastOrderDate = null;
     }
 
-    public Customer(String custID, String name, char gender, int age, String contact, Date lastOrderDate) {
+    public Customer(String custID, String name,String ic, char gender, String contact, Date lastOrderDate) {
         this.custID = custID;
         this.name = name;
+        this.ic = ic;
         this.gender = gender;
-        this.age = age;
         this.contact = contact;
         this.lastOrderDate = lastOrderDate;
     }
@@ -64,13 +64,14 @@ public abstract class Customer {
         this.gender = gender;
     }
 
-    public int getAge() {
-        return age;
+    public String getIc() {
+        return ic;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setIc(String ic) {
+        this.ic = ic;
     }
+
 
     public String getContact() {
         return contact;

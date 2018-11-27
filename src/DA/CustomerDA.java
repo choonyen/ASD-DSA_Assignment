@@ -36,8 +36,8 @@ public class CustomerDA {
             stmt = conn.prepareStatement(insertStr);
             stmt.setString(1, customer.getCustID());
             stmt.setString(2, customer.getName());
-            stmt.setString(3, String.valueOf(customer.getGender()));
-            stmt.setInt(4, customer.getAge());
+            stmt.setString(3, customer.getIc());
+            stmt.setString(4, String.valueOf(customer.getGender()));
             stmt.setString(5, customer.getContact());
             if(customer.getLastOrderDate()!=null)
                 stmt.setDate(6, new java.sql.Date(customer.getLastOrderDate().getTime()));
@@ -77,9 +77,34 @@ public class CustomerDA {
             if(rs.next()){
                 customer = new Consumer(
                         rs.getString("CUSTID"),
-                        rs.getString("NAME"),                    
+                        rs.getString("NAME"),         
+                        rs.getString("IC"),
                         rs.getString("GENDER").charAt(0),
-                        rs.getInt("AGE"),
+                        rs.getString("CONTACT"),
+                        rs.getDate("LASTORDERDATE")
+                 
+                );
+            }
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return customer;
+    }
+    
+    public Customer getConsumerByIC(String ic){
+        String queryStr = "SELECT * FROM " + tableName + " WHERE IC = ?";
+        Customer customer = null;
+        try{
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1,ic);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                customer = new Consumer(
+                        rs.getString("CUSTID"),
+                        rs.getString("NAME"),         
+                        rs.getString("IC"),
+                        rs.getString("GENDER").charAt(0),
                         rs.getString("CONTACT"),
                         rs.getDate("LASTORDERDATE")
                  
@@ -106,8 +131,38 @@ public class CustomerDA {
                             rs.getDouble("CREDITLIMIT"),
                             customer.getCustID(),
                             customer.getName(),
+                            customer.getIc(),
                             customer.getGender(),
-                            customer.getAge(),
+                            customer.getContact(),
+                            customer.getLastOrderDate()
+                 
+                    );
+                }
+            
+            }catch (SQLException ex) {
+               JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        return customer;
+    }
+    
+    public Customer getCorporateCustomerByIC(String ic){
+        String queryStr = "SELECT * FROM " + "CORPORATE_CUSTOMER" + " WHERE CUSTID = ?";
+        Customer customer = this.getConsumerByIC(ic);
+        if(customer!=null){
+            try{
+            
+                stmt = conn.prepareStatement(queryStr);
+                stmt.setString(1,ic);
+                ResultSet rs = stmt.executeQuery();
+                if(rs.next()){
+                   customer = new CorporateCustomer(
+                            rs.getDouble("CREDITLIMIT"),
+                            customer.getCustID(),
+                            customer.getName(),
+                            customer.getIc(),
+                            customer.getGender(),
                             customer.getContact(),
                             customer.getLastOrderDate()
                  
