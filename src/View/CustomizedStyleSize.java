@@ -292,7 +292,6 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
                 textStyle.setText(Style);
             }             
         }
-        total = total + stylePrice;
     }//GEN-LAST:event_jComboBoxStyleActionPerformed
 
     private void jComboBoxSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSizeActionPerformed
@@ -307,7 +306,6 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
                 textSize.setText(Size);
             }   
         }
-        total = total + sizePrice;
         
     }//GEN-LAST:event_jComboBoxSizeActionPerformed
 
@@ -318,6 +316,7 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
         customizedFloral.setCustID(customer.getCustID());
         customizedFloral.setStyleNo(styleNo);
         customizedFloral.setSizeCode("" + sizeCode);
+        total = total + stylePrice + sizePrice;
         customizedFloral.setPrice(total);
         
         CustomizedFlowerAccessory customizedFlowerAccessory = new CustomizedFlowerAccessory(customizedFloral);
