@@ -11,51 +11,80 @@ import java.util.Date;
  *
  * @author LENOVO
  */
-public class Consumer extends Customer{
+public class Consumer implements CustomerInterface{
     
-    public Consumer(){
-    }
-
-    public Consumer(String custID, String name, String ic, char gender, String contact) {
-        super(custID, name, ic, gender, contact);
-    }
+    private String custID;
+    private String name;
+    private String ic;
+    private char gender;
+    private String contact;
+    private Date lastOrderDate;
 
     public Consumer(String custID, String name, String ic, char gender, String contact, Date lastOrderDate) {
-        super(custID, name, ic, gender, contact, lastOrderDate);
+        this.custID = custID;
+        this.name = name;
+        this.ic = ic;
+        this.gender = gender;
+        this.contact = contact;
+        this.lastOrderDate = lastOrderDate;
+    }
+    
+    public Consumer(String custID, String name, String ic, char gender, String contact) {
+        this.custID = custID;
+        this.name = name;
+        this.ic = ic;
+        this.gender = gender;
+        this.contact = contact;
+    }
+    
+    public String getCustID() {
+        return custID;
+    }
+
+    public void setCustID(String custID) {
+        this.custID = custID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public String getIc() {
+        return ic;
+    }
+
+    public void setIc(String ic) {
+        this.ic = ic;
     }
 
 
-    @Override
-    public double getCreditLimit() {
-        throw new UnsupportedOperationException("Consumer no Credit Limit."); //To change body of generated methods, choose Tools | Templates.
+    public String getContact() {
+        return contact;
     }
 
-    @Override
-    public void setCreditLimit(double creditLimit) {
-        throw new UnsupportedOperationException("Consumer no Credit Limit."); //To change body of generated methods, choose Tools | Templates.
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    @Override
-    public String getCompanyName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Date getLastOrderDate() {
+        return lastOrderDate;
     }
 
-    @Override
-    public void setCompanyName(String companyName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setLastOrderDate(Date lastOrderDate) {
+        this.lastOrderDate = lastOrderDate;
     }
-
-    @Override
-    public String getLocation() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setLocation(String location) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
     
     
 }

@@ -4,25 +4,25 @@
  * and open the template in the editor.
  */
 package View;
+import Control.CustomerMaintenanceControl;
 import Model.*;
-import DA.*;
 import javax.swing.JOptionPane;
 /**
  *
  * @author LENOVO
  */
 public class AddCustomerConfirm extends javax.swing.JFrame {
-    private Customer customer;
-    private CountDA countDA;
-    private CustomerDA customerDA;
+    private CorporateCustomerInterface corporateCustomer = null;
+    private CustomerInterface consumer = null;
+    private CustomerMaintenanceControl control;
+
     /**
      * Creates new form AddCustomerConfirm
      */
-    public AddCustomerConfirm(Customer customer) {
+    public AddCustomerConfirm(CustomerMaintenanceControl control, CustomerInterface customer) {
         initComponents();
-        countDA = new CountDA();
-        customerDA = new CustomerDA();
-        this.customer = customer;
+        this.control = control;
+        this.consumer = customer;
         jtfCustID.setText(customer.getCustID());
         jtfName.setText(customer.getName());
         jtfIC.setText(customer.getIc());
@@ -31,22 +31,37 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         else
             jtfGender.setText("Female");
         jtfContactNo.setText(customer.getContact());
-        if(customer instanceof CorporateCustomer){
-            jtfCreditLimit.setText(String.valueOf(customer.getCreditLimit()));
-            jtfCompanyName.setText(customer.getCompanyName());
-            jtaLocation.setText(customer.getLocation());
-        }
-        else{
-            jlblCreditLimit.setVisible(false);
-            jtfCreditLimit.setVisible(false);
-            jlblCompanyName.setVisible(false);
-            jtfCompanyName.setVisible(false);
-            jlblLocation.setVisible(false);
-            jtaLocation.setVisible(false);
-            jScrollPane1.setVisible(false);
-        }
+        
+        jlblCreditLimit.setVisible(false);
+        jtfCreditLimit.setVisible(false);
+        jlblCompanyName.setVisible(false);
+        jtfCompanyName.setVisible(false);
+        jlblLocation.setVisible(false);
+        jtaLocation.setVisible(false);
+        jScrollPane1.setVisible(false);
+        
         
     }
+    
+    public AddCustomerConfirm(CustomerMaintenanceControl control,CorporateCustomerInterface customer) {
+        initComponents();
+        this.control = control;
+        this.corporateCustomer = customer;
+        jtfCustID.setText(customer.getCustID());
+        jtfName.setText(customer.getName());
+        jtfIC.setText(customer.getIc());
+        if(customer.getGender() == 'M')
+            jtfGender.setText("Male");
+        else
+            jtfGender.setText("Female");
+        jtfContactNo.setText(customer.getContact());
+        jtfCreditLimit.setText(String.valueOf(customer.getCreditLimit()));
+        jtfCompanyName.setText(customer.getCompanyName());
+        jtaLocation.setText(customer.getLocation());
+        
+
+    }
+    
     public AddCustomerConfirm() {
         initComponents();
     }
@@ -279,19 +294,15 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(customer instanceof Consumer){
-            customerDA.addConsumer(customer);
-            countDA.increaseCustomerCount();
-            JOptionPane.showMessageDialog(null, "Consumer Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        if(consumer!= null){
+            control.addConsumer(consumer);
+            JOptionPane.showMessageDialog(null, consumer.getCustID() + " added success.");
         }
         else{
-            customerDA.addCorporateCustomer(customer);
-            countDA.increaseCorporateCustomerCount();
-            JOptionPane.showMessageDialog(null, "Corporate Customer Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            control.addCorporateCustomer(corporateCustomer);
+            JOptionPane.showMessageDialog(null, corporateCustomer.getCustID() + " added success.");
         }
-        
         this.dispose();
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

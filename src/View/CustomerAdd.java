@@ -5,6 +5,7 @@
  */
 package View;
 
+import Control.CustomerMaintenanceControl;
 import Model.*;
 import DA.*;
 import javax.swing.JOptionPane;
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author LENOVO
  */
 public class CustomerAdd extends javax.swing.JFrame {
-
+    private CustomerMaintenanceControl control;
     /**
      * Creates new form CustomerMaintenance
      */
@@ -28,6 +29,18 @@ public class CustomerAdd extends javax.swing.JFrame {
         jtaLocation.setVisible(false);
         jScrollPane1.setVisible(false);
         
+    }
+    
+    public CustomerAdd(CustomerMaintenanceControl control) {
+        initComponents();
+        jlblCreditLimit.setVisible(false);
+        jtfCreditLimit.setVisible(false);
+        jlblCompanyName.setVisible(false);
+        jtfCompanyName.setVisible(false);
+        jlblLocation.setVisible(false);
+        jtaLocation.setVisible(false);
+        jScrollPane1.setVisible(false);
+        this.control = control;
     }
 
     /**
@@ -258,87 +271,51 @@ public class CustomerAdd extends javax.swing.JFrame {
 
     private void jbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddActionPerformed
         // TODO add your handling code here:
+        String errorMsg;
+        String companyName;
+        String location;
+        String creditLimitStr;
         boolean valid = true;
-        String warningMsg = "";
-        if(jtfName.getText().equals("")){
-            warningMsg += "*Name cannot be empty.\n";
-            valid = false;
-        }
-        if(jtfIC.getText().equals("")){
-            warningMsg += "*IC No cannot be empty.\n";
-            valid = false;
-        }
-        if(!icValidation(jtfIC.getText())){
-            warningMsg += "*Invalid IC No. format.\n";
-            valid = false;
-        }
-        if(jtfContact.getText().equals("")){
-            warningMsg += "*Contact No. cannot be empty.\n";
-            valid = false;
-        }
-        if(!contactValidation(jtfContact.getText()) && !jtfContact.getText().equals("")){
-            warningMsg += "*Invalid Contact No. format\n";
-            valid = false;
-        }
-        if(jcboxCorporateCustomer.isSelected()){
-            if(jtfCreditLimit.getText().equals("")){
-                warningMsg += "*Credit Limit cannot be empty.\n";
-                valid = false;
-            }
-            if(jtfCompanyName.getText().equals("")){
-                warningMsg += "*Company Name cannot be empty.\n";
-                valid = false;
-            }
-            if(jtaLocation.getText().equals("")){
-                warningMsg += "*Location cannot be empty.\n";
-                valid = false;
-            }
-        }
+        String name = jtfName.getText();
+        String ic = jtfIC.getText();
+        char gender;
+        if(jcbGender.getSelectedIndex()==0)
+            gender = 'M';
+        else
+            gender = 'F';
+        String contact = jtfContact.getText();
         
-        if(valid){
-            CountDA countDA = new CountDA();
-            Count count = countDA.getCount();
-            String name = jtfName.getText();
-            String ic = jtfIC.getText();
-            char gender;
-            if(jcbGender.getSelectedIndex()==0)
-                gender = 'M';
-            else
-                gender = 'F';
-            String contact = jtfContact.getText();
-            
-            
-            if(jcboxCorporateCustomer.isSelected()){
-                String companyName = jtfCreditLimit.getText();
-                String location = jtaLocation.getText();
-                double creditLimit = 0;
-                try{
-                    creditLimit = Double.parseDouble(jtfCreditLimit.getText());
-                }catch(NumberFormatException ex){
-                    JOptionPane.showMessageDialog(null, "Invalid amount, must be number", "ERROR", JOptionPane.ERROR_MESSAGE);
-                }
-                if(creditLimit!=0){
-                    Customer customer = new CorporateCustomer(companyName, location, creditLimit,"C"+String.format("%03d", count.getCustomerCount()),name,ic, gender, contact);
-                    AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
-                    addCustomerConfirm.setVisible(true);
-                    clear();
-                }
+        
+        if(jcboxCorporateCustomer.isSelected()){
+            companyName = jtfCompanyName.getText();
+            location = jtaLocation.getText();
+            creditLimitStr = jtfCreditLimit.getText();
+            errorMsg = control.isValid(name, ic, contact, companyName, location, creditLimitStr);
+            if(errorMsg.equals("")){
+                Double creditLimit = Double.parseDouble(creditLimitStr);
+                CorporateCustomerInterface corporateCustomer = control.createCorporateCustomer(name, ic, gender, contact, companyName, location, creditLimit);
+                AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(control,corporateCustomer);
+                addCustomerConfirm.setVisible(true);
+                this.dispose();
             }
             else{
-                Customer customer = new Consumer("C"+String.format("%03d", count.getCustomerCount()),name,ic, gender, contact);
-                AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
-                addCustomerConfirm.setVisible(true);
-                clear();
-
+                 JOptionPane.showMessageDialog(null, errorMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
-            
-            
-
+    
         }
         else{
-            JOptionPane.showMessageDialog(null, warningMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-
+            errorMsg = control.isValid(name, ic, contact);
+            if(errorMsg.equals("")){
+                CustomerInterface consumer = control.createConsumer(name, ic, gender, contact);
+                AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(control,consumer);
+                addCustomerConfirm.setVisible(true);
+                this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, errorMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            }
         }
+       
     }//GEN-LAST:event_jbAddActionPerformed
 
     private void jcboxCorporateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboxCorporateCustomerActionPerformed
@@ -374,35 +351,7 @@ public class CustomerAdd extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jbCancelActionPerformed
 
-    private boolean contactValidation(String contact){
-        if(contact.matches("[\\d]{3}-[\\d]{7,8}")){
-            if(contact.charAt(0) == '0' && contact.charAt(1) == '1')
-                return true;
-        }
-        return false;
-    }
     
-    private boolean icValidation(String ic){       
-        if(ic.length() == 14){
-            if(ic.charAt(6) == '-' && ic.charAt(9) == '-'){
-                for(int i = 0; i < ic.length(); i++){
-                    if(i!=6 && i != 9){
-                        if(!Character.isDigit(ic.charAt(i))){
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            
-            }
-            else{
-                return false;
-            } 
-        }
-        else{
-            return false;
-        }
-    }
     private void clear(){
         jtfName.setText("");
         jtfIC.setText("");

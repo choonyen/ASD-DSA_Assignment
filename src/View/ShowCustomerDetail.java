@@ -5,27 +5,61 @@
  */
 package View;
 
+import Control.CustomerMaintenanceControl;
 import DA.CustomerDA;
 import Model.CorporateCustomer;
-import Model.Customer;
+import Model.CorporateCustomerInterface;
+import Model.CustomerInterface;
 
 /**
  *
  * @author LENOVO
  */
 public class ShowCustomerDetail extends javax.swing.JFrame {
-    CustomerDA customerDA;
-    Customer customer;
+    CustomerMaintenanceControl control;
+    CustomerInterface consumer = null;
+    CorporateCustomerInterface corporateCustomer = null;
     /**
      * Creates new form ShowCustomerDetail
      */
     public ShowCustomerDetail() {
         initComponents();
     }
-    public ShowCustomerDetail(Customer customer) {
+    public ShowCustomerDetail(CustomerMaintenanceControl control,CustomerInterface customer) {
         initComponents();
-        customerDA = new CustomerDA();
-        this.customer = customer;
+        this.control = control;
+        this.consumer = customer;
+        jtfCustID.setText(customer.getCustID());
+        jtfName.setText(customer.getName());
+        jtfIC.setText(customer.getIc());
+        if(customer.getGender() == 'M')
+            jtfGender.setText("Male");
+        else
+            jtfGender.setText("Female");
+        
+        jtfContactNo.setText(customer.getContact());      
+        jlblCreditLimit.setVisible(false);
+        jtfCreditLimit.setVisible(false);
+        jlblCompanyName.setVisible(false);
+        jtfCompanyName.setVisible(false);
+        jlblLocation.setVisible(false);
+        jtaLocation.setVisible(false);
+        jScrollPane1.setVisible(false);
+        jlblRemaining.setVisible(false);
+        jtfRemaining.setVisible(false);
+        if(customer.getLastOrderDate()!=null){
+            jtfLastOrderDate.setText(String.valueOf(customer.getLastOrderDate().getTime()));
+        }
+        else{
+            jtfLastOrderDate.setText("-");
+        }
+        
+    }
+    
+    public ShowCustomerDetail(CustomerMaintenanceControl control,CorporateCustomerInterface customer) {
+        initComponents();
+        this.control = control;
+        this.corporateCustomer = customer;
         jtfCustID.setText(customer.getCustID());
         jtfName.setText(customer.getName());
         jtfIC.setText(customer.getIc());
@@ -35,20 +69,11 @@ public class ShowCustomerDetail extends javax.swing.JFrame {
             jtfGender.setText("Female");
         
         jtfContactNo.setText(customer.getContact());
-        if(customer instanceof CorporateCustomer){
-            jtfCreditLimit.setText(String.valueOf(customer.getCreditLimit()));
-            jtfCompanyName.setText(customer.getCompanyName());
-            jtaLocation.setText(customer.getLocation());
-        }
-        else{
-            jlblCreditLimit.setVisible(false);
-            jtfCreditLimit.setVisible(false);
-            jlblCompanyName.setVisible(false);
-            jtfCompanyName.setVisible(false);
-            jlblLocation.setVisible(false);
-            jtaLocation.setVisible(false);
-            jScrollPane1.setVisible(false);
-        }
+        jtfCreditLimit.setText(String.valueOf(customer.getCreditLimit()));
+        jtfCompanyName.setText(customer.getCompanyName());
+        jtaLocation.setText(customer.getLocation());
+        jtfRemaining.setText(String.valueOf(customer.getRemainingCreditLimit()));
+       
         if(customer.getLastOrderDate()!=null){
             jtfLastOrderDate.setText(String.valueOf(customer.getLastOrderDate().getTime()));
         }
@@ -92,6 +117,8 @@ public class ShowCustomerDetail extends javax.swing.JFrame {
         jtaLocation = new javax.swing.JTextArea();
         jlblLastOrderDate = new javax.swing.JLabel();
         jtfLastOrderDate = new javax.swing.JTextField();
+        jlblRemaining = new javax.swing.JLabel();
+        jtfRemaining = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -180,6 +207,12 @@ public class ShowCustomerDetail extends javax.swing.JFrame {
 
         jtfLastOrderDate.setEditable(false);
 
+        jlblRemaining.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblRemaining.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblRemaining.setText("Remaining:");
+
+        jtfRemaining.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -227,10 +260,15 @@ public class ShowCustomerDetail extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGap(8, 8, 8)
                                             .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jtfLastOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jtfContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(jtfContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jtfRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 52, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -269,13 +307,19 @@ public class ShowCustomerDetail extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlblLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfRemaining)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlblLastOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,9 +354,17 @@ public class ShowCustomerDetail extends javax.swing.JFrame {
 
     private void jbEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditActionPerformed
         // TODO add your handling code here:
-        CustomerEdit customerEdit = new CustomerEdit(customer);
-        customerEdit.setVisible(true);
-        this.dispose();
+        if(consumer!=null){
+            CustomerEdit customerEdit = new CustomerEdit(control,consumer);
+            customerEdit.setVisible(true);
+            this.dispose();
+        }
+        else{
+            CustomerEdit customerEdit = new CustomerEdit(control, corporateCustomer);
+            customerEdit.setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_jbEditActionPerformed
 
     /**
@@ -366,6 +418,7 @@ public class ShowCustomerDetail extends javax.swing.JFrame {
     private javax.swing.JLabel jlblLastOrderDate;
     private javax.swing.JLabel jlblLocation;
     private javax.swing.JLabel jlblName;
+    private javax.swing.JLabel jlblRemaining;
     private javax.swing.JLabel jlblTitle;
     private javax.swing.JTextArea jtaLocation;
     private javax.swing.JTextField jtfCompanyName;
@@ -376,5 +429,6 @@ public class ShowCustomerDetail extends javax.swing.JFrame {
     private javax.swing.JTextField jtfIC;
     private javax.swing.JTextField jtfLastOrderDate;
     private javax.swing.JTextField jtfName;
+    private javax.swing.JTextField jtfRemaining;
     // End of variables declaration//GEN-END:variables
 }
