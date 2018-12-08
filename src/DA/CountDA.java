@@ -51,11 +51,10 @@ public class CountDA {
         return count;
     }
     
-    public void increaseCustomerCount(){
-        Count count = this.getCount();
-        int customerCount = count.getCustomerCount()+1;
+    public void increaseCustomerCount(int count){
+
         try{
-            stmt = conn.prepareStatement(("Update Count set CUSTOMERCOUNT = " + customerCount));
+            stmt = conn.prepareStatement(("Update Count set CUSTOMERCOUNT = " + count));
             stmt.executeUpdate();
                   
         }catch (SQLException ex) {
@@ -63,12 +62,11 @@ public class CountDA {
         }
  
     }
-     public void increaseCorporateCustomerCount(){
-        increaseCustomerCount(); 
-        Count count = this.getCount();
-        int corporateCustomerCount = count.getCorporateCustomerCount()+1;
+    
+     public void increaseCorporateCustomerCount(int count){ 
+
         try{
-            stmt = conn.prepareStatement(("Update Count set CORPORATECUSTOMERCOUNT = " + corporateCustomerCount));
+            stmt = conn.prepareStatement(("Update Count set CORPORATECUSTOMERCOUNT = " + count));
             stmt.executeUpdate();
                   
         }catch (SQLException ex) {

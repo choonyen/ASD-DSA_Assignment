@@ -5,20 +5,27 @@
  */
 package View;
 
+import Control.CustomerMaintenanceControl;
 import DA.CustomerDA;
-import Model.Customer;
+import Model.CorporateCustomerInterface;
 import javax.swing.JOptionPane;
+import Model.CustomerInterface;
 
 /**
  *
  * @author LENOVO
  */
 public class CustomerSearch extends javax.swing.JFrame {
+    CustomerMaintenanceControl control;
 
     /**
      * Creates new form CustomerSearch
      */
     public CustomerSearch() {
+        initComponents();
+    }
+    public CustomerSearch(CustomerMaintenanceControl control) {
+        this.control = control;
         initComponents();
     }
 
@@ -135,8 +142,6 @@ public class CustomerSearch extends javax.swing.JFrame {
 
     private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
         // TODO add your handling code here:
-        Customer customer = null;
-        CustomerDA customerDA = new CustomerDA();
         int searchBy = jcbSearch.getSelectedIndex();
         String searchWith = jtfSearch.getText();
         if(jtfSearch.getText().equals("")){
@@ -144,19 +149,44 @@ public class CustomerSearch extends javax.swing.JFrame {
         }
         else{
             if(searchBy == 0){
-                customer = customerDA.getCorporateCustomer(searchWith);
+                if(searchWith.charAt(0) == 'C'){
+                    CustomerInterface consumer = control.getConsumerById(searchWith);
+                    if(consumer!=null){
+                        ShowCustomerDetail showCustomerDetail = new ShowCustomerDetail(control,consumer);
+                        showCustomerDetail.setVisible(true);
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null, "Record not exists!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    CorporateCustomerInterface corporateCustomer = control.getCorporateCustomerById(searchWith);
+                    if(corporateCustomer!=null){
+                        ShowCustomerDetail showCustomerDetail = new ShowCustomerDetail(control,corporateCustomer);
+                        showCustomerDetail.setVisible(true);
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null, "Record not exists!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+                }
             }
             else{
-                customer = customerDA.getCorporateCustomerByIC(searchWith);
+                CorporateCustomerInterface corporateCustomer = control.getCorporateCustomerByIc(searchWith);
+                if(corporateCustomer!=null){
+                    ShowCustomerDetail showCustomerDetail = new ShowCustomerDetail(control,corporateCustomer);
+                    showCustomerDetail.setVisible(true);
+                }
+                else{
+                    CustomerInterface consumer = control.getConsumerByIc(searchWith);
+                    if(consumer!=null){
+                        ShowCustomerDetail showCustomerDetail = new ShowCustomerDetail(control,consumer);
+                        showCustomerDetail.setVisible(true);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Record not exists!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
-            
-            if(customer==null){
-                JOptionPane.showMessageDialog(null, "Customer doesn't exist.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-            else{
-                ShowCustomerDetail showCustomerDetail = new ShowCustomerDetail(customer);
-                showCustomerDetail.setVisible(true);
-            }
+
         }
     }//GEN-LAST:event_jbSearchActionPerformed
 

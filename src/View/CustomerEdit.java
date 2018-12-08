@@ -5,29 +5,32 @@
  */
 package View;
 
+import Control.CustomerMaintenanceControl;
 import DA.CustomerDA;
 import Model.Consumer;
 import Model.CorporateCustomer;
-import Model.Customer;
+import Model.CorporateCustomerInterface;
 import javax.swing.JOptionPane;
+import Model.CustomerInterface;
 
 /**
  *
  * @author LENOVO
  */
 public class CustomerEdit extends javax.swing.JFrame {
-    CustomerDA customerDA;
-    Customer customer;
+    CustomerInterface consumer = null;
+    CorporateCustomerInterface corporateCustomer =null;
+    CustomerMaintenanceControl control;
     /**
      * Creates new form CustomerEdit
      */
     public CustomerEdit() {
         initComponents();
     }
-    public CustomerEdit(Customer customer) {
+    public CustomerEdit(CustomerMaintenanceControl control, CustomerInterface customer) {
         initComponents();
-        customerDA = new CustomerDA();
-        this.customer = customer;
+        this.control = control;
+        this.consumer = customer;
         jtfCustID.setText(customer.getCustID());
         jtfName.setText(customer.getName());
         jtfIC.setText(customer.getIc());
@@ -35,20 +38,39 @@ public class CustomerEdit extends javax.swing.JFrame {
             jcbGender.setSelectedIndex(1);
             
         jtfContactNo.setText(customer.getContact());
-        if(customer instanceof CorporateCustomer){
-            jtfCreditLimit.setText(String.valueOf(customer.getCreditLimit()));
-            jtfCompanyName.setText(customer.getCompanyName());
-            jtaLocation.setText(customer.getLocation());
+
+        jlblCreditLimit.setVisible(false);
+        jtfCreditLimit.setVisible(false);
+        jlblCompanyName.setVisible(false);
+        jtfCompanyName.setVisible(false);
+        jlblLocation.setVisible(false);
+        jtaLocation.setVisible(false);
+        jScrollPane1.setVisible(false);
+        
+        if(customer.getLastOrderDate()!=null){
+            jtfLastOrderDate.setText(String.valueOf(customer.getLastOrderDate().getTime()));
         }
         else{
-            jlblCreditLimit.setVisible(false);
-            jtfCreditLimit.setVisible(false);
-            jlblCompanyName.setVisible(false);
-            jtfCompanyName.setVisible(false);
-            jlblLocation.setVisible(false);
-            jtaLocation.setVisible(false);
-            jScrollPane1.setVisible(false);
+            jtfLastOrderDate.setText("-");
         }
+        
+    }
+    
+    public CustomerEdit(CustomerMaintenanceControl control, CorporateCustomerInterface customer) {
+        initComponents();
+        this.control = control;
+        this.corporateCustomer = customer;
+        jtfCustID.setText(customer.getCustID());
+        jtfName.setText(customer.getName());
+        jtfIC.setText(customer.getIc());
+        if(customer.getGender() == 'F')
+            jcbGender.setSelectedIndex(1);
+            
+        jtfContactNo.setText(customer.getContact());
+        jtfCreditLimit.setText(String.valueOf(customer.getCreditLimit()));
+        jtfCompanyName.setText(customer.getCompanyName());
+        jtaLocation.setText(customer.getLocation());
+        
         if(customer.getLastOrderDate()!=null){
             jtfLastOrderDate.setText(String.valueOf(customer.getLastOrderDate().getTime()));
         }
@@ -300,85 +322,60 @@ public class CustomerEdit extends javax.swing.JFrame {
 
     private void jbConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmActionPerformed
         // TODO add your handling code here:
-        boolean valid = true;
         String warningMsg = "";
-        if(jtfName.getText().equals("")){
-            warningMsg += "*Name cannot be empty.\n";
-            valid = false;
-        }
-        if(jtfIC.getText().equals("")){
-            warningMsg += "*IC No cannot be empty.\n";
-            valid = false;
-        }
-        if(!icValidation(jtfIC.getText())){
-            warningMsg += "*Invalid IC No. format.\n";
-            valid = false;
-        }
-        if(jtfContactNo.getText().equals("")){
-            warningMsg += "*Contact No. cannot be empty.\n";
-            valid = false;
-        }
-        if(!contactValidation(jtfContactNo.getText()) && !jtfContactNo.getText().equals("")){
-            warningMsg += "*Invalid Contact No. format\n";
-            valid = false;
-        }
-        if(customer instanceof CorporateCustomer){
-            if(jtfCreditLimit.getText().equals("")){
-                warningMsg += "*Credit Limit cannot be empty.\n";
-                valid = false;
-            }
-            if(jtfCompanyName.getText().equals("")){
-                warningMsg += "*Company Name cannot be empty.\n";
-                valid = false;
-            }
-            if(jtaLocation.getText().equals("")){
-                warningMsg += "*Location cannot be empty.\n";
-                valid = false;
-            }
-        }
-        
-        if(valid){
-            String name = jtfName.getText();
-            String ic = jtfIC.getText();
-            char gender;
-            if(jcbGender.getSelectedIndex()==0)
-                gender = 'M';
-            else
-                gender = 'F';
-            String contact = jtfContactNo.getText();
-            
-            customer.setName(name);
-            customer.setIc(ic);
-            customer.setGender(gender);
-            customer.setContact(contact);
-            
-            if(customer instanceof CorporateCustomer){
-                String companyName = jtfCompanyName.getText();
-                String location = jtaLocation.getText();
-                double creditLimit = 0;
-                try{
-                    creditLimit = Double.parseDouble(jtfCreditLimit.getText());
-                }catch(NumberFormatException ex){
-                    JOptionPane.showMessageDialog(null, "Invalid amount, must be number", "ERROR", JOptionPane.ERROR_MESSAGE);
-                }
-                if(creditLimit!=0){
-                    customer.setCompanyName(companyName);
-                    customer.setLocation(location);
-                    customer.setCreditLimit(creditLimit);
-                    customerDA.updateCorporateCustomer(customer);
-                }
-            }
-            else{
-                customerDA.updateConsumer(customer);
-            }
-            
-            JOptionPane.showMessageDialog(null, "Edit Success!!!!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            ShowCustomerDetail showCustomerDetail = new ShowCustomerDetail(customer);
-            showCustomerDetail.setVisible(true);
-            this.dispose();
-            
-        }
-        else{
+        String name = jtfName.getText();
+        String ic = jtfIC.getText();
+        char gender;
+        if(jcbGender.getSelectedIndex()==0)
+            gender = 'M';
+        else
+            gender = 'F';
+        String contact = jtfContactNo.getText();
+       
+        if(corporateCustomer != null){
+           String companyName = jtfCompanyName.getText();
+           String location = jtaLocation.getText();
+           String creditLimitStr = jtfCreditLimit.getText();
+           
+           warningMsg = control.isValid(name, ic, contact, companyName, location, creditLimitStr);
+           if(warningMsg.equals("")){
+                Double creditLimit = Double.parseDouble(creditLimitStr);
+                corporateCustomer.setName(name);
+                corporateCustomer.setIc(ic);
+                corporateCustomer.setGender(gender);
+                corporateCustomer.setContact(contact);
+                double diff = creditLimit - corporateCustomer.getCreditLimit();
+                corporateCustomer.setRemainingCreditLimit(corporateCustomer.getRemainingCreditLimit() + diff);
+                    
+                corporateCustomer.setCompanyName(companyName);
+                corporateCustomer.setLocation(location);
+                corporateCustomer.setCreditLimit(creditLimit);
+                
+                control.updateCorporateCustomer(corporateCustomer);
+                JOptionPane.showMessageDialog(null, "Edit Success!!!!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                ShowCustomerDetail showCustomerDetail = new ShowCustomerDetail(control,corporateCustomer);
+                showCustomerDetail.setVisible(true);
+                this.dispose();
+           }
+           
+       }
+       else{
+           warningMsg = control.isValid(name, ic, contact);
+           if(warningMsg.equals("")){
+               consumer.setName(name);
+               consumer.setIc(ic);
+               consumer.setGender(gender);
+               consumer.setContact(contact);
+               
+               control.updateConsumer(consumer);
+               JOptionPane.showMessageDialog(null, "Edit Success!!!!", "Success", JOptionPane.INFORMATION_MESSAGE);
+               ShowCustomerDetail showCustomerDetail = new ShowCustomerDetail(control,consumer);
+               showCustomerDetail.setVisible(true);
+               this.dispose();
+           }
+       }
+ 
+        if(!warningMsg.equals("")){
             JOptionPane.showMessageDialog(null, warningMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
 
         }
@@ -418,35 +415,7 @@ public class CustomerEdit extends javax.swing.JFrame {
             }
         });
     }
-    private boolean contactValidation(String contact){
-        if(contact.matches("[\\d]{3}-[\\d]{7,8}")){
-            if(contact.charAt(0) == '0' && contact.charAt(1) == '1')
-                return true;
-        }
-        return false;
-    }
-    
-    private boolean icValidation(String ic){       
-        if(ic.length() == 14){
-            if(ic.charAt(6) == '-' && ic.charAt(9) == '-'){
-                for(int i = 0; i < ic.length(); i++){
-                    if(i!=6 && i != 9){
-                        if(!Character.isDigit(ic.charAt(i))){
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            
-            }
-            else{
-                return false;
-            } 
-        }
-        else{
-            return false;
-        }
-    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
