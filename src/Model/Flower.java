@@ -12,11 +12,14 @@ package Model;
 public class Flower {
     private String flowerNo;
     private String flowerName;
+    private String desc;
     private double price;
+    
 
-    public Flower(String flowerNo, String flowerName, double price) {
+    public Flower(String flowerNo, String flowerName, String desc,double price) {
         this.flowerNo = flowerNo;
         this.flowerName = flowerName;
+        this.desc = desc;
         this.price = price;
     }
 
@@ -34,6 +37,16 @@ public class Flower {
 
     public void setFlowerName(String flowerName) {
         this.flowerName = flowerName;
+    }
+    
+    public void setDesc(String desc)
+    {
+        this.desc = desc;
+    }
+    
+    public String getDesc()
+    {
+        return desc;
     }
 
     public double getPrice() {

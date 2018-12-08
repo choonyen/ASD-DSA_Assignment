@@ -48,6 +48,27 @@ public class SizeDA {
         return sizeList;
     }
     
+    public Size getSizeById(String id){
+        String queryStr = "SELECT * FROM " + tableName + " WHERE SIZECODE = ?";
+        Size size = null;
+        try{
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                size = new Size(
+                        rs.getString("SIZECODE").charAt(0),
+                        rs.getDouble("SIZE"),
+                        rs.getDouble("ADDITIONFEE")
+                );
+            }
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return size;
+    }
+    
     private void createConnection() {
         try {
             conn = DriverManager.getConnection(host, user, password);

@@ -47,6 +47,27 @@ public class AccessoryDA {
         return accessoryList;
     }
     
+    public Accessory getAccessoryById(String id){
+        String queryStr = "SELECT * FROM " + tableName + " WHERE ACCESSORYNO = ?";
+        Accessory accessory = null;
+        try{
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                accessory = new Accessory(
+                        rs.getString("ACCESSORYNO"),
+                        rs.getString("ACCESSORYNAME"),
+                        rs.getDouble("PRICE")
+                );
+            }
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return accessory;
+    }
+    
     private void createConnection() {
         try {
             conn = DriverManager.getConnection(host, user, password);

@@ -37,6 +37,7 @@ public class FlowerDA {
                 flower = new Flower(
                         rs.getString("FLOWERNO"),
                         rs.getString("FLOWERNAME"),
+                        rs.getString("FLOWERDESCRIPTION"),
                         rs.getDouble("PRICE")
                 );
                 flowerList.add(flower);
@@ -46,6 +47,28 @@ public class FlowerDA {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return flowerList;
+    }
+    
+    public Flower getFlowerById(String id){
+        String queryStr = "SELECT * FROM " + tableName + " WHERE FLOWERNO = ?";
+        Flower flower = null;
+        try{
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                flower = new Flower(
+                        rs.getString("FLOWERNO"),
+                        rs.getString("FLOWERNAME"),
+                        rs.getString("FLOWERDESCRIPTION"),
+                        rs.getDouble("PRICE")
+                );
+            }
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return flower;
     }
     
     private void createConnection() {

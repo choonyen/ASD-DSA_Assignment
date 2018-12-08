@@ -12,13 +12,13 @@ import Control.*;
  * @author Choonyen
  */
 public class SearchConsumer extends javax.swing.JFrame {
-    MaintenanceCustomerControl maintenanceCustomerControl;
+    CustomizedMaintenanceControl maintenanceCustomerControl;
 
     /**
      * Creates new form SearchConsumer
      */
     public SearchConsumer() {
-        maintenanceCustomerControl = new MaintenanceCustomerControl();
+        maintenanceCustomerControl = new CustomizedMaintenanceControl();
         initComponents();
     }
 

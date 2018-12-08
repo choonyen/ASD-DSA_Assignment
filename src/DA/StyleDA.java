@@ -49,6 +49,28 @@ public class StyleDA {
         return styleList;
     }
     
+    public Style getStyleById(String id){
+        String queryStr = "SELECT * FROM " + tableName + " WHERE STYLENO = ?";
+        Style style = null;
+        try{
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                style = new Style(
+                        rs.getString("STYLENO"),
+                        rs.getString("STYLENAME"),
+                        rs.getDouble("PRICE"),
+                        rs.getString("DESCRIPTION")
+                );
+            }
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return style;
+    }
+    
     private void createConnection() {
         try {
             conn = DriverManager.getConnection(host, user, password);

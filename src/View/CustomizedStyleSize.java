@@ -59,21 +59,7 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
         {
             jComboBoxSize.addItem(""+sizeList.get(i).getSizeCode());
         }
-        
-        for(int i=0;i<styleList.size();i++)
-        {
-            if(jComboBoxStyle.getSelectedItem() == styleList.get(i).getStyleName())
-            {
-                styleNo = styleList.get(i).getStyleNo();        
-            }
-        }
-        for(int i=0; i<sizeList.size();i++)
-        {
-            if(jComboBoxSize.getSelectedItem().equals(String.valueOf(sizeList.get(i).getSizeCode())))
-            {
-                sizeCode = sizeList.get(i).getSizeCode();    
-            }
-        }
+ 
              
     }
 
@@ -311,11 +297,26 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        for(int i=0;i<styleList.size();i++)
+        {
+            if(jComboBoxStyle.getSelectedItem() == styleList.get(i).getStyleName())
+            {
+                styleNo = styleList.get(i).getStyleNo();        
+            }
+        }
+        for(int i=0; i<sizeList.size();i++)
+        {
+            if(jComboBoxSize.getSelectedItem().equals(String.valueOf(sizeList.get(i).getSizeCode())))
+            {
+                sizeCode = sizeList.get(i).getSizeCode();    
+            }
+        }  
         customizedFloral = new CustomizedFloral();
         customizedFloral.setOrderID(jtfOrderId.getText());
         customizedFloral.setCustID(customer.getCustID());
         customizedFloral.setStyleNo(styleNo);
-        customizedFloral.setSizeCode("" + sizeCode);
+        customizedFloral.setSizeCode(String.valueOf(sizeCode).charAt(0));
         total = total + stylePrice + sizePrice;
         customizedFloral.setPrice(total);
         

@@ -81,7 +81,7 @@ public class CountDA {
         Count count = this.getCount();
         int customizedCount = count.getCustomizedOrderCount()+1;
         try{
-            stmt = conn.prepareStatement(("Update Count set CUSTOMERCOUNT = " + customizedCount));
+            stmt = conn.prepareStatement(("Update Count set CUSTOMIZEDORDERCOUNT = " + customizedCount));
             stmt.executeUpdate();
                   
         }catch (SQLException ex) {

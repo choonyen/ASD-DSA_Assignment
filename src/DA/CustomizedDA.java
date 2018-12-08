@@ -18,7 +18,7 @@ public class CustomizedDA {
     private String host = "jdbc:derby://localhost:1527/DSA_Database";
     private String user = "nbuser";
     private String password = "nbuser";
-    private String tableName = "CUSTOMIZED_ORDER";
+    private String tableName = "CUSTOM_ORDER";
     private Connection conn;
     private PreparedStatement stmt;
     
@@ -28,9 +28,9 @@ public class CustomizedDA {
     }
     
     
-    public List<CustomizedFloral> getCustomizedOrder(){
+    public CustomizedList<CustomizedFloral> getCustomizedOrder(){
         String queryStr = "SELECT * FROM " + tableName;
-        List<CustomizedFloral> custFloralList = new ArrayList<CustomizedFloral>();
+        CustomizedList<CustomizedFloral> custFloralList = new CustomizedLinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();
@@ -40,7 +40,7 @@ public class CustomizedDA {
                         rs.getString("CUSTOMOMORDERNO"),
                         rs.getString("CUSTID"),
                         rs.getString("STYLENO"),
-                        rs.getString("SIZECODE"),
+                        rs.getString("SIZECODE").charAt(0),
                         rs.getString("FLOWERNO"),
                         rs.getString("ACCESSORYNO"),
                         rs.getDouble("PRICE"),
@@ -63,7 +63,7 @@ public class CustomizedDA {
             stmt.setString(1, custFloral.getOrderID());
             stmt.setString(2, custFloral.getCustID());
             stmt.setString(3, custFloral.getStyleNo());
-            stmt.setString(4, custFloral.getSizeCode());
+            stmt.setString(4, String.valueOf(custFloral.getSizeCode()));
             stmt.setString(5, custFloral.getFlowerNo());
             stmt.setString(6, custFloral.getAccessoryNo());
             stmt.setDouble(7, custFloral.getPrice());

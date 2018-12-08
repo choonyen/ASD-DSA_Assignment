@@ -15,14 +15,36 @@ import java.util.*;
  *
  * @author Choonyen
  */
-public class MaintenanceCustomerControl {
+public class CustomizedMaintenanceControl {
+    private static CustomizedList<CustomizedFloral> CUSTOMIZED_LIST;
+    private static CustomizedList<Style> STYLE_LIST;
+    private static CustomizedList<Size> SIZE_LIST;
+    private static CustomizedList<Flower> FLOWER_LIST;
+    private static CustomizedList<Accessory> ACCESSORY_LIST;
+    private static int CUSTOMIZED_ORDER_COUNT;
+    
+    CountDA countDA;
     CustomizedDA customizedDA;
     CustomerDA customerDA;
     
-    public MaintenanceCustomerControl()
+    public CustomizedMaintenanceControl()
     {
+        countDA = new CountDA();
         customizedDA = new CustomizedDA();
         customerDA = new CustomerDA();
+        CUSTOMIZED_LIST = customizedDA.getCustomizedOrder();
+        CUSTOMIZED_ORDER_COUNT = countDA.getCount().getCustomizedOrderCount();
+    }
+    
+    public CustomizedList <CustomizedFloral> getAllCustomized()
+    {
+        return CUSTOMIZED_LIST;
+    }
+    
+    public void addCustomizedOrder(CustomizedFloral customizedFloral)
+    {
+        CUSTOMIZED_LIST.add(customizedFloral);
+        CUSTOMIZED_ORDER_COUNT ++;
     }
     
     private boolean idValidation(String id)

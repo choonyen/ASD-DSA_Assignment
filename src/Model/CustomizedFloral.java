@@ -9,12 +9,12 @@ package Model;
  *
  * @author Choonyen
  */
-public class CustomizedFloral {
+public class CustomizedFloral{
     
     private String orderID;
     private String custID;
     private String styleNo;
-    private String sizeCode;
+    private char sizeCode;
     private String flowerNo;
     private String accessoryNo;
     private double price;
@@ -22,7 +22,7 @@ public class CustomizedFloral {
     
     public CustomizedFloral(){}
     
-    public CustomizedFloral(String orderID, String custID, String styleNo, String sizeCode, double price)
+    public CustomizedFloral(String orderID, String custID, String styleNo, char sizeCode, double price)
     {
         this.orderID = orderID;
         this.custID = custID;
@@ -31,7 +31,7 @@ public class CustomizedFloral {
         this.price = price;
     }
     
-    public CustomizedFloral(String orderID, String custID, String styleNo, String sizeCode, String flowerNo, String accessoryNo, double price)
+    public CustomizedFloral(String orderID, String custID, String styleNo, char sizeCode, String flowerNo, String accessoryNo, double price)
     {
         this.orderID = orderID;
         this.custID = custID;
@@ -42,7 +42,7 @@ public class CustomizedFloral {
         this.price = price;
     }
 
-    public CustomizedFloral(String orderID, String custID, String styleNo, String sizeCode, String flowerNo, String accessoryNo, double price, String priority) {
+    public CustomizedFloral(String orderID, String custID, String styleNo, char sizeCode, String flowerNo, String accessoryNo, double price, String priority) {
         this.orderID = orderID;
         this.custID = custID;
         this.styleNo = styleNo;
@@ -77,11 +77,11 @@ public class CustomizedFloral {
         this.styleNo = styleNo;
     }
 
-    public String getSizeCode() {
+    public char getSizeCode() {
         return sizeCode;
     }
 
-    public void setSizeCode(String sizeCode) {
+    public void setSizeCode(char sizeCode) {
         this.sizeCode = sizeCode;
     }
 

@@ -23,6 +23,7 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
     private String flowerNo;
     private String accessoryNo;
     private double flowerPrice;
+    private String flowerDesc;
     private double accessoryPrice;
     private double total;
     
@@ -51,23 +52,7 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
        {
            jComboBoxAccessory.addItem(accessoryList.get(i).getAccessoryName());
        }
-       
-       for(int i=0;i<flowerList.size();i++)
-        {
-            if(jComboBoxFlower.getSelectedItem() == flowerList.get(i).getFlowerName())
-            {
-                flowerNo = flowerList.get(i).getFlowerNo();
-            }
-        }
-        for(int i=0; i<accessoryList.size();i++)
-        {
-            if(jComboBoxAccessory.getSelectedItem().equals(accessoryList.get(i).getAccessoryName()))
-            {
-                 accessoryNo = accessoryList.get(i).getAccessoryNo();
-            }
-        }
-        
-    
+  
     }
 
     /**
@@ -89,13 +74,12 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
         jComboBoxAccessory = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         textFlower = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textAccessory = new javax.swing.JTextArea();
         jLabelTotal = new javax.swing.JLabel();
         jTextFieldTotal = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jbtTotal = new javax.swing.JButton();
+        textAccessory = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,7 +96,7 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -154,13 +138,10 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
 
         textFlower.setEditable(false);
         textFlower.setColumns(20);
+        textFlower.setLineWrap(true);
         textFlower.setRows(5);
+        textFlower.setWrapStyleWord(true);
         jScrollPane1.setViewportView(textFlower);
-
-        textAccessory.setEditable(false);
-        textAccessory.setColumns(20);
-        textAccessory.setRows(5);
-        jScrollPane2.setViewportView(textAccessory);
 
         jLabelTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -184,6 +165,8 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
             }
         });
 
+        textAccessory.setEditable(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -191,39 +174,36 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(221, 221, 221)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabelFlower, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxFlower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(221, 221, 221)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabelAccessory, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxAccessory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textAccessory, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
+                                .addComponent(jLabelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabelFlower, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBoxFlower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabelAccessory, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBoxAccessory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(134, 134, 134)
                                         .addComponent(jButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton2))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jbtTotal)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(54, 54, 54))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -231,19 +211,19 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFlower)
                     .addComponent(jComboBoxFlower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAccessory)
                     .addComponent(jComboBoxAccessory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(textAccessory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTotal)
                     .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,7 +232,7 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,12 +255,16 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
 
     private void jComboBoxFlowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFlowerActionPerformed
         // TODO add your handling code here:
+
         for(int i =0;i<flowerList.size();i++)
         {
             if(jComboBoxFlower.getSelectedItem() == flowerList.get(i).getFlowerName())
             {  
+                flowerNo = flowerList.get(i).getFlowerNo();
                 flowerPrice = flowerList.get(i).getPrice();
-                String Flower ="Price: RM " + flowerPrice;
+                flowerDesc = flowerList.get(i).getDesc();
+                String Flower ="Price: RM " + flowerPrice
+                        + "\nDescription: " + flowerDesc;
                 textFlower.setText(Flower);
             }             
         }
@@ -292,6 +276,7 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
         {
             if(jComboBoxAccessory.getSelectedItem() == accessoryList.get(i).getAccessoryName())
             {
+                accessoryNo = accessoryList.get(i).getAccessoryNo();
                 accessoryPrice = accessoryList.get(i).getPrice();
                 String Accessory = "Price: RM " + accessoryPrice;
                 textAccessory.setText(Accessory);
@@ -303,6 +288,15 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        customizedFloral.setFlowerNo(flowerNo);
+        customizedFloral.setAccessoryNo(accessoryNo);
+        customizedFloral.setPrice(total);
+        
+        CustomizedPriority customizedPriority = new CustomizedPriority(customizedFloral);
+        this.setVisible(false);
+        customizedPriority.setVisible(true);
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -361,10 +355,9 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextFieldTotal;
     private javax.swing.JButton jbtTotal;
-    private javax.swing.JTextArea textAccessory;
+    private javax.swing.JTextField textAccessory;
     private javax.swing.JTextArea textFlower;
     // End of variables declaration//GEN-END:variables
 }
