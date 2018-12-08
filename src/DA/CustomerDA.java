@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
-import java.util.*;
 
 /**
  *
@@ -29,7 +28,7 @@ public class CustomerDA {
         createConnection();
     }
     
-    public void addConsumer(Customer customer){
+    public void addConsumer(CustomerInterface customer){
         String insertStr = "INSERT INTO " + tableName + " VALUES(?,?,?,?,?,?)";
         
         try{
@@ -51,13 +50,16 @@ public class CustomerDA {
         }
     }
     
-    public void addCorporateCustomer(Customer customer){
-        String insertStr = "INSERT INTO " + "CORPORATE_CUSTOMER" + " VALUES(?,?)";
-        this.addConsumer(customer);
+    public void addCorporateCustomer(CorporateCustomerInterface customer){
+        String insertStr = "INSERT INTO " + "CORPORATE_CUSTOMER" + " VALUES(?,?,?,?,?)";
+        this.addConsumer(new Consumer(customer.getCustID(),customer.getName(), customer.getIc(),customer.getGender(),customer.getContact()));
         try{
             stmt = conn.prepareStatement(insertStr);
             stmt.setString(1, customer.getCustID());
-            stmt.setDouble(2, customer.getCreditLimit());
+            stmt.setString(2, customer.getCompanyName());
+            stmt.setString(3, customer.getLocation());
+            stmt.setDouble(4, customer.getCreditLimit());
+            stmt.setDouble(5, customer.getRemainingCreditLimit());
             
             stmt.executeUpdate();
             
@@ -67,9 +69,9 @@ public class CustomerDA {
         }
     }
     
-    public Customer getConsumer(String id){
+    public CustomerInterface getConsumer(String id){
         String queryStr = "SELECT * FROM " + tableName + " WHERE CUSTID = ?";
-        Customer customer = null;
+        CustomerInterface customer = null;
         try{
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1,id);
@@ -92,9 +94,9 @@ public class CustomerDA {
         return customer;
     }
     
-    public Customer getConsumerByIC(String ic){
+    public CustomerInterface getConsumerByIC(String ic){
         String queryStr = "SELECT * FROM " + tableName + " WHERE IC = ?";
-        Customer customer = null;
+        CustomerInterface customer = null;
         try{
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1,ic);
@@ -117,9 +119,11 @@ public class CustomerDA {
         return customer;
     }
     
-    public Customer getCorporateCustomer(String id){
+    public CustomerInterface getCorporateCustomer(String id){
         String queryStr = "SELECT * FROM " + "CORPORATE_CUSTOMER" + " WHERE CUSTID = ?";
-        Customer customer = this.getConsumer(id);
+        CustomerInterface customer;
+        CorporateCustomerInterface corporateCustomer;
+        customer = this.getConsumer(id);
         if(customer!=null){
             try{
             
@@ -127,14 +131,17 @@ public class CustomerDA {
                 stmt.setString(1,id);
                 ResultSet rs = stmt.executeQuery();
                 if(rs.next()){
-                   customer = new CorporateCustomer(
-                            rs.getDouble("CREDITLIMIT"),
+                   corporateCustomer = new CorporateCustomer(
                             customer.getCustID(),
                             customer.getName(),
                             customer.getIc(),
                             customer.getGender(),
                             customer.getContact(),
-                            customer.getLastOrderDate()
+                            customer.getLastOrderDate(),
+                            rs.getString("COMPANYNAME"),
+                            rs.getString("LOCATION"),
+                            rs.getDouble("CREDITLIMIT"),
+                            rs.getDouble("REMAININGCREDITLIMIT")
                  
                     );
                 }
@@ -147,24 +154,29 @@ public class CustomerDA {
         return customer;
     }
     
-    public Customer getCorporateCustomerByIC(String ic){
+    public CustomerInterface getCorporateCustomerByIC(String ic){
         String queryStr = "SELECT * FROM " + "CORPORATE_CUSTOMER" + " WHERE CUSTID = ?";
-        Customer customer = this.getConsumerByIC(ic);
+        CustomerInterface customer;
+        CorporateCustomerInterface corporateCustomer;
+        customer = this.getConsumerByIC(ic);
         if(customer!=null){
             try{
             
                 stmt = conn.prepareStatement(queryStr);
-                stmt.setString(1,ic);
+                stmt.setString(1,customer.getCustID());
                 ResultSet rs = stmt.executeQuery();
                 if(rs.next()){
-                   customer = new CorporateCustomer(
-                            rs.getDouble("CREDITLIMIT"),
+                   corporateCustomer = new CorporateCustomer(
                             customer.getCustID(),
                             customer.getName(),
                             customer.getIc(),
                             customer.getGender(),
                             customer.getContact(),
-                            customer.getLastOrderDate()
+                            customer.getLastOrderDate(),
+                            rs.getString("COMPANYNAME"),
+                            rs.getString("LOCATION"),
+                            rs.getDouble("CREDITLIMIT"),
+                            rs.getDouble("REMAININGCREDITLIMIT")
                  
                     );
                 }
@@ -175,6 +187,109 @@ public class CustomerDA {
         }
         
         return customer;
+    }
+    
+    public void updateConsumer(CustomerInterface customer){
+        String updateStr = "UPDATE " + tableName + " SET "
+                + " NAME = ?, IC = ?, GENDER = ?, CONTACT = ?, LASTORDERDATE = ? WHERE CUSTID = ?";
+        try{
+            stmt = conn.prepareStatement(updateStr);
+            stmt.setString(6, customer.getCustID());
+            stmt.setString(1, customer.getName());
+            stmt.setString(2, customer.getIc());
+            stmt.setString(3, String.valueOf(customer.getGender()));
+            stmt.setString(4, customer.getContact());
+            if(customer.getLastOrderDate()!=null)
+                stmt.setDate(5, new java.sql.Date(customer.getLastOrderDate().getTime()));
+            else
+                stmt.setDate(5, null);
+
+            stmt.executeUpdate();
+            
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void updateCorporateCustomer(CorporateCustomerInterface corporateCustomer){
+        String updateStr = "UPDATE " + "CORPORATE_CUSTOMER" + " SET "
+                + " COMPANYNAME = ?, LOCATION = ?, CREDITLIMIT = ?, REMAININGCREDITLIMIT = ? WHERE CUSTID = ?";
+        CustomerInterface customer = this.getConsumer(corporateCustomer.getCustID());
+        this.updateConsumer(customer);
+        try{
+            stmt = conn.prepareStatement(updateStr);
+            stmt.setString(5, corporateCustomer.getCustID());
+            stmt.setString(1, corporateCustomer.getCompanyName());
+            stmt.setString(2, corporateCustomer.getLocation());
+            stmt.setDouble(3, corporateCustomer.getCreditLimit());
+            stmt.setDouble(4, corporateCustomer.getRemainingCreditLimit());
+            
+            stmt.executeUpdate();
+            
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public List<CustomerInterface> getAllConsumer(){
+        String queryStr = "Select * FROM " + tableName + " WHERE CUSTID Like ? ";
+        List<CustomerInterface> consumerList = new LinkedList();
+        try{
+                CustomerInterface consumer;
+                stmt = conn.prepareStatement(queryStr);
+                stmt.setString(1, "C%");
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
+                    consumer = new Consumer(
+                        rs.getString("CUSTID"),
+                        rs.getString("NAME"),         
+                        rs.getString("IC"),
+                        rs.getString("GENDER").charAt(0),
+                        rs.getString("CONTACT"),
+                        rs.getDate("LASTORDERDATE")
+                 
+                    );
+                    consumerList.add(consumer);
+                }
+        }catch (SQLException ex) {
+               JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return consumerList;
+        
+    }
+    
+    
+    public List<CorporateCustomerInterface> getAllCorporateCustomer(){
+        String queryStr = "Select * FROM " + tableName + " c,CORPORATE_CUSTOMER v WHERE c.CUSTID Like ? AND c.CUSTID = v.CUSTID";
+        List<CorporateCustomerInterface> corporateCustomerList = new LinkedList();
+        try{
+                CorporateCustomerInterface corporateCustomer;
+                stmt = conn.prepareStatement(queryStr);
+                 stmt.setString(1, "V%");
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
+                    corporateCustomer = new CorporateCustomer(
+                        rs.getString("CUSTID"),
+                        rs.getString("NAME"),         
+                        rs.getString("IC"),
+                        rs.getString("GENDER").charAt(0),
+                        rs.getString("CONTACT"),
+                        rs.getDate("LASTORDERDATE"),
+                        rs.getString("COMPANYNAME"),
+                        rs.getString("LOCATION"),
+                        rs.getDouble("CREDITLIMIT"),
+                        rs.getDouble("REMAININGCREDITLIMIT")
+                 
+                    );
+                    corporateCustomerList.add(corporateCustomer);
+                }
+        }catch (SQLException ex) {
+               JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return corporateCustomerList;
+        
     }
     
     

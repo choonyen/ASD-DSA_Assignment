@@ -4,24 +4,35 @@
  * and open the template in the editor.
  */
 package View;
-
 import Model.*;
-import DA.*;
-import javax.swing.JOptionPane;
-
+import Control.*;
+import java.util.Iterator;
 /**
  *
  * @author LENOVO
  */
 public class CustomerMaintenance extends javax.swing.JFrame {
-
+    private CustomerMaintenanceControl control;
+    private List<CustomerInterface> consumerList;
+    private List<CorporateCustomerInterface> corporateCustomerList;
     /**
      * Creates new form CustomerMaintenance
      */
     public CustomerMaintenance() {
         initComponents();
-        jlblCreditLimit.setVisible(false);
-        jtfCreditLimit.setVisible(false);
+        control = new CustomerMaintenanceControl();
+        consumerList = control.getAllConsumer();
+        corporateCustomerList = control.getAllCorporateCustomer();
+        Iterator<CustomerInterface> consumerIterator = consumerList.getIterator();
+        while(consumerIterator.hasNext()){
+            System.out.println(consumerIterator.next().getName());
+        }
+        System.out.println("");
+        Iterator<CorporateCustomerInterface> corporateCustomerIterator = corporateCustomerList.getIterator();
+        while(corporateCustomerIterator.hasNext()){
+            System.out.println(corporateCustomerIterator.next().getName());
+        }
+        
     }
 
     /**
@@ -33,300 +44,130 @@ public class CustomerMaintenance extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jlblTitle = new javax.swing.JLabel();
         jlblHeader = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jlblName = new javax.swing.JLabel();
-        jtfName = new javax.swing.JTextField();
-        jlblGender = new javax.swing.JLabel();
-        jlblContact = new javax.swing.JLabel();
-        jcbGender = new javax.swing.JComboBox<>();
-        jtfContact = new javax.swing.JTextField();
-        jbAdd = new javax.swing.JButton();
-        jbCancel = new javax.swing.JButton();
-        jcboxCorporateCustomer = new javax.swing.JCheckBox();
-        jlblCreditLimit = new javax.swing.JLabel();
-        jtfCreditLimit = new javax.swing.JTextField();
-        jlblIC = new javax.swing.JLabel();
-        jtfIC = new javax.swing.JTextField();
+        jlblTitle = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jbExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 204, 204));
-
-        jlblTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jlblTitle.setForeground(new java.awt.Color(102, 0, 0));
-        jlblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlblTitle.setText("Fiore Flowershop");
 
         jlblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblHeader.setForeground(new java.awt.Color(153, 0, 0));
         jlblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblHeader.setText("Customer Maintenance");
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-
-        jlblName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblName.setText("Name:");
-
-        jlblGender.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblGender.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblGender.setText("Gender:");
-
-        jlblContact.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblContact.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblContact.setText("Contact No:");
-
-        jcbGender.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
-
-        jtfContact.setToolTipText("exp: 0xx-xxxxxxx");
-
-        jbAdd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jbAdd.setText("Add");
-        jbAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAddActionPerformed(evt);
-            }
-        });
-
-        jbCancel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jbCancel.setText("Cancel");
-
-        jcboxCorporateCustomer.setBackground(new java.awt.Color(255, 204, 204));
-        jcboxCorporateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jcboxCorporateCustomer.setText("Corporate Customer");
-        jcboxCorporateCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcboxCorporateCustomerActionPerformed(evt);
-            }
-        });
-
-        jlblCreditLimit.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblCreditLimit.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblCreditLimit.setText("Credit Limit:");
-
-        jtfCreditLimit.setEditable(false);
-        jtfCreditLimit.setToolTipText("exp: 0xx-xxxxxxx");
-
-        jlblIC.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblIC.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblIC.setText("IC No:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcboxCorporateCustomer)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlblGender, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jlblName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jlblContact, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jlblIC, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfContact, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblName)
-                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlblIC)
-                        .addGap(9, 9, 9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jtfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlblGender)
-                    .addComponent(jcbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlblContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtfContact))
-                .addGap(18, 18, 18)
-                .addComponent(jcboxCorporateCustomer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfCreditLimit)
-                    .addComponent(jlblCreditLimit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
-        );
-
-        jtfIC.getAccessibleContext().setAccessibleDescription("exp: 001230-08-2341");
+        jlblTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jlblTitle.setForeground(new java.awt.Color(102, 0, 0));
+        jlblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblTitle.setText("Fiore Flowershop");
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 51));
+
+        jButton1.setText("Add Customer");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Search Customer");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Customer List");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Monthly Invoice");
+
+        jbExit.setText("Exit");
+        jbExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jlblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(jlblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(221, 221, 221)
+                .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jlblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jbExit, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        boolean valid = true;
-        String warningMsg = "";
-        if(jtfName.getText().equals("")){
-            warningMsg += "*Name cannot be empty.\n";
-            valid = false;
-        }
-        if(jtfIC.getText().equals("")){
-            warningMsg += "*IC No cannot be empty.\n";
-            valid = false;
-        }
-        if(icValidation(jtfIC.getText())){
-            warningMsg += "*Invalid IC No. format.\n";
-            valid = false;
-        }
-        if(jtfContact.getText().equals("")){
-            warningMsg += "*Contact No. cannot be empty.\n";
-            valid = false;
-        }
-        if(!contactValidation(jtfContact.getText()) && !jtfContact.getText().equals("")){
-            warningMsg += "*Invalid Contact No. format\n";
-            valid = false;
-        }
-        if(jcboxCorporateCustomer.isSelected() && jtfCreditLimit.getText().equals("")){
-            warningMsg += "*Credit Limit cannot be empty.\n";
-            valid = false;
-        }
-        
-        if(valid){
-            CountDA countDA = new CountDA();
-            Count count = countDA.getCount();
-            String name = jtfName.getText();
-            String ic = jtfIC.getText();
-            char gender;
-            if(jcbGender.getSelectedIndex()==0)
-                gender = 'M';
-            else
-                gender = 'F';
-            int age;
-            String contact = jtfContact.getText();
-            
-            
-            if(jcboxCorporateCustomer.isSelected()){
-                double creditLimit = 0;
-                try{
-                    creditLimit = Double.parseDouble(jtfCreditLimit.getText());
-                }catch(NumberFormatException ex){
-                    JOptionPane.showMessageDialog(null, "Invalid amount, must be number", "ERROR", JOptionPane.ERROR_MESSAGE);
-                }
-                if(creditLimit!=0){
-                    Customer customer = new CorporateCustomer(creditLimit,"C"+String.format("%03d", count.getCustomerCount()),name,ic, gender, contact);
-                    AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
-                    addCustomerConfirm.setVisible(true);
-                }
-            }
-            else{
-                Customer customer = new Consumer("C"+String.format("%03d", count.getCustomerCount()),name,ic, gender, contact);
-                AddCustomerConfirm addCustomerConfirm = new AddCustomerConfirm(customer);
-                addCustomerConfirm.setVisible(true);
-            }
-            
-            
-            
-            
-            
-            
-        }
-        else{
-            JOptionPane.showMessageDialog(null, warningMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        CustomerAdd customerAdd = new CustomerAdd(control);
+        customerAdd.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        }
-    }//GEN-LAST:event_jbAddActionPerformed
-
-    private void jcboxCorporateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboxCorporateCustomerActionPerformed
+    private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
         // TODO add your handling code here:
-        if(jcboxCorporateCustomer.isSelected()){
-            jlblCreditLimit.setVisible(true);
-            jtfCreditLimit.setVisible(true);
-            jtfCreditLimit.setEditable(true);
-        }
-        else{
-            jlblCreditLimit.setVisible(false);
-            jtfCreditLimit.setVisible(false);
-            jtfCreditLimit.setEditable(false);
-        }
-    }//GEN-LAST:event_jcboxCorporateCustomerActionPerformed
+        control.updateDatabase();
+    }//GEN-LAST:event_jbExitActionPerformed
 
-    private boolean contactValidation(String contact){
-        if(contact.matches("[\\d]{3}-[\\d]{7,8}")){
-            if(contact.charAt(0) == '0' && contact.charAt(1) == '1')
-                return true;
-        }
-        return false;
-    }
-    
-    private boolean icValidation(String ic){       
-        if(ic.length() == 14){
-            if(ic.charAt(6) == '-' && ic.charAt(9) == '-'){
-                for(int i = 0; i < ic.length(); i++){
-                    if(i!=6 && i != 9){
-                        if(!Character.isDigit(ic.charAt(i))){
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            
-            }
-            else{
-                return false;
-            } 
-        }
-        else{
-            return false;
-        }
-    }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        CustomerSearch customerSearch = new CustomerSearch(control);
+        customerSearch.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        CustomerDisplay customerDisplay = new CustomerDisplay(control);
+        customerDisplay.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -363,22 +204,13 @@ public class CustomerMaintenance extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton jbAdd;
-    private javax.swing.JButton jbCancel;
-    private javax.swing.JComboBox<String> jcbGender;
-    private javax.swing.JCheckBox jcboxCorporateCustomer;
-    private javax.swing.JLabel jlblContact;
-    private javax.swing.JLabel jlblCreditLimit;
-    private javax.swing.JLabel jlblGender;
+    private javax.swing.JButton jbExit;
     private javax.swing.JLabel jlblHeader;
-    private javax.swing.JLabel jlblIC;
-    private javax.swing.JLabel jlblName;
     private javax.swing.JLabel jlblTitle;
-    private javax.swing.JTextField jtfContact;
-    private javax.swing.JTextField jtfCreditLimit;
-    private javax.swing.JTextField jtfIC;
-    private javax.swing.JTextField jtfName;
     // End of variables declaration//GEN-END:variables
 }
