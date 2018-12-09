@@ -26,9 +26,9 @@ public class FlowerDA {
         createConnection();
     }
     
-    public List<Flower> getFlowerList(){
+    public CustomizedList<Flower> getFlowerList(){
         String queryStr = "SELECT * FROM " + tableName;
-        List<Flower> flowerList = new ArrayList<>();
+        CustomizedList<Flower> flowerList = new CustomizedLinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();

@@ -75,11 +75,10 @@ public class CountDA {
  
     }
      
-     public void increaseCustomizedCount(){
-        Count count = this.getCount();
-        int customizedCount = count.getCustomizedOrderCount()+1;
+     public void increaseCustomizedCount(int count){
+         
         try{
-            stmt = conn.prepareStatement(("Update Count set CUSTOMIZEDORDERCOUNT = " + customizedCount));
+            stmt = conn.prepareStatement(("Update Count set CUSTOMIZEDORDERCOUNT = " + count));
             stmt.executeUpdate();
                   
         }catch (SQLException ex) {

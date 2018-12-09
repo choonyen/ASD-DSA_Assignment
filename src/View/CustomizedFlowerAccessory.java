@@ -8,6 +8,7 @@ import DA.*;
 import Model.*;
 import Control.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 /**
  *
@@ -16,16 +17,18 @@ import java.util.List;
 public class CustomizedFlowerAccessory extends javax.swing.JFrame {
     
     private CustomizedFloral customizedFloral;
-    private FlowerDA flowerDA;
-    private AccessoryDA accessoryDA;
-    private List<Flower> flowerList = new ArrayList<>();
-    private List<Accessory> accessoryList = new ArrayList<>();
+    private CustomizedMaintenanceControl control;
+    private Iterator <Flower> flowerList;
+    private Iterator <Accessory> accessoryList;
+    
     private String flowerNo;
     private String accessoryNo;
     private double flowerPrice;
     private String flowerDesc;
     private double accessoryPrice;
     private double total;
+    private String flowerText;
+    private String accessoryText;
     
     /**
      * Creates new form CustomizedFlowerAccessory
@@ -34,23 +37,24 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CustomizedFlowerAccessory(CustomizedFloral customizedFloral)
+    public CustomizedFlowerAccessory(CustomizedMaintenanceControl control, CustomizedFloral customizedFloral)
     {
+       this.control = control;
        this.customizedFloral = customizedFloral;
        initComponents();
-       flowerDA = new FlowerDA();
-       accessoryDA = new AccessoryDA(); 
        
-       flowerList = flowerDA.getFlowerList();
-       for(int i=0;i<flowerList.size();i++)
+       flowerList = control.getAllFlower().getIterator();
+       while(flowerList.hasNext())
        {
-           jComboBoxFlower.addItem(flowerList.get(i).getFlowerName());
+           Flower flower = flowerList.next();
+           jComboBoxFlower.addItem(flower.getFlowerName());
        }
        
-       accessoryList = accessoryDA.getAccessoryList();
-       for(int i=0;i<accessoryList.size();i++)
+       accessoryList = control.getAllAccessory().getIterator();
+       while(accessoryList.hasNext())
        {
-           jComboBoxAccessory.addItem(accessoryList.get(i).getAccessoryName());
+           Accessory accessory = accessoryList.next();
+           jComboBoxAccessory.addItem(accessory.getAccessoryName());
        }
   
     }
@@ -157,6 +161,11 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
         });
 
         jButton2.setText("Back To Home Page");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jbtTotal.setText("Calculate");
         jbtTotal.addActionListener(new java.awt.event.ActionListener() {
@@ -256,32 +265,39 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
     private void jComboBoxFlowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFlowerActionPerformed
         // TODO add your handling code here:
 
-        for(int i =0;i<flowerList.size();i++)
+        flowerList = control.getAllFlower().getIterator();
+        while(flowerList.hasNext())
         {
-            if(jComboBoxFlower.getSelectedItem() == flowerList.get(i).getFlowerName())
+            Flower flower = flowerList.next();
+            if(jComboBoxFlower.getSelectedItem().equals(flower.getFlowerName()))
             {  
-                flowerNo = flowerList.get(i).getFlowerNo();
-                flowerPrice = flowerList.get(i).getPrice();
-                flowerDesc = flowerList.get(i).getDesc();
-                String Flower ="Price: RM " + flowerPrice
+                flowerNo = flower.getFlowerNo();
+                flowerPrice = flower.getPrice();
+                flowerDesc = flower.getDesc();
+                flowerText ="Price: RM " + flowerPrice
                         + "\nDescription: " + flowerDesc;
-                textFlower.setText(Flower);
+                
             }             
         }
+        textFlower.setText(flowerText);
     }//GEN-LAST:event_jComboBoxFlowerActionPerformed
 
     private void jComboBoxAccessoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAccessoryActionPerformed
         // TODO add your handling code here:
-        for(int i=0;i<accessoryList.size();i++)
+        
+        accessoryList = control.getAllAccessory().getIterator();
+        while(accessoryList.hasNext())
         {
-            if(jComboBoxAccessory.getSelectedItem() == accessoryList.get(i).getAccessoryName())
+            Accessory accessory = accessoryList.next();
+            if(jComboBoxAccessory.getSelectedItem().equals(accessory.getAccessoryName()))
             {
-                accessoryNo = accessoryList.get(i).getAccessoryNo();
-                accessoryPrice = accessoryList.get(i).getPrice();
-                String Accessory = "Price: RM " + accessoryPrice;
-                textAccessory.setText(Accessory);
+                accessoryNo = accessory.getAccessoryNo();
+                accessoryPrice = accessory.getPrice();
+                accessoryText = "Price: RM " + accessoryPrice;
+                
             }       
         }
+        textAccessory.setText(accessoryText);
         
         
     }//GEN-LAST:event_jComboBoxAccessoryActionPerformed
@@ -293,7 +309,7 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
         customizedFloral.setAccessoryNo(accessoryNo);
         customizedFloral.setPrice(total);
         
-        CustomizedPriority customizedPriority = new CustomizedPriority(customizedFloral);
+        CustomizedPriority customizedPriority = new CustomizedPriority(control, customizedFloral);
         this.setVisible(false);
         customizedPriority.setVisible(true);
         
@@ -306,6 +322,11 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
         total = total + flowerPrice + accessoryPrice;
         jTextFieldTotal.setText(String.format("RM %.2f",total));
     }//GEN-LAST:event_jbtTotalActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,6 +353,7 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CustomizedFlowerAccessory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -37,7 +37,7 @@ public class CustomizedDA {
             while(rs.next()){
                 CustomizedFloral custFloral = null;
                 custFloral = new CustomizedFloral(
-                        rs.getString("CUSTOMOMORDERNO"),
+                        rs.getString("CUSTOMORDERNO"),
                         rs.getString("CUSTID"),
                         rs.getString("STYLENO"),
                         rs.getString("SIZECODE").charAt(0),
@@ -54,6 +54,60 @@ public class CustomizedDA {
         }
         return custFloralList;
         
+    }
+    
+    public CustomizedFloral getOrderCustomer(String id){
+        String queryStr = "SELECT * FROM " + tableName + " WHERE CUSTID = ?";
+        CustomizedFloral custFloral = null;
+        try{
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                custFloral = new CustomizedFloral(
+                        rs.getString("CUSTOMORDERNO"),
+                        rs.getString("CUSTID"),
+                        rs.getString("STYLENO"),
+                        rs.getString("SIZECODE").charAt(0),
+                        rs.getString("FLOWERNO"),
+                        rs.getString("ACCESSORYNO"),
+                        rs.getDouble("PRICE"),
+                        rs.getString("PRIORITY")
+                 
+                );
+            }
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return custFloral;
+    }
+    
+    public CustomizedFloral getOrderCust(String id){
+        String queryStr = "SELECT * FROM " + tableName + " WHERE CUSTOMORDERNO = ?";
+        CustomizedFloral custFloral = null;
+        try{
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                custFloral = new CustomizedFloral(
+                        rs.getString("CUSTOMORDERNO"),
+                        rs.getString("CUSTID"),
+                        rs.getString("STYLENO"),
+                        rs.getString("SIZECODE").charAt(0),
+                        rs.getString("FLOWERNO"),
+                        rs.getString("ACCESSORYNO"),
+                        rs.getDouble("PRICE"),
+                        rs.getString("PRIORITY")
+                 
+                );
+            }
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return custFloral;
     }
     
     public void addCustOrder(CustomizedFloral custFloral){

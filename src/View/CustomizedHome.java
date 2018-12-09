@@ -15,7 +15,8 @@ import Control.*;
  */
 public class CustomizedHome extends javax.swing.JFrame {
 
-    Customer customer;
+    CustomizedMaintenanceControl control;
+    CustomerInterface customer = null;
     /**
      * Creates new form CustomizedHome
      */
@@ -23,9 +24,10 @@ public class CustomizedHome extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CustomizedHome(Customer customer)
+    public CustomizedHome(CustomizedMaintenanceControl control, CustomerInterface customer)
     {
         this.customer = customer;
+        this.control = control;
         initComponents();
         jtfCustName.setText(customer.getName());
         jtfCustomerID.setText(customer.getCustID());
@@ -261,9 +263,9 @@ public class CustomizedHome extends javax.swing.JFrame {
 
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
         // TODO add your handling code here:
-        CustomizedStyleSize customizedOrder = new CustomizedStyleSize(customer);
+        CustomizedStyleSize customizedOrder = new CustomizedStyleSize(control, customer);
         customizedOrder.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButtonConfirmActionPerformed
 
     /**
@@ -291,6 +293,7 @@ public class CustomizedHome extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CustomizedHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -26,19 +26,54 @@ public class CustomizedMaintenanceControl {
     CountDA countDA;
     CustomizedDA customizedDA;
     CustomerDA customerDA;
+    StyleDA styleDA;
+    SizeDA sizeDA;
+    FlowerDA flowerDA;
+    AccessoryDA accessoryDA;
     
     public CustomizedMaintenanceControl()
     {
         countDA = new CountDA();
         customizedDA = new CustomizedDA();
         customerDA = new CustomerDA();
+        styleDA = new StyleDA();
+        sizeDA = new SizeDA();
+        flowerDA = new FlowerDA();
+        accessoryDA = new AccessoryDA();
+        
         CUSTOMIZED_LIST = customizedDA.getCustomizedOrder();
+        STYLE_LIST = styleDA.getStyleList();
+        SIZE_LIST = sizeDA.getSizeList();
+        FLOWER_LIST = flowerDA.getFlowerList();
+        ACCESSORY_LIST = accessoryDA.getAccessoryList();
         CUSTOMIZED_ORDER_COUNT = countDA.getCount().getCustomizedOrderCount();
+        
+        
     }
     
     public CustomizedList <CustomizedFloral> getAllCustomized()
     {
         return CUSTOMIZED_LIST;
+    }
+    
+    public CustomizedList <Style> getAllStyle()
+    {
+        return STYLE_LIST;
+    }
+    
+    public CustomizedList <Size> getAllSize()
+    {
+        return SIZE_LIST;
+    }
+    
+    public CustomizedList <Flower> getAllFlower()
+    {
+        return FLOWER_LIST;
+    }
+    
+    public CustomizedList <Accessory> getAllAccessory()
+    {
+        return ACCESSORY_LIST;
     }
     
     public void addCustomizedOrder(CustomizedFloral customizedFloral)
@@ -47,58 +82,88 @@ public class CustomizedMaintenanceControl {
         CUSTOMIZED_ORDER_COUNT ++;
     }
     
-    private boolean idValidation(String id)
+    public int getCustomizedCount()
     {
-        if(id.length() == 4)
-        {
-            if(id.charAt(0) == 'C' || id.charAt(0) == 'c')
-            {
-                for(int i=1;i<id.length();i++)
-                {
-                    if(!Character.isDigit(id.charAt(i)))
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    public Customer searchCustomer(String id)
-    {
-        Customer customer = null;
-        if(!id.equals(""))
-        {
-            if(idValidation(id))
-            {
-                customer = customerDA.getConsumer(id);
-                if(customer==null)
-                {
-                    JOptionPane.showMessageDialog(null,"Wrong ID!! Cannot Find Customer.","Error", JOptionPane.ERROR_MESSAGE);
-                    return customer;
-                }
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Invalid ID format!!! example:C000 ","ERROR",JOptionPane.ERROR_MESSAGE);
-                return customer;
-            }
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"ERROR!! Cannot be Blank","ERROR",JOptionPane.ERROR_MESSAGE);
-        }
-        return customer;    
+        return CUSTOMIZED_ORDER_COUNT;
     }
     
     
+    public Style getStyleById(String no)
+    {
+        Iterator<Style> styleList = STYLE_LIST.getIterator();
+        Style result = null;
+        while(styleList.hasNext())
+        {
+            Style style = styleList.next();
+            if(style.getStyleNo().equals(no))
+            {
+                result = style;
+                break;
+            }
+
+        }
+        return result;
+    }
+    
+    public Size getSizeById(String id)
+    {
+        Iterator<Size> sizeList = SIZE_LIST.getIterator();
+        Size result = null;
+        while(sizeList.hasNext())
+        {
+            Size size = sizeList.next();
+            if(String.valueOf(size.getSizeCode()).equals(id))
+            {
+                result = size;
+                break;
+            }
+        }
+        return result;
+    }
+    
+    public Flower getFlowerById(String id)
+    {
+        Iterator<Flower> flowerList = FLOWER_LIST.getIterator();
+        Flower result = null;
+        while(flowerList.hasNext())
+        {
+            Flower flower = flowerList.next();
+            if(flower.getFlowerNo().equals(id))
+            {
+                result = flower;
+                break;
+            }
+        }
+        return result;
+    }
+    
+    public Accessory getAccessoryById(String id)
+    {
+        Iterator<Accessory> accessoryList = ACCESSORY_LIST.getIterator();
+        Accessory result = null;
+        while(accessoryList.hasNext())
+        {
+            Accessory accessory = accessoryList.next();
+            if(accessory.getAccessoryNo().equals(id))
+            {
+                result = accessory;
+                break;
+            }
+        }
+        return result;
+    }
+    
+    public void updateDatabase()
+    {
+        Iterator<CustomizedFloral> customizedList = CUSTOMIZED_LIST.getIterator();
+        while(customizedList.hasNext()){
+            CustomizedFloral custFloral = customizedList.next();
+            
+            if(customizedDA.getOrderCust(custFloral.getOrderID())== null)
+                customizedDA.addCustOrder(custFloral);
+                
+      
+        }      
+        countDA.increaseCustomizedCount(CUSTOMIZED_ORDER_COUNT);       
+    }  
 }

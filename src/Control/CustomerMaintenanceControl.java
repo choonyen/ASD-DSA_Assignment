@@ -213,6 +213,15 @@ public class CustomerMaintenanceControl {
         return false;
     }
     
+    public boolean custIdValidation(String custId){
+        if(custId.length()!=4 || (custId.charAt(0)!='C' && custId.charAt(0)!='V')||
+                !Character.isDigit(custId.charAt(1))||!Character.isDigit(custId.charAt(2))||
+                !Character.isDigit(custId.charAt(3)))
+            return false;
+        else
+            return true;
+    }
+    
     private boolean icValidation(String ic){       
         if(ic.length() == 14){
             if(ic.charAt(6) == '-' && ic.charAt(9) == '-'){
@@ -235,5 +244,5 @@ public class CustomerMaintenanceControl {
         }
     }
     
-    
+  
 }

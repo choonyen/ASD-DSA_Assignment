@@ -8,22 +8,25 @@ import DA.*;
 import Model.*;
 import Control.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 /**
  *
  * @author Choonyen
  */
 public class CustomizedStyleSize extends javax.swing.JFrame {
-    private Customer customer;
-    private CustomizedFloral customizedFloral;
-    private CountDA countDA;
-    private StyleDA styleDA;
-    private SizeDA sizeDA;
-    private Count count;
-    private List<Style> styleList = new ArrayList<>();
-    private List<Size> sizeList = new ArrayList<>();
+    CustomizedMaintenanceControl control;
+    CustomizedFloral customizedFloral;
+    CustomerInterface customer;
+    Iterator <Style> styleList;
+    Iterator <Size> sizeList;
+    
     private String styleNo;
+    private String styleText;
+    private String sizeText;
     private char sizeCode;
     private double total = 15.0;
     private double stylePrice;
@@ -36,29 +39,29 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CustomizedStyleSize(Customer customer)
+    public CustomizedStyleSize(CustomizedMaintenanceControl control, CustomerInterface customer)
     {
         this.customer = customer;
+        this.control = control;
         initComponents();
         
-        countDA = new CountDA();
-        count = countDA.getCount();
-        styleDA = new StyleDA();
-        sizeDA = new SizeDA();
+        jtfOrderId.setText("O"+String.format("%03d",control.getCustomizedCount()));
         
-        jtfOrderId.setText("O"+String.format("%03d",count.getCustomizedOrderCount()));
-        
-        styleList = styleDA.getStyleList();
-        for(int i =0;i<styleList.size();i++)
+        styleList = control.getAllStyle().getIterator();
+        while(styleList.hasNext())
         {
-            jComboBoxStyle.addItem(styleList.get(i).getStyleName());
+            Style style = styleList.next();
+            jComboBoxStyle.addItem(style.getStyleName());
         }
-        
-        sizeList = sizeDA.getSizeList();
-        for(int i=0;i<sizeList.size();i++)
-        {
-            jComboBoxSize.addItem(""+sizeList.get(i).getSizeCode());
-        }
+
+        sizeList = control.getAllSize().getIterator();
+
+       while(sizeList.hasNext())
+       {
+           Size size = sizeList.next();
+           jComboBoxSize.addItem(String.valueOf(size.getSizeCode()));
+       }
+
  
              
     }
@@ -159,6 +162,11 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
         });
 
         jButton2.setText("Back To Home Page");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         textSize.setEditable(false);
         textSize.setColumns(20);
@@ -268,48 +276,57 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
 
     private void jComboBoxStyleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStyleActionPerformed
         // TODO add your handling code here:
-        for(int i =0;i<styleList.size();i++)
+        styleList = control.getAllStyle().getIterator();
+        while(styleList.hasNext())
         {
-            if(jComboBoxStyle.getSelectedItem() == styleList.get(i).getStyleName())
+            Style style = styleList.next();
+            if(jComboBoxStyle.getSelectedItem().equals(style.getStyleName()))
             {  
-                stylePrice = styleList.get(i).getPrice();
-                String Style ="Description: " + styleList.get(i).getDesc()
-                                +"\nPrice: RM " + stylePrice;
-                textStyle.setText(Style);
-            }             
+                stylePrice = style.getPrice();
+                styleText ="Description: " + style.getDesc()
+                                +"\nPrice: RM " + stylePrice;  
+            }  
         }
+        textStyle.setText(styleText);
     }//GEN-LAST:event_jComboBoxStyleActionPerformed
 
     private void jComboBoxSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSizeActionPerformed
         // TODO add your handling code here:
-        for(int i =0;i<sizeList.size();i++)
+        sizeList = control.getAllSize().getIterator();
+        while(sizeList.hasNext())
         {
-            if(jComboBoxSize.getSelectedItem().equals(String.valueOf(sizeList.get(i).getSizeCode())))
+            Size size = sizeList.next();
+            if(jComboBoxSize.getSelectedItem().equals(String.valueOf(size.getSizeCode())))
             {  
-                sizePrice = sizeList.get(i).getFee();
-                String Size = "Size: " + sizeList.get(i).getSize() + " Inch"
+                sizePrice = size.getFee();
+                sizeText = "Size: " + size.getSize() + " Inch"
                             + "\nPrice: RM " + sizePrice;
-                textSize.setText(Size);
+                
             }   
         }
+        textSize.setText(sizeText);
         
     }//GEN-LAST:event_jComboBoxSizeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        for(int i=0;i<styleList.size();i++)
+        styleList = control.getAllStyle().getIterator();
+        while(styleList.hasNext())
         {
-            if(jComboBoxStyle.getSelectedItem() == styleList.get(i).getStyleName())
+            Style style = styleList.next();
+            if(jComboBoxStyle.getSelectedItem().equals(style.getStyleName()))
             {
-                styleNo = styleList.get(i).getStyleNo();        
+                styleNo = style.getStyleNo();        
             }
         }
-        for(int i=0; i<sizeList.size();i++)
+        sizeList = control.getAllSize().getIterator();
+        while(sizeList.hasNext())
         {
-            if(jComboBoxSize.getSelectedItem().equals(String.valueOf(sizeList.get(i).getSizeCode())))
+            Size size = sizeList.next();
+            if(jComboBoxSize.getSelectedItem().equals(String.valueOf(size.getSizeCode())))
             {
-                sizeCode = sizeList.get(i).getSizeCode();    
+                sizeCode = size.getSizeCode();    
             }
         }  
         customizedFloral = new CustomizedFloral();
@@ -320,12 +337,17 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
         total = total + stylePrice + sizePrice;
         customizedFloral.setPrice(total);
         
-        CustomizedFlowerAccessory customizedFlowerAccessory = new CustomizedFlowerAccessory(customizedFloral);
+        CustomizedFlowerAccessory customizedFlowerAccessory = new CustomizedFlowerAccessory(control, customizedFloral);
         this.setVisible(false);
         customizedFlowerAccessory.setVisible(true);
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,6 +374,8 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CustomizedStyleSize.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

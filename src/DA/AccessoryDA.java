@@ -25,9 +25,9 @@ public class AccessoryDA {
         createConnection();
     }
     
-    public List<Accessory> getAccessoryList(){
+    public CustomizedList<Accessory> getAccessoryList(){
         String queryStr = "SELECT * FROM " + tableName;
-        List<Accessory> accessoryList = new ArrayList<Accessory>();
+        CustomizedList<Accessory> accessoryList = new CustomizedLinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();

@@ -26,9 +26,9 @@ public class StyleDA {
         createConnection();
     }
     
-    public List<Style> getStyleList(){
+    public CustomizedList<Style> getStyleList(){
         String queryStr = "SELECT * FROM " + tableName;
-        List<Style> styleList = new ArrayList<Style>();
+        CustomizedList<Style> styleList = new CustomizedLinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();

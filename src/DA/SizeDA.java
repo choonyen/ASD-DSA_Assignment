@@ -26,9 +26,9 @@ public class SizeDA {
         createConnection();
     }
     
-    public List<Size> getSizeList(){
+    public CustomizedList<Size> getSizeList(){
         String queryStr = "SELECT * FROM " + tableName;
-        List<Size> sizeList = new ArrayList<Size>();
+        CustomizedList<Size> sizeList = new CustomizedLinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();

@@ -6,19 +6,28 @@
 package View;
 import Model.*;
 import Control.*;
+import DA.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Choonyen
  */
 public class SearchConsumer extends javax.swing.JFrame {
-    CustomizedMaintenanceControl maintenanceCustomerControl;
-
+    CustomerMaintenanceControl control;
+    CustomizedMaintenanceControl controlCustomized;
     /**
      * Creates new form SearchConsumer
      */
     public SearchConsumer() {
-        maintenanceCustomerControl = new CustomizedMaintenanceControl();
+        
+        initComponents();
+    }
+    
+    public SearchConsumer(CustomerMaintenanceControl control, CustomizedMaintenanceControl controlCustomized)
+    {
+        this.controlCustomized = controlCustomized;
+        this.control = control;
         initComponents();
     }
 
@@ -37,7 +46,7 @@ public class SearchConsumer extends javax.swing.JFrame {
         jLabelCustID = new javax.swing.JLabel();
         jtfCustID = new javax.swing.JTextField();
         jbtSearch = new javax.swing.JButton();
-        jbtReset = new javax.swing.JButton();
+        jbtCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,10 +94,10 @@ public class SearchConsumer extends javax.swing.JFrame {
             }
         });
 
-        jbtReset.setText("Reset");
-        jbtReset.addActionListener(new java.awt.event.ActionListener() {
+        jbtCancel.setText("Cancel");
+        jbtCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtResetActionPerformed(evt);
+                jbtCancelActionPerformed(evt);
             }
         });
 
@@ -106,7 +115,7 @@ public class SearchConsumer extends javax.swing.JFrame {
                 .addGap(153, 153, 153)
                 .addComponent(jbtSearch)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtReset)
+                .addComponent(jbtCancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -119,7 +128,7 @@ public class SearchConsumer extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtSearch)
-                    .addComponent(jbtReset))
+                    .addComponent(jbtCancel))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
 
@@ -144,32 +153,59 @@ public class SearchConsumer extends javax.swing.JFrame {
     private void jbtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSearchActionPerformed
         // TODO add your handling code here:
         String id = jtfCustID.getText();
-        Customer customer = maintenanceCustomerControl.searchCustomer(id);
-        
-        if(customer != null)
-        {
-            CustomizedHome customizedHome = new CustomizedHome(customer);
-            customizedHome.setVisible(true);
-            this.setVisible(false);
+
+        if(jtfCustID.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Empty Field!!!!", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        else
+        {
+            CustomerInterface consumer = control.getConsumerById(id);
+            if(control.custIdValidation(id))
+            {
+                    if(consumer!=null)
+                    {
+                        CustomizedHome customizedHome = new CustomizedHome(controlCustomized,consumer);
+                        customizedHome.setVisible(true);
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null, "ID Does not Exists!", "ERROR", JOptionPane.ERROR_MESSAGE);
+   
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "ID not Valid! Example: C000 ", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            
+                
+        }
+        this.dispose();
     }//GEN-LAST:event_jbtSearchActionPerformed
 
-    private void jbtResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtResetActionPerformed
+    private void jbtCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelActionPerformed
         // TODO add your handling code here:
-        jtfCustID.setText("");
-    }//GEN-LAST:event_jbtResetActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbtCancelActionPerformed
 
     private void jtfCustIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCustIDActionPerformed
         // TODO add your handling code here:
         String id = jtfCustID.getText();
-        Customer customer = maintenanceCustomerControl.searchCustomer(id);
-        
-        if(customer != null)
-        {
-            CustomizedHome customizedHome = new CustomizedHome(customer);
-            customizedHome.setVisible(true);
-            this.setVisible(false);
+
+        if(jtfCustID.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Empty Field!!!!", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        else
+        {
+            CustomerInterface consumer = control.getConsumerById(id);
+            if(consumer!=null)
+            {
+                CustomizedHome customizedHome = new CustomizedHome(controlCustomized, consumer);
+                customizedHome.setVisible(true);
+            }
+             else
+                JOptionPane.showMessageDialog(null, "ID Does not Exists!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                
+        }
+        this.dispose();
     }//GEN-LAST:event_jtfCustIDActionPerformed
 
     /**
@@ -198,6 +234,7 @@ public class SearchConsumer extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SearchConsumer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -212,7 +249,7 @@ public class SearchConsumer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton jbtReset;
+    private javax.swing.JButton jbtCancel;
     private javax.swing.JButton jbtSearch;
     private javax.swing.JTextField jtfCustID;
     // End of variables declaration//GEN-END:variables

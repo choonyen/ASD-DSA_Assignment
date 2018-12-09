@@ -6,7 +6,9 @@
 package View;
 
 import Model.*;
+import Control.*;
 import DA.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,9 +16,9 @@ import DA.*;
  */
 public class CustomizedPriority extends javax.swing.JFrame {
 
-    private CustomizedDA customizedDA;
-    private CountDA countDA;
+    
     private CustomizedFloral customizedFloral;
+    private CustomizedMaintenanceControl control;
     private double priorPrice;
     private double total;
     private String prior;
@@ -27,11 +29,10 @@ public class CustomizedPriority extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CustomizedPriority(CustomizedFloral customizedFloral)
+    public CustomizedPriority(CustomizedMaintenanceControl control, CustomizedFloral customizedFloral)
     {
         this.customizedFloral = customizedFloral;
-        customizedDA = new CustomizedDA();
-        countDA = new CountDA();
+        this.control = control;     
         initComponents();  
     }
 
@@ -209,10 +210,10 @@ public class CustomizedPriority extends javax.swing.JFrame {
         customizedFloral.setPrice(total);
         customizedFloral.setPriority(prior);
         
-        customizedDA.addCustOrder(customizedFloral);
-        countDA.increaseCustomizedCount();
+        control.addCustomizedOrder(customizedFloral);
+        JOptionPane.showMessageDialog(null, customizedFloral.getOrderID() + " added successful.");
         
-        ItemizedView itemizedView = new ItemizedView(customizedFloral);
+        ItemizedView itemizedView = new ItemizedView(control,customizedFloral);
         this.setVisible(false);
         itemizedView.setVisible(true);
     }//GEN-LAST:event_jbtConfirmActionPerformed
@@ -266,6 +267,8 @@ public class CustomizedPriority extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CustomizedPriority.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
