@@ -8,13 +8,7 @@ package Control;
 import DA.CustomerDA;
 import Model.CorporateCustomerInterface;
 import Model.CustomerInterface;
-import Model.Invoice;
 import Model.List;
-import static org.hamcrest.CoreMatchers.is;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
