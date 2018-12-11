@@ -23,8 +23,9 @@ public class CorporateCustomer implements CorporateCustomerInterface{
     private String location;
     private double creditLimit;
     private double remainingCreditLimit;
+    private boolean isActive;
 
-    public CorporateCustomer(String custID, String name, String ic, char gender, String contact, String companyName, String location, double creditLimit, double remainingCreditLimit) {
+    public CorporateCustomer(String custID, String name, String ic, char gender, String contact, String companyName, String location, double creditLimit, double remainingCreditLimit, boolean isActive) {
         this.custID = custID;
         this.name = name;
         this.ic = ic;
@@ -34,9 +35,10 @@ public class CorporateCustomer implements CorporateCustomerInterface{
         this.location = location;
         this.creditLimit = creditLimit;
         this.remainingCreditLimit = remainingCreditLimit;
+        this.isActive = isActive;
     }
 
-    public CorporateCustomer( String custID, String name, String ic, char gender, String contact, Date lastOrderDate, String companyName, String location, double creditLimit, double remainingCreditLimit) {
+    public CorporateCustomer( String custID, String name, String ic, char gender, String contact, Date lastOrderDate, String companyName, String location, double creditLimit, double remainingCreditLimit, boolean isActive) {
         this.custID = custID;
         this.name = name;
         this.ic = ic;
@@ -47,9 +49,14 @@ public class CorporateCustomer implements CorporateCustomerInterface{
         this.location = location;
         this.creditLimit = creditLimit;
         this.remainingCreditLimit = remainingCreditLimit;
+        this.isActive = isActive;
     }
 
     public CorporateCustomer(){
+    }
+    
+    public CorporateCustomer(String custID){
+        this.custID = custID;
     }
     
     public String getCustID() {
@@ -107,6 +114,7 @@ public class CorporateCustomer implements CorporateCustomerInterface{
         return companyName;
     }
 
+
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
@@ -135,7 +143,14 @@ public class CorporateCustomer implements CorporateCustomerInterface{
         this.remainingCreditLimit = remainingCreditLimit;
     }
 
-    
+     public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     
     
 }

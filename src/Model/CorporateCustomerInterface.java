@@ -19,4 +19,6 @@ public interface CorporateCustomerInterface extends CustomerInterface{
     public void setLocation(String location);
     public double getRemainingCreditLimit();
     public void setRemainingCreditLimit(double remainingCreditLimit);
+    public void setIsActive(boolean isActive);
+    public boolean getIsActive();
 }

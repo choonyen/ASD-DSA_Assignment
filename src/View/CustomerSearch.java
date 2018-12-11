@@ -147,6 +147,10 @@ public class CustomerSearch extends javax.swing.JFrame {
         if(jtfSearch.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Empty Field!!!!", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        else if(control.custIdValidation(searchWith)){
+            JOptionPane.showMessageDialog(null, "Invalid Customer ID format", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        }
         else{
             if(searchBy == 0){
                 if(searchWith.charAt(0) == 'C'){
