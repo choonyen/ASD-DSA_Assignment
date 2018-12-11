@@ -17,7 +17,7 @@ import javax.swing.*;
  * @author LENOVO
  */
 public class CustomerDA {
-     private String host = "jdbc:derby://localhost:1527/DSA_Database";
+    private String host = "jdbc:derby://localhost:1527/DSA_Database";
     private String user = "nbuser";
     private String password = "nbuser";
     private String tableName = "CUSTOMER";
@@ -51,7 +51,7 @@ public class CustomerDA {
     }
     
     public void addCorporateCustomer(CorporateCustomerInterface customer){
-        String insertStr = "INSERT INTO " + "CORPORATE_CUSTOMER" + " VALUES(?,?,?,?,?)";
+        String insertStr = "INSERT INTO " + "CORPORATE_CUSTOMER" + " VALUES(?,?,?,?,?,?)";
         this.addConsumer(new Consumer(customer.getCustID(),customer.getName(), customer.getIc(),customer.getGender(),customer.getContact()));
         try{
             stmt = conn.prepareStatement(insertStr);
@@ -60,7 +60,7 @@ public class CustomerDA {
             stmt.setString(3, customer.getLocation());
             stmt.setDouble(4, customer.getCreditLimit());
             stmt.setDouble(5, customer.getRemainingCreditLimit());
-            
+            stmt.setBoolean(6, customer.getIsActive());
             stmt.executeUpdate();
             
             
@@ -141,7 +141,8 @@ public class CustomerDA {
                             rs.getString("COMPANYNAME"),
                             rs.getString("LOCATION"),
                             rs.getDouble("CREDITLIMIT"),
-                            rs.getDouble("REMAININGCREDITLIMIT")
+                            rs.getDouble("REMAININGCREDITLIMIT"),
+                            rs.getBoolean("ISACTIVE")
                  
                     );
                 }
@@ -176,7 +177,8 @@ public class CustomerDA {
                             rs.getString("COMPANYNAME"),
                             rs.getString("LOCATION"),
                             rs.getDouble("CREDITLIMIT"),
-                            rs.getDouble("REMAININGCREDITLIMIT")
+                            rs.getDouble("REMAININGCREDITLIMIT"),
+                            rs.getBoolean("ISACTIVE")
                  
                     );
                 }
@@ -214,16 +216,17 @@ public class CustomerDA {
     
     public void updateCorporateCustomer(CorporateCustomerInterface corporateCustomer){
         String updateStr = "UPDATE " + "CORPORATE_CUSTOMER" + " SET "
-                + " COMPANYNAME = ?, LOCATION = ?, CREDITLIMIT = ?, REMAININGCREDITLIMIT = ? WHERE CUSTID = ?";
+                + " COMPANYNAME = ?, LOCATION = ?, CREDITLIMIT = ?, REMAININGCREDITLIMIT = ?, ISACTIVE = ? WHERE CUSTID = ?";
         CustomerInterface customer = this.getConsumer(corporateCustomer.getCustID());
         this.updateConsumer(customer);
         try{
             stmt = conn.prepareStatement(updateStr);
-            stmt.setString(5, corporateCustomer.getCustID());
+            stmt.setString(6, corporateCustomer.getCustID());
             stmt.setString(1, corporateCustomer.getCompanyName());
             stmt.setString(2, corporateCustomer.getLocation());
             stmt.setDouble(3, corporateCustomer.getCreditLimit());
             stmt.setDouble(4, corporateCustomer.getRemainingCreditLimit());
+            stmt.setBoolean(5, corporateCustomer.getIsActive());
             
             stmt.executeUpdate();
             
@@ -280,7 +283,8 @@ public class CustomerDA {
                         rs.getString("COMPANYNAME"),
                         rs.getString("LOCATION"),
                         rs.getDouble("CREDITLIMIT"),
-                        rs.getDouble("REMAININGCREDITLIMIT")
+                        rs.getDouble("REMAININGCREDITLIMIT"),
+                        rs.getBoolean("ISACTIVE")
                  
                     );
                     corporateCustomerList.add(corporateCustomer);
