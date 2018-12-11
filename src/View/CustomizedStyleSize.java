@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -310,36 +311,43 @@ public class CustomizedStyleSize extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        styleList = control.getAllStyle().getIterator();
-        while(styleList.hasNext())
+        if(jComboBoxStyle.getSelectedIndex()== 0 || jComboBoxSize.getSelectedIndex()==0)
         {
-            Style style = styleList.next();
-            if(jComboBoxStyle.getSelectedItem().equals(style.getStyleName()))
-            {
-                styleNo = style.getStyleNo();        
-            }
+            JOptionPane.showMessageDialog(null,"The drop down list must be selected!!", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        sizeList = control.getAllSize().getIterator();
-        while(sizeList.hasNext())
+        else
         {
-            Size size = sizeList.next();
-            if(jComboBoxSize.getSelectedItem().equals(String.valueOf(size.getSizeCode())))
+            styleList = control.getAllStyle().getIterator();
+            while(styleList.hasNext())
             {
-                sizeCode = size.getSizeCode();    
+                Style style = styleList.next();
+                if(jComboBoxStyle.getSelectedItem().equals(style.getStyleName()))
+                {
+                    styleNo = style.getStyleNo();        
+                }
             }
-        }  
-        customizedFloral = new CustomizedFloral();
-        customizedFloral.setOrderID(jtfOrderId.getText());
-        customizedFloral.setCustID(customer.getCustID());
-        customizedFloral.setStyleNo(styleNo);
-        customizedFloral.setSizeCode(String.valueOf(sizeCode).charAt(0));
-        total = total + stylePrice + sizePrice;
-        customizedFloral.setPrice(total);
+            sizeList = control.getAllSize().getIterator();
+            while(sizeList.hasNext())
+            {
+                Size size = sizeList.next();
+                if(jComboBoxSize.getSelectedItem().equals(String.valueOf(size.getSizeCode())))
+                {
+                    sizeCode = size.getSizeCode();    
+                }
+            }  
+            customizedFloral = new CustomizedFloral();
+            customizedFloral.setOrderID(jtfOrderId.getText());
+            customizedFloral.setCustID(customer.getCustID());
+            customizedFloral.setStyleNo(styleNo);
+            customizedFloral.setSizeCode(String.valueOf(sizeCode).charAt(0));
+            total = total + stylePrice + sizePrice;
+            customizedFloral.setPrice(total);
         
-        CustomizedFlowerAccessory customizedFlowerAccessory = new CustomizedFlowerAccessory(control, customizedFloral);
-        this.setVisible(false);
-        customizedFlowerAccessory.setVisible(true);
+            CustomizedFlowerAccessory customizedFlowerAccessory = new CustomizedFlowerAccessory(control, customizedFloral);
+            this.setVisible(false);
+            customizedFlowerAccessory.setVisible(true);
+        }
+        
         
         
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -206,16 +206,24 @@ public class CustomizedPriority extends javax.swing.JFrame {
 
     private void jbtConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtConfirmActionPerformed
         // TODO add your handling code here:
-        total = customizedFloral.getPrice() + priorPrice;
-        customizedFloral.setPrice(total);
-        customizedFloral.setPriority(prior);
+        if(rbtFlexi.isSelected() || rbtNormal.isSelected() || rbtExpress.isSelected())
+        {
+            total = customizedFloral.getPrice() + priorPrice;
+            customizedFloral.setPrice(total);
+            customizedFloral.setPriority(prior);
         
-        control.addCustomizedOrder(customizedFloral);
-        JOptionPane.showMessageDialog(null, customizedFloral.getOrderID() + " added successful.");
+            control.addCustomizedOrder(customizedFloral);
+            JOptionPane.showMessageDialog(null, customizedFloral.getOrderID() + " added successful.");
         
-        ItemizedView itemizedView = new ItemizedView(control,customizedFloral);
-        this.setVisible(false);
-        itemizedView.setVisible(true);
+            ItemizedView itemizedView = new ItemizedView(control,customizedFloral);
+            this.setVisible(false);
+            itemizedView.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"The check Box must be selected!!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jbtConfirmActionPerformed
 
     private void rbtFlexiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtFlexiActionPerformed

@@ -10,6 +10,7 @@ import Control.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Choonyen
@@ -304,14 +305,21 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(jComboBoxAccessory.getSelectedIndex()==0 || jComboBoxFlower.getSelectedIndex()==0)
+        {
+            JOptionPane.showMessageDialog(null,"The drop down list must be selected!!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            customizedFloral.setFlowerNo(flowerNo);
+            customizedFloral.setAccessoryNo(accessoryNo);
+            customizedFloral.setPrice(total);
         
-        customizedFloral.setFlowerNo(flowerNo);
-        customizedFloral.setAccessoryNo(accessoryNo);
-        customizedFloral.setPrice(total);
+            CustomizedPriority customizedPriority = new CustomizedPriority(control, customizedFloral);
+            this.setVisible(false);
+            customizedPriority.setVisible(true);
+        }
         
-        CustomizedPriority customizedPriority = new CustomizedPriority(control, customizedFloral);
-        this.setVisible(false);
-        customizedPriority.setVisible(true);
         
 
     }//GEN-LAST:event_jButton1ActionPerformed
