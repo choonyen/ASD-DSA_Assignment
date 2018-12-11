@@ -2,4 +2,4 @@ language: java
 sudo: required
 before_script:
  - ant test
- script: ant build
+script: ant build
