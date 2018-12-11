@@ -38,17 +38,17 @@ public class DisplayPrior extends javax.swing.JFrame {
         while(customizedList.hasNext())
         {       
             CustomizedFloral custFloral = customizedList.next();
-            if(custFloral.getPriority().equals("Flexi"))
+            if(custFloral.getPriority().equals("Express"))
             {
-                Vector rowFlexi = new Vector();
-                rowFlexi.add(custFloral.getOrderID());
-                rowFlexi.add(custFloral.getCustID());
+                Vector rowExpress = new Vector();
+                rowExpress.add(custFloral.getOrderID());
+                rowExpress.add(custFloral.getCustID());
                 customer = controlCustomer.getConsumerById(custFloral.getCustID());
-                rowFlexi.add(customer.getName());
-                rowFlexi.add(String.format("RM  %4.2f", custFloral.getPrice()));
-                rowFlexi.add(custFloral.getPriority());
+                rowExpress.add(customer.getName());
+                rowExpress.add(String.format("RM  %4.2f", custFloral.getPrice()));
+                rowExpress.add(custFloral.getPriority());
             
-                customizedModel.addRow(rowFlexi);
+                customizedModel.addRow(rowExpress);
             }
         }
         
@@ -73,18 +73,19 @@ public class DisplayPrior extends javax.swing.JFrame {
         customizedList = control.getAllCustomized().getIterator();
         while(customizedList.hasNext())
         {       
-            CustomizedFloral custFloral = customizedList.next();
-            if(custFloral.getPriority().equals("Express"))
-            {
-                Vector rowExpress = new Vector();
-                rowExpress.add(custFloral.getOrderID());
-                rowExpress.add(custFloral.getCustID());
-                customer = controlCustomer.getConsumerById(custFloral.getCustID());
-                rowExpress.add(customer.getName());
-                rowExpress.add(String.format("RM  %4.2f", custFloral.getPrice()));
-                rowExpress.add(custFloral.getPriority());
             
-                customizedModel.addRow(rowExpress);
+            CustomizedFloral custFloral = customizedList.next();
+            if(custFloral.getPriority().equals("Flexi"))
+            {
+                Vector rowFlexi = new Vector();
+                rowFlexi.add(custFloral.getOrderID());
+                rowFlexi.add(custFloral.getCustID());
+                customer = controlCustomer.getConsumerById(custFloral.getCustID());
+                rowFlexi.add(customer.getName());
+                rowFlexi.add(String.format("RM  %4.2f", custFloral.getPrice()));
+                rowFlexi.add(custFloral.getPriority());
+            
+                customizedModel.addRow(rowFlexi);
             }
         }
         

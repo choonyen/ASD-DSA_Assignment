@@ -305,20 +305,28 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jComboBoxAccessory.getSelectedIndex()==0 || jComboBoxFlower.getSelectedIndex()==0)
+        if(jTextFieldTotal.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(null,"The drop down list must be selected!!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"The price must be calculate!!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
-            customizedFloral.setFlowerNo(flowerNo);
-            customizedFloral.setAccessoryNo(accessoryNo);
-            customizedFloral.setPrice(total);
+            if(jComboBoxAccessory.getSelectedIndex()==0 || jComboBoxFlower.getSelectedIndex()==0)
+            {
+                JOptionPane.showMessageDialog(null,"The drop down list must be selected!!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                customizedFloral.setFlowerNo(flowerNo);
+                customizedFloral.setAccessoryNo(accessoryNo);
+                customizedFloral.setPrice(total);
         
-            CustomizedPriority customizedPriority = new CustomizedPriority(control, customizedFloral);
-            this.setVisible(false);
-            customizedPriority.setVisible(true);
+                CustomizedPriority customizedPriority = new CustomizedPriority(control, customizedFloral);
+                this.setVisible(false);
+                customizedPriority.setVisible(true);
+            }
         }
+        
         
         
 
