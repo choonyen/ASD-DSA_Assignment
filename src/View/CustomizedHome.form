@@ -116,7 +116,7 @@
                                   <Component id="jtfCustomerID" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jtfCustName" alignment="0" pref="100" max="32767" attributes="0"/>
                                   <Component id="jtfGender" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtfAge" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfIc" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jtfContact" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Component id="jButtonBack" min="-2" max="-2" attributes="0"/>
@@ -155,7 +155,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelSize" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jtfAge" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfIc" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -188,7 +188,7 @@
               <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Age"/>
+            <Property name="text" type="java.lang.String" value="IC"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
@@ -267,13 +267,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfGenderActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfAge">
+        <Component class="javax.swing.JTextField" name="jtfIc">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfAgeActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfIcActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfContact">

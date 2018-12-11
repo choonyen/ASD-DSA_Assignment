@@ -4,22 +4,28 @@
  * and open the template in the editor.
  */
 package View;
+
 import Control.CustomerMaintenanceControl;
-import Model.*;
-import javax.swing.JOptionPane;
+import DA.CustomerDA;
+import Model.CorporateCustomer;
+import Model.CorporateCustomerInterface;
+import Model.CustomerInterface;
+
 /**
  *
  * @author LENOVO
  */
-public class AddCustomerConfirm extends javax.swing.JFrame {
-    private CorporateCustomerInterface corporateCustomer = null;
-    private CustomerInterface consumer = null;
-    private CustomerMaintenanceControl control;
-
+public class ShowCustomerDetail extends javax.swing.JFrame {
+    CustomerMaintenanceControl control;
+    CustomerInterface consumer = null;
+    CorporateCustomerInterface corporateCustomer = null;
     /**
-     * Creates new form AddCustomerConfirm
+     * Creates new form ShowCustomerDetail
      */
-    public AddCustomerConfirm(CustomerMaintenanceControl control, CustomerInterface customer) {
+    public ShowCustomerDetail() {
+        initComponents();
+    }
+    public ShowCustomerDetail(CustomerMaintenanceControl control,CustomerInterface customer) {
         initComponents();
         this.control = control;
         this.consumer = customer;
@@ -30,8 +36,8 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
             jtfGender.setText("Male");
         else
             jtfGender.setText("Female");
-        jtfContactNo.setText(customer.getContact());
         
+        jtfContactNo.setText(customer.getContact());      
         jlblCreditLimit.setVisible(false);
         jtfCreditLimit.setVisible(false);
         jlblCompanyName.setVisible(false);
@@ -39,11 +45,18 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jlblLocation.setVisible(false);
         jtaLocation.setVisible(false);
         jScrollPane1.setVisible(false);
-        
+        jlblRemaining.setVisible(false);
+        jtfRemaining.setVisible(false);
+        if(customer.getLastOrderDate()!=null){
+            jtfLastOrderDate.setText(String.valueOf(customer.getLastOrderDate().getTime()));
+        }
+        else{
+            jtfLastOrderDate.setText("-");
+        }
         
     }
     
-    public AddCustomerConfirm(CustomerMaintenanceControl control,CorporateCustomerInterface customer) {
+    public ShowCustomerDetail(CustomerMaintenanceControl control,CorporateCustomerInterface customer) {
         initComponents();
         this.control = control;
         this.corporateCustomer = customer;
@@ -54,16 +67,20 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
             jtfGender.setText("Male");
         else
             jtfGender.setText("Female");
+        
         jtfContactNo.setText(customer.getContact());
         jtfCreditLimit.setText(String.valueOf(customer.getCreditLimit()));
         jtfCompanyName.setText(customer.getCompanyName());
         jtaLocation.setText(customer.getLocation());
+        jtfRemaining.setText(String.valueOf(customer.getRemainingCreditLimit()));
+       
+        if(customer.getLastOrderDate()!=null){
+            jtfLastOrderDate.setText(String.valueOf(customer.getLastOrderDate().getTime()));
+        }
+        else{
+            jtfLastOrderDate.setText("-");
+        }
         
-
-    }
-    
-    public AddCustomerConfirm() {
-        initComponents();
     }
 
     /**
@@ -87,8 +104,8 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jtfName = new javax.swing.JTextField();
         jtfGender = new javax.swing.JTextField();
         jtfContactNo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbEdit = new javax.swing.JButton();
+        jbCancel = new javax.swing.JButton();
         jlblCreditLimit = new javax.swing.JLabel();
         jtfCreditLimit = new javax.swing.JTextField();
         jlblIC = new javax.swing.JLabel();
@@ -98,6 +115,10 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jlblLocation = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaLocation = new javax.swing.JTextArea();
+        jlblLastOrderDate = new javax.swing.JLabel();
+        jtfLastOrderDate = new javax.swing.JTextField();
+        jlblRemaining = new javax.swing.JLabel();
+        jtfRemaining = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,7 +132,7 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jlblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblHeader.setForeground(new java.awt.Color(153, 0, 0));
         jlblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlblHeader.setText("Add Customer");
+        jlblHeader.setText("Customer Detail");
 
         jlblCustID.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblCustID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -137,19 +158,19 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
 
         jtfContactNo.setEditable(false);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Confirm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbEdit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jbEdit.setText("Edit");
+        jbEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbEditActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbCancel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jbCancel.setText("Cancel");
+        jbCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbCancelActionPerformed(evt);
             }
         });
 
@@ -180,11 +201,23 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
         jtaLocation.setRows(5);
         jScrollPane1.setViewportView(jtaLocation);
 
+        jlblLastOrderDate.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblLastOrderDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblLastOrderDate.setText("Last Order Date:");
+
+        jtfLastOrderDate.setEditable(false);
+
+        jlblRemaining.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblRemaining.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblRemaining.setText("Remaining:");
+
+        jtfRemaining.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+            .addComponent(jlblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -216,17 +249,26 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
                                             .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jlblContact, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jlblLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jlblCompanyName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfContactNo)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                                    .addComponent(jtfCompanyName, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                            .addComponent(jbEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jlblCompanyName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlblLastOrderDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                                        .addComponent(jtfCompanyName, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(8, 8, 8)
+                                            .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jtfLastOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtfContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jtfRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 52, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -254,7 +296,7 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
                     .addComponent(jlblGender)
                     .addComponent(jtfGender, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblContact, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -265,14 +307,27 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlblLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jlblRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfRemaining)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlblCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfCreditLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jlblLastOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfLastOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2))
         );
 
@@ -286,29 +341,31 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelActionPerformed
         // TODO add your handling code here:
-        if(consumer!= null){
-            control.addConsumer(consumer);
-            JOptionPane.showMessageDialog(null, consumer.getCustID() + " added success.");
+        this.dispose();
+    }//GEN-LAST:event_jbCancelActionPerformed
+
+    private void jbEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditActionPerformed
+        // TODO add your handling code here:
+        if(consumer!=null){
+            CustomerEdit customerEdit = new CustomerEdit(control,consumer);
+            customerEdit.setVisible(true);
+            this.dispose();
         }
         else{
-            control.addCorporateCustomer(corporateCustomer);
-            JOptionPane.showMessageDialog(null, corporateCustomer.getCustID() + " added success.");
+            CustomerEdit customerEdit = new CustomerEdit(control, corporateCustomer);
+            customerEdit.setVisible(true);
+            this.dispose();
         }
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jbEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,30 +384,30 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddCustomerConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowCustomerDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddCustomerConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowCustomerDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddCustomerConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowCustomerDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddCustomerConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowCustomerDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCustomerConfirm().setVisible(true);
+                new ShowCustomerDetail().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbCancel;
+    private javax.swing.JButton jbEdit;
     private javax.swing.JLabel jlblCompanyName;
     private javax.swing.JLabel jlblContact;
     private javax.swing.JLabel jlblCreditLimit;
@@ -358,8 +415,10 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
     private javax.swing.JLabel jlblGender;
     private javax.swing.JLabel jlblHeader;
     private javax.swing.JLabel jlblIC;
+    private javax.swing.JLabel jlblLastOrderDate;
     private javax.swing.JLabel jlblLocation;
     private javax.swing.JLabel jlblName;
+    private javax.swing.JLabel jlblRemaining;
     private javax.swing.JLabel jlblTitle;
     private javax.swing.JTextArea jtaLocation;
     private javax.swing.JTextField jtfCompanyName;
@@ -368,6 +427,8 @@ public class AddCustomerConfirm extends javax.swing.JFrame {
     private javax.swing.JTextField jtfCustID;
     private javax.swing.JTextField jtfGender;
     private javax.swing.JTextField jtfIC;
+    private javax.swing.JTextField jtfLastOrderDate;
     private javax.swing.JTextField jtfName;
+    private javax.swing.JTextField jtfRemaining;
     // End of variables declaration//GEN-END:variables
 }

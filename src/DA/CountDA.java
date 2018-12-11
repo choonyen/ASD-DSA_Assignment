@@ -51,11 +51,24 @@ public class CountDA {
         return count;
     }
     
-    public void increateCustomerCount(){
-        Count count = this.getCount();
-        int customerCount = count.getCustomerCount()+1;
+    public void increaseCustomerCount(int count){
+
         try{
-            stmt = conn.prepareStatement(("Update Count set CUSTOMERCOUNT = " + customerCount));
+            stmt = conn.prepareStatement(("Update Count set CUSTOMERCOUNT = " + count));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
+    public void increaseProductCount(){
+        Count count = this.getCount();
+        int productCount = count.getProductCount() + 1;
+
+        try{
+            stmt = conn.prepareStatement("Update Count set PRODUCTCOUNT = ? ");
+            stmt.setInt(1, productCount);
             stmt.executeUpdate();
                   
         }catch (SQLException ex) {
@@ -64,11 +77,11 @@ public class CountDA {
  
     }
     
-      public void increateProductCount(){
-        Count count = this.getCount();
-        int productCount = count.getProductCount()+1;
+    
+    public void increaseCorporateCustomerCount(int count){ 
+
         try{
-            stmt = conn.prepareStatement(("Update Count set PRODUCTCOUNT = " + productCount));
+            stmt = conn.prepareStatement(("Update Count set CORPORATECUSTOMERCOUNT = " + count));
             stmt.executeUpdate();
                   
         }catch (SQLException ex) {
@@ -76,8 +89,30 @@ public class CountDA {
         }
  
     }
-      
-      
+     
+     public void increaseCustomizedCount(int count){
+         
+        try{
+            stmt = conn.prepareStatement(("Update Count set CUSTOMIZEDORDERCOUNT = " + count));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
+    
+    public void increaseInvoiceCount(int count){ 
+
+        try{
+            stmt = conn.prepareStatement(("Update Count set INVOICECOUNT = " + count));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
     
     private void createConnection() {
         try {

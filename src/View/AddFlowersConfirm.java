@@ -214,7 +214,7 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         // TODO add your handling code here
         catalogDA.addCatalog(catalog);
-        countDA.increateProductCount();
+        countDA.increaseProductCount();
         JOptionPane.showMessageDialog(null, "Catalog Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_jConfirmActionPerformed
