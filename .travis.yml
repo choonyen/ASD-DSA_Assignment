@@ -1,6 +1,5 @@
 language: java
 sudo: required
-jdk: openjdk8
 before_script:
  - ant test
  script: ant build
