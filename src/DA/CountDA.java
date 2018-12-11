@@ -62,6 +62,21 @@ public class CountDA {
         }
  
     }
+    public void increaseProductCount(){
+        Count count = this.getCount();
+        int productCount = count.getProductCount() + 1;
+
+        try{
+            stmt = conn.prepareStatement("Update Count set PRODUCTCOUNT = ? ");
+            stmt.setInt(1, productCount);
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
+    
     
     public void increaseCorporateCustomerCount(int count){ 
 
