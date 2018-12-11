@@ -1,7 +1,4 @@
-
-
-language: java
-sudo: required
-
-before_install:
-  - cd java
+language : java
+sudo : required
+before_script :
+- rm -rf test
