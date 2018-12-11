@@ -5,28 +5,20 @@
  */
 package View;
 
-import DA.CatalogDA;
-import DA.CountDA;
-import Model.Catalog;
+import DA.*;
+import Model.*;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author lamzn
  */
-public class AddFlowersConfirm extends javax.swing.JFrame {
+public class UpdateFlowerComfirm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddFlowersConfirm
-     */
-    
-     private Catalog catalog;
+    private Catalog catalog;
     private CountDA countDA;
     private CatalogDA catalogDA;
-    /**
-     * Creates new form AddCustomerConfirm
-     */
-    public AddFlowersConfirm(Catalog catalog) {
+   
+    public UpdateFlowerComfirm(Catalog catalog) {
         initComponents();
         countDA = new CountDA();
         catalogDA = new CatalogDA();
@@ -39,11 +31,11 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
          jtfStock.setText(String.valueOf(catalog.getStock()));
         
     }
-    public AddFlowersConfirm() {
+    
+    
+    public UpdateFlowerComfirm() {
         initComponents();
     }
-
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,32 +46,24 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jlblProdID = new javax.swing.JLabel();
-        jlblProdName = new javax.swing.JLabel();
         jlblTitle = new javax.swing.JLabel();
         jlblHeader = new javax.swing.JLabel();
+        jlblProdID = new javax.swing.JLabel();
+        jtfProdID = new javax.swing.JTextField();
+        jlblProdName = new javax.swing.JLabel();
         jlblType = new javax.swing.JLabel();
         jlblPrice = new javax.swing.JLabel();
         jlblDescription = new javax.swing.JLabel();
         jlblStock = new javax.swing.JLabel();
         jConfirm = new javax.swing.JButton();
         jCancel = new javax.swing.JButton();
-        jtfProdID = new javax.swing.JTextField();
-        jtfProdName = new javax.swing.JTextField();
-        jtfType = new javax.swing.JTextField();
-        jtfDescription = new javax.swing.JTextField();
         jtfStock = new javax.swing.JTextField();
+        jtfDescription = new javax.swing.JTextField();
+        jtfProdName = new javax.swing.JTextField();
         jtfPrice = new javax.swing.JTextField();
+        jtfType = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jlblProdID.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblProdID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblProdID.setText("Product ID:");
-
-        jlblProdName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jlblProdName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jlblProdName.setText("Product Name:");
 
         jlblTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jlblTitle.setForeground(new java.awt.Color(102, 0, 0));
@@ -90,6 +74,16 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
         jlblHeader.setForeground(new java.awt.Color(153, 0, 0));
         jlblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblHeader.setText("Catalog Maintenance");
+
+        jlblProdID.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblProdID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblProdID.setText("Product ID:");
+
+        jtfProdID.setEditable(false);
+
+        jlblProdName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblProdName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlblProdName.setText("Product Name:");
 
         jlblType.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblType.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -123,89 +117,90 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
             }
         });
 
-        jtfProdID.setEditable(false);
-
-        jtfProdName.setEditable(false);
-
-        jtfType.setEditable(false);
+        jtfStock.setEditable(false);
 
         jtfDescription.setEditable(false);
 
-        jtfStock.setEditable(false);
+        jtfProdName.setEditable(false);
 
         jtfPrice.setEditable(false);
+
+        jtfType.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlblProdName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblProdID, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblType, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlblProdName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtfProdID, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfProdName)
-                            .addComponent(jtfType)
-                            .addComponent(jtfDescription, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfProdID)
                             .addComponent(jtfStock)
-                            .addComponent(jtfPrice, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(107, 107, 107))
-                    .addComponent(jlblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                            .addComponent(jtfDescription)
+                            .addComponent(jtfProdName, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtfPrice)
+                            .addComponent(jtfType, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(jlblTitle)
+                        .addGap(0, 59, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jlblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(179, 179, 179)
-                .addComponent(jConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addComponent(jCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(jCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(113, 113, 113))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jlblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblProdID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtfProdID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblProdName, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(jtfProdName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblType, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(jtfType))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                    .addComponent(jtfPrice))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jtfDescription))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblStock, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                    .addComponent(jtfStock))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                    .addComponent(jtfProdID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblProdID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlblProdName, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlblType, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                            .addComponent(jtfType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlblPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                            .addComponent(jtfPrice))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlblDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(jtfDescription))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlblStock, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                            .addComponent(jtfStock))
+                        .addGap(72, 72, 72))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jtfProdName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         pack();
@@ -213,9 +208,9 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
 
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         // TODO add your handling code here
-        catalogDA.addCatalog(catalog);
-        countDA.increateProductCount();
-        JOptionPane.showMessageDialog(null, "Catalog Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        catalogDA.updateCatalog(catalog);
+        
+        JOptionPane.showMessageDialog(null, "Catalog Updated.", "Success", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_jConfirmActionPerformed
 
@@ -241,20 +236,20 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddFlowersConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateFlowerComfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddFlowersConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateFlowerComfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddFlowersConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateFlowerComfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddFlowersConfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateFlowerComfirm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddFlowersConfirm().setVisible(true);
+                new UpdateFlowerComfirm().setVisible(true);
             }
         });
     }
