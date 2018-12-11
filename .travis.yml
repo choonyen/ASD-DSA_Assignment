@@ -1,5 +1,10 @@
 language: java
-sudo: required
-before_script:
- - ant test
-script: ant build
+
+jdk:
+  - oraclejdk8
+  - openjdk7
+
+before_install:
+  - cd java
+
+
