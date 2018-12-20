@@ -25,7 +25,7 @@ public class ViewFlowerUpdate extends javax.swing.JFrame {
         countDA = new CountDA();
         catalogDA = new CatalogDA();
         this.catalog = catalog;
-        jtfProdID.setText(catalog.getProdid());
+        jtfProdID.setText(catalog.getProdId());
         jtfProdName.setText(catalog.getName());
         jType.setSelectedItem(catalog.getType());
         jtfPrice.setText(String.valueOf(catalog.getPrice()));

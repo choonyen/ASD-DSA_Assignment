@@ -50,7 +50,7 @@ public class CatalogDA {
               
               
                stmt = conn.prepareStatement(insertStr);
-               stmt.setString(1, catalog.getProdid());
+               stmt.setString(1, catalog.getProdId());
                stmt.setString(2, catalog.getName());
                stmt.setString(3, catalog.getType());
                stmt.setDouble(4, catalog.getPrice());
@@ -69,7 +69,7 @@ public class CatalogDA {
           try {
 
               stmt = conn.prepareStatement(insertStr);
-                stmt.setString(1,  catalog.getProdid());
+                stmt.setString(1,  catalog.getProdId());
               stmt.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -80,7 +80,7 @@ public class CatalogDA {
           try {
 
                stmt = conn.prepareStatement(insertStr);
-               stmt.setString(6, catalog.getProdid());
+               stmt.setString(6, catalog.getProdId());
                stmt.setString(1, catalog.getName());
                stmt.setString(2, catalog.getType());
                stmt.setDouble(3, catalog.getPrice());

@@ -114,6 +114,18 @@ public class CountDA {
  
     }
     
+    public void increasePaymentCount(){
+        
+        Count count = this.getCount();
+        int paymentCount = count.getPaymentCount() + 1;
+        try{
+            stmt = conn.prepareStatement(("Update Count set PAYMENTCOUNT = " + paymentCount));
+            stmt.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private void createConnection() {
         try {
             conn = DriverManager.getConnection(host, user, password);

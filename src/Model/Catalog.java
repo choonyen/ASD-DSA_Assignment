@@ -9,79 +9,87 @@ package Model;
  *
  * @author lamzn
  */
-public class Catalog {
+public class Catalog implements CatalogInterface{
     
-    private String Prodid;
-    private String Name;
-    private String Type;
-    private double Price;
-    private String Description;
-    private int Stock;
+    private String prodId;
+    private String name;
+    private String type;
+    private double price;
+    private String description;
+    private int stock;
   
     
     public Catalog(){
     }
 
-    public Catalog(String Prodid, String Name, String Type,double Price,String Description, int Stock){
-        this.Prodid = Prodid;
-        this.Name = Name;
-        this.Type = Type;
-        this.Price = Price;
-        this.Description = Description;
-        this.Stock = Stock;
+    public Catalog(String prodId, String name, String type,double price,String description, int stock){
+        this.prodId = prodId;
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.description = description;
+        this.stock = stock;
  
     }
 
-
-
-    public String getProdid() {
-        return Prodid;
+    @Override
+    public String getProdId() {
+        return prodId;
     }
 
-    public void setProdid(String Prodid) {
-        this.Prodid = Prodid;
+    @Override
+    public void setProdId(String ProdId) {
+        this.prodId = prodId;
     }
 
+    @Override
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 
+    @Override
     public String getType() {
-        return Type;
+        return type;
     }
 
-    public void setType(String Type) {
-        this.Type = Type;
+    @Override
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public double getPrice() {
-        return Price;
+    @Override
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPrice(double Price) {
-        this.Price = Price;
+    @Override
+    public void setPrice(Double price) {
+        this.price = price;
     }
     
+    @Override
       public String getDescription() {
-        return Description;
+        return description;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
     }
     
+    @Override
     public int getStock() {
-        return Stock;
+        return stock;
     }
 
-    public void setStock(int Stock) {
-        this.Stock = Stock;
+    @Override
+    public void setStock(int stock) {
+        this.stock = stock;
     }
-
-
 }
 
