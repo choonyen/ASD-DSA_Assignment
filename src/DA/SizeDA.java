@@ -7,7 +7,6 @@ package DA;
 import Model.*;
 import java.sql.*;
 import javax.swing.*;
-import java.util.*;
 
 /**
  *
@@ -26,9 +25,9 @@ public class SizeDA {
         createConnection();
     }
     
-    public CustomizedList<Size> getSizeList(){
+    public List<Size> getSizeList(){
         String queryStr = "SELECT * FROM " + tableName;
-        CustomizedList<Size> sizeList = new CustomizedLinkedList();
+        List<Size> sizeList = new LinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();

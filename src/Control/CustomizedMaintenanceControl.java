@@ -6,21 +6,19 @@
 package Control;
 import Model.*;
 import DA.*;
-import DA.*;
-import Model.*;
+import java.util.Iterator;
 import javax.swing.*;
-import java.util.*;
 
 /**
  *
  * @author Choonyen
  */
 public class CustomizedMaintenanceControl {
-    private static CustomizedList<CustomizedFloral> CUSTOMIZED_LIST;
-    private static CustomizedList<Style> STYLE_LIST;
-    private static CustomizedList<Size> SIZE_LIST;
-    private static CustomizedList<Flower> FLOWER_LIST;
-    private static CustomizedList<Accessory> ACCESSORY_LIST;
+    private static List<CustomizedFloral> CUSTOMIZED_LIST;
+    private static List<Style> STYLE_LIST;
+    private static List<Size> SIZE_LIST;
+    private static List<Flower> FLOWER_LIST;
+    private static List<Accessory> ACCESSORY_LIST;
     private static int CUSTOMIZED_ORDER_COUNT;
     
     CountDA countDA;
@@ -51,27 +49,27 @@ public class CustomizedMaintenanceControl {
         
     }
     
-    public CustomizedList <CustomizedFloral> getAllCustomized()
+    public List <CustomizedFloral> getAllCustomized()
     {
         return CUSTOMIZED_LIST;
     }
     
-    public CustomizedList <Style> getAllStyle()
+    public List <Style> getAllStyle()
     {
         return STYLE_LIST;
     }
     
-    public CustomizedList <Size> getAllSize()
+    public List <Size> getAllSize()
     {
         return SIZE_LIST;
     }
     
-    public CustomizedList <Flower> getAllFlower()
+    public List <Flower> getAllFlower()
     {
         return FLOWER_LIST;
     }
     
-    public CustomizedList <Accessory> getAllAccessory()
+    public List <Accessory> getAllAccessory()
     {
         return ACCESSORY_LIST;
     }

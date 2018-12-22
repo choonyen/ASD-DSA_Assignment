@@ -8,7 +8,6 @@ package DA;
 import Model.*;
 import java.sql.*;
 import javax.swing.*;
-import java.util.*;
 
 /**
  *
@@ -28,9 +27,9 @@ public class CustomizedDA {
     }
     
     
-    public CustomizedList<CustomizedFloral> getCustomizedOrder(){
+    public List<CustomizedFloral> getCustomizedOrder(){
         String queryStr = "SELECT * FROM " + tableName;
-        CustomizedList<CustomizedFloral> custFloralList = new CustomizedLinkedList();
+        List<CustomizedFloral> custFloralList = new LinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();

@@ -7,7 +7,6 @@ package DA;
 import Model.*;
 import java.sql.*;
 import javax.swing.*;
-import java.util.*;
 
 /**
  *
@@ -26,9 +25,9 @@ public class StyleDA {
         createConnection();
     }
     
-    public CustomizedList<Style> getStyleList(){
+    public List<Style> getStyleList(){
         String queryStr = "SELECT * FROM " + tableName;
-        CustomizedList<Style> styleList = new CustomizedLinkedList();
+        List<Style> styleList = new LinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();
