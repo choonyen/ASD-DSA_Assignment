@@ -199,7 +199,7 @@ public class CustomerMaintenanceControl {
 
     }
 
-    public List<Invoice> getUnpaidList() {
+    private List<Invoice> getUnpaidList() {
         Iterator<Invoice> invoiceList = INVOICE_LIST.getIterator();
         List<Invoice> unpaidInvoice = new LinkedList();
         while (invoiceList.hasNext()) {
