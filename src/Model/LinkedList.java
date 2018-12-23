@@ -6,18 +6,15 @@
 package Model;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  *
- * @author LENOVO
+ * @author MSI GL62 6QF
  */
 public class LinkedList<T> implements List<T> {
-    
+
     private int numberOfEntries = 0;
     private Node firstNode = null;
-    
-    
     
     @Override
     public void add(T data) {
@@ -27,7 +24,7 @@ public class LinkedList<T> implements List<T> {
         }
         else{
             Node currentNode = firstNode;
-            while(currentNode.next!=null){
+            while(currentNode.next != null){
                 currentNode = currentNode.next;
             }
             currentNode.next = newNode;
@@ -35,24 +32,21 @@ public class LinkedList<T> implements List<T> {
         numberOfEntries++;
     }
 
-
     @Override
     public int numberOfEntries() {
         return numberOfEntries;
     }
 
     @Override
-    public void edit(T oldData,T newData) {
+    public void edit(T oldData, T newData) {
         if(!isEmpty()){
             Node currentNode = firstNode;
-            while(!currentNode.data.equals(oldData) && currentNode.next!=null)
+            while(!currentNode.data.equals(oldData) && currentNode.next != null)
                 currentNode = currentNode.next;
             if(currentNode.data.equals(oldData)){
                 currentNode.data = newData;
             }
-                
         }
-        
     }
 
     @Override
@@ -61,7 +55,7 @@ public class LinkedList<T> implements List<T> {
         if(!isEmpty()){
             Node currentNode = firstNode;
             if(numberOfEntries >= position){
-                for(int i=0 ; i < position ; i++)
+                for(int i = 0; i < position; i++)
                     currentNode = currentNode.next;
                 item = currentNode.data;
             }
@@ -75,17 +69,17 @@ public class LinkedList<T> implements List<T> {
             return true;
         return false;
     }
-    
-    public Iterator<T> getIterator(){
+
+    @Override
+    public Iterator<T> getIterator() {
         return new LinkedIterator();
     }
-    
 
-    private class LinkedIterator implements Iterator<T>{
-        
+    private class LinkedIterator implements Iterator<T> {
+
         private Node currentNode;
         
-        public LinkedIterator(){
+        public LinkedIterator() {
             currentNode = firstNode;
         }
 
@@ -96,25 +90,25 @@ public class LinkedList<T> implements List<T> {
 
         @Override
         public T next() {
-            if (hasNext()) {
+            if(hasNext()){
                 T returnData = currentNode.data;
                 currentNode = currentNode.next;
                 return returnData;
-            } else {
+            }
+            else{
                 return null;
             }
         }
-        
     }
-    
-    
-    private class Node{
+
+    private class Node {
+
         T data;
         Node next;
         
-        public Node(T data){
+        public Node(T data) {
             this.data = data;
-            this.next = null;    
+            this.next = null;
         }
-    }
+    }  
 }

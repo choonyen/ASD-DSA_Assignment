@@ -9,8 +9,7 @@ import Model.Catalog;
 import Model.CatalogInterface;
 import Model.CustomerOrder;
 import Model.CustomerOrderInterface;
-import Model.DAPLinkedList;
-import Model.DAPList;
+import Model.LinkedList;
 import Model.OrderList;
 import Model.OrderListInterface;
 import Model.Payment;
@@ -21,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import Model.List;
 
 /**
  *
@@ -140,9 +140,9 @@ public class PaymentDA {
         return catalog;
     }
     
-    public DAPList<PaymentInterface> getAllPayment(){
+    public List<PaymentInterface> getAllPayment(){
         String queryStr = "SELECT * FROM " +tableName;
-        DAPList<PaymentInterface> paymentList = new DAPLinkedList();
+        List<PaymentInterface> paymentList = new LinkedList();
         try{
             PaymentInterface payment;
             stmt = conn.prepareStatement(queryStr);
@@ -161,9 +161,9 @@ public class PaymentDA {
         return paymentList;
     }
     
-    public DAPList<CustomerOrderInterface> getAllCustomerOrder(){
+    public List<CustomerOrderInterface> getAllCustomerOrder(){
         String queryStr = "SELECT * FROM " +tableName1;
-        DAPList<CustomerOrderInterface> customerOrderList = new DAPLinkedList();
+        List<CustomerOrderInterface> customerOrderList = new LinkedList();
         try{
             CustomerOrderInterface customerOrder;
             stmt = conn.prepareStatement(queryStr);
@@ -184,9 +184,9 @@ public class PaymentDA {
         return customerOrderList;
     }
     
-    public DAPList<OrderListInterface> getAllOrderList(){     //use to get all record in order_list table
+    public List<OrderListInterface> getAllOrderList(){     //use to get all record in order_list table
         String queryStr = "SELECT * FROM " +tableName2;
-        DAPList<OrderListInterface> orderListList = new DAPLinkedList();
+        List<OrderListInterface> orderListList = new LinkedList();
         try{
             OrderListInterface orderList;
             stmt = conn.prepareStatement(queryStr);
@@ -206,9 +206,9 @@ public class PaymentDA {
         return orderListList;
     }
     
-    public DAPList<CatalogInterface> getAllCatalog(){           //use to get all record in catalog 
+    public List<CatalogInterface> getAllCatalog(){           //use to get all record in catalog 
         String queryStr = "SELECT * FROM " +tableName3;
-        DAPList<CatalogInterface> catalogList = new DAPLinkedList();
+        List<CatalogInterface> catalogList = new LinkedList();
         try{
             CatalogInterface catalog;
             stmt = conn.prepareStatement(queryStr);

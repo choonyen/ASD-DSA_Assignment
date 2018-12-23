@@ -9,17 +9,15 @@ import java.util.Iterator;
 
 /**
  *
- * @author LENOVO
+ * @author MSI GL62 6QF
  */
-public interface List<T>{
+public interface List<T> {
     
     public void add(T data);
     public int numberOfEntries();
-    public void edit(T oldData,T newdata);
+    public void edit(T oldData, T newData);
     public T get(int position);
     
     public boolean isEmpty();
     public Iterator<T> getIterator();
-    
-    
 }

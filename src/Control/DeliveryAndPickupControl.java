@@ -11,7 +11,6 @@ import DA.OrderPickupDA;
 import DA.PaymentDA;
 import Model.CatalogInterface;
 import Model.CustomerOrderInterface;
-import Model.DAPList;
 import Model.DeliveryInterface;
 import Model.OrderList;
 import Model.OrderListInterface;
@@ -20,6 +19,7 @@ import Model.Payment;
 import Model.PaymentInterface;
 import java.util.Date;
 import java.util.Iterator;
+import Model.List;
 
 /**
  *
@@ -27,12 +27,12 @@ import java.util.Iterator;
  */
 public class DeliveryAndPickupControl {
     
-    private static DAPList<DeliveryInterface> DELIVERY_LIST, DELIVERYBYDATE_LIST;
-    private static DAPList<PaymentInterface> PAYMENT_LIST;
-    private static DAPList<CustomerOrderInterface> CUSTOMERORDER_LIST;
-    private static DAPList<OrderListInterface> ORDERLIST_LIST;
-    private static DAPList<CatalogInterface> CATALOG_LIST;
-    private static DAPList<OrderPickupInterface> PICKUP_LIST;
+    private static List<DeliveryInterface> DELIVERY_LIST, DELIVERYBYDATE_LIST;
+    private static List<PaymentInterface> PAYMENT_LIST;
+    private static List<CustomerOrderInterface> CUSTOMERORDER_LIST;
+    private static List<OrderListInterface> ORDERLIST_LIST;
+    private static List<CatalogInterface> CATALOG_LIST;
+    private static List<OrderPickupInterface> PICKUP_LIST;
     private static int PAYMENT_COUNT;
     
     private OrderPickupDA orderPickupDA;
@@ -62,31 +62,31 @@ public class DeliveryAndPickupControl {
         //return PICKUP_LIST;
     //}
     
-    public DAPList<OrderPickupInterface> getAllPickup(){
+    public List<OrderPickupInterface> getAllPickup(){
         return PICKUP_LIST;
     }
     
-    public DAPList<DeliveryInterface> getAllDelivery(){
+    public List<DeliveryInterface> getAllDelivery(){
         return DELIVERY_LIST;
     }
     
-    public DAPList<DeliveryInterface> getDeliveryListByDate(){
+    public List<DeliveryInterface> getDeliveryListByDate(){
         return DELIVERYBYDATE_LIST;
     }
     
-    public DAPList<PaymentInterface> getAllPayment(){
+    public List<PaymentInterface> getAllPayment(){
         return PAYMENT_LIST;
     }
     
-    public DAPList<CustomerOrderInterface> getAllCustomerOrder(){
+    public List<CustomerOrderInterface> getAllCustomerOrder(){
         return CUSTOMERORDER_LIST;
     }
     
-    public DAPList<OrderListInterface> getAllOrderList(){
+    public List<OrderListInterface> getAllOrderList(){
         return ORDERLIST_LIST;
     }
     
-    public DAPList<CatalogInterface> getAllCatalog(){
+    public List<CatalogInterface> getAllCatalog(){
         return CATALOG_LIST;
     }
     

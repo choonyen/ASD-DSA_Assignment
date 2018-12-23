@@ -5,8 +5,7 @@
  */
 package DA;
 
-import Model.DAPLinkedList;
-import Model.DAPList;
+import Model.LinkedList;
 import Model.Delivery;
 import Model.DeliveryInterface;
 import java.sql.Connection;
@@ -16,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import Model.List;
 
 /**
  *
@@ -56,9 +56,9 @@ public class DeliveryDA {
         return delivery;
     }*/
     
-    public DAPList<DeliveryInterface> getDeliveryListByDate(Date date){
+    public List<DeliveryInterface> getDeliveryListByDate(Date date){
         String queryStr = "SELECT * FROM " +tableName +" WHERE DELIVERYDATE = ?";
-        DAPList<DeliveryInterface> deliveryList = new DAPLinkedList();
+        List<DeliveryInterface> deliveryList = new LinkedList();
         try{
             DeliveryInterface delivery;
             stmt = conn.prepareStatement(queryStr);
@@ -80,9 +80,9 @@ public class DeliveryDA {
         return deliveryList;
     }
     
-    public DAPList<DeliveryInterface> getAllDelivery(){
+    public List<DeliveryInterface> getAllDelivery(){
         String queryStr = "SELECT * FROM " +tableName;
-        DAPList<DeliveryInterface> deliveryList = new DAPLinkedList();
+        List<DeliveryInterface> deliveryList = new LinkedList();
         try{
             DeliveryInterface delivery;
             stmt = conn.prepareStatement(queryStr);

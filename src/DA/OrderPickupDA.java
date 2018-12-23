@@ -5,8 +5,7 @@
  */
 package DA;
 
-import Model.DAPLinkedList;
-import Model.DAPList;
+import Model.LinkedList;
 import Model.OrderPickup;
 import Model.OrderPickupInterface;
 import java.sql.Connection;
@@ -15,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import Model.List;
 
 /**
  *
@@ -54,9 +54,9 @@ public class OrderPickupDA {
         return orderPickup;
     }
     
-    public DAPList<OrderPickupInterface> getAllPickup(){
+    public List<OrderPickupInterface> getAllPickup(){
         String queryStr = "SELECT * FROM " +tableName;
-        DAPList<OrderPickupInterface> pickupList = new DAPLinkedList();
+        List<OrderPickupInterface> pickupList = new LinkedList();
         try{
             OrderPickupInterface orderPickup;
             stmt = conn.prepareStatement(queryStr);
