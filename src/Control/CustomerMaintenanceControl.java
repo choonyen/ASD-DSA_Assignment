@@ -176,17 +176,19 @@ public class CustomerMaintenanceControl {
                     double amount=0 ;
                     if(unpaidList!=null){
                         Iterator<Invoice> unpaidIterator = unpaidList.getIterator();
-                    while (unpaidIterator.hasNext()) {
-                        Invoice invoice = unpaidIterator.next();
-                        if (invoice.getCustomer().getCustID().equals(corporateCustomer.getCustID())) {
-                            amount += invoice.getAmount();
+                        while (unpaidIterator.hasNext()) {
+                            Invoice invoice = unpaidIterator.next();
+                            if (invoice.getCustomer().getCustID().equals(corporateCustomer.getCustID())) {
+                                amount += invoice.getAmount();
+                            }
                         }
-                    }
                     }
                     if (amount == 0) {
                         amount = corporateCustomer.getCreditLimit() - corporateCustomer.getRemainingCreditLimit();
                     } else {
                         amount = corporateCustomer.getCreditLimit() - corporateCustomer.getRemainingCreditLimit() - amount;
+                        if(amount == 0)
+                            continue;
                     }
                     Invoice invoice = new Invoice(String.format("I%03d", INVOICE_COUNT++), corporateCustomer, amount, new Date(), false);
                     INVOICE_LIST.add(invoice);
