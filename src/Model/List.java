@@ -11,7 +11,7 @@ import java.util.Iterator;
  *
  * @author MSI GL62 6QF
  */
-public interface List<T> {  
+public interface List<T> {
     
     public void add(T data);
     public int numberOfEntries();
