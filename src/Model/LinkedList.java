@@ -12,15 +12,15 @@ import java.util.NoSuchElementException;
  *
  * @author LENOVO
  */
-public class LinkedList<T> implements List<T> {
+public class LinkedList<T> implements List<T> { //implementation class of List ADT, is store linked collection of object.
     
-    private int numberOfEntries = 0;
-    private Node firstNode = null;
+    private int numberOfEntries = 0;  // store the number of entries in the list
+    private Node firstNode = null;   // point to first data of the list
     
     
     
     @Override
-    public void add(T data) {
+    public void add(T data) {        //add data to list, if the list is empty, pointing firstNode to the data,else add the data to the back of the list. 
         Node newNode = new Node(data);
         if(isEmpty()){
             firstNode = newNode;
@@ -37,12 +37,12 @@ public class LinkedList<T> implements List<T> {
 
 
     @Override
-    public int numberOfEntries() {
+    public int numberOfEntries() {   // return number of entries in the list
         return numberOfEntries;
     }
 
     @Override
-    public void edit(T oldData,T newData) {
+    public void edit(T oldData,T newData) {   // edit by replace the oldData to newData in the list.
         if(!isEmpty()){
             Node currentNode = firstNode;
             while(!currentNode.data.equals(oldData) && currentNode.next!=null)
@@ -55,8 +55,8 @@ public class LinkedList<T> implements List<T> {
         
     }
 
-    @Override
-    public T get(int position) {
+    @Override 
+    public T get(int position) {     //return the object from the list in the position
         T item = null;
         if(!isEmpty()){
             Node currentNode = firstNode;
@@ -70,32 +70,32 @@ public class LinkedList<T> implements List<T> {
     }
 
     @Override
-    public boolean isEmpty() {
+    public boolean isEmpty() {   // determine whether the list is empty by check the numberOf Entries is 0 or not.
         if(numberOfEntries == 0)
             return true;
         return false;
     }
     
-    public Iterator<T> getIterator(){
+    public Iterator<T> getIterator(){     // get iterator
         return new LinkedIterator();
     }
     
 
-    private class LinkedIterator implements Iterator<T>{
+    private class LinkedIterator implements Iterator<T>{   //a class implements Iterator
         
         private Node currentNode;
         
-        public LinkedIterator(){
+        public LinkedIterator(){    // the currentNode by default pointing firstNode.
             currentNode = firstNode;
         }
 
         @Override
-        public boolean hasNext() {
+        public boolean hasNext() {   // check whether is the end of the list
             return currentNode != null;
         }
 
         @Override
-        public T next() {
+        public T next() {   // if not end of the list, return the currentNode and point the currentNode to next Node.
             if (hasNext()) {
                 T returnData = currentNode.data;
                 currentNode = currentNode.next;
@@ -108,7 +108,7 @@ public class LinkedList<T> implements List<T> {
     }
     
     
-    private class Node{
+    private class Node{      
         T data;
         Node next;
         

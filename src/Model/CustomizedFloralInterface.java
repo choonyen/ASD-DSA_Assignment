@@ -9,8 +9,9 @@ package Model;
  *
  * @author LokeCY
  */
-public interface CustomizedFloralInterface {
+public interface CustomizedFloralInterface { //An Entity ADT for customized Floral Arrangement
     
+    // Getter and Setter for the attribute of the customized Floral Arrangement.
     public String getOrderID();
     public void setOrderID(String orderID);
     public String getCustID();

@@ -20,7 +20,7 @@ public class ItemizedView extends javax.swing.JFrame {
     private Size size;
     private Flower flower;
     private Accessory accessory;
-    private CustomizedFloral customizedFloral;
+    private CustomizedFloralInterface customizedFloral;
     private CustomerMaintenanceControl controlCustomer;
     private CustomizedMaintenanceControl control;
     
@@ -32,7 +32,7 @@ public class ItemizedView extends javax.swing.JFrame {
         initComponents();
     }
     
-    public ItemizedView(CustomizedMaintenanceControl control, CustomizedFloral customizedFloral)
+    public ItemizedView(CustomizedMaintenanceControl control, CustomizedFloralInterface customizedFloral)
     {
         controlCustomer = new CustomerMaintenanceControl();
         this.customizedFloral = customizedFloral;

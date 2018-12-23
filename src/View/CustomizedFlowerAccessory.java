@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class CustomizedFlowerAccessory extends javax.swing.JFrame {
     
-    private CustomizedFloral customizedFloral;
+    private CustomizedFloralInterface customizedFloral;
     private CustomizedMaintenanceControl control;
     private Iterator <Flower> flowerList;
     private Iterator <Accessory> accessoryList;
@@ -38,7 +38,7 @@ public class CustomizedFlowerAccessory extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CustomizedFlowerAccessory(CustomizedMaintenanceControl control, CustomizedFloral customizedFloral)
+    public CustomizedFlowerAccessory(CustomizedMaintenanceControl control, CustomizedFloralInterface customizedFloral)
     {
        this.control = control;
        this.customizedFloral = customizedFloral;

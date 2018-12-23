@@ -14,7 +14,7 @@ import javax.swing.*;
  * @author Choonyen
  */
 public class CustomizedMaintenanceControl {
-    private static List<CustomizedFloral> CUSTOMIZED_LIST;
+    private static List<CustomizedFloralInterface> CUSTOMIZED_LIST;
     private static List<Style> STYLE_LIST;
     private static List<Size> SIZE_LIST;
     private static List<Flower> FLOWER_LIST;
@@ -49,7 +49,7 @@ public class CustomizedMaintenanceControl {
         
     }
     
-    public List <CustomizedFloral> getAllCustomized()
+    public List <CustomizedFloralInterface> getAllCustomized()
     {
         return CUSTOMIZED_LIST;
     }
@@ -74,7 +74,7 @@ public class CustomizedMaintenanceControl {
         return ACCESSORY_LIST;
     }
     
-    public void addCustomizedOrder(CustomizedFloral customizedFloral)
+    public void addCustomizedOrder(CustomizedFloralInterface customizedFloral)
     {
         CUSTOMIZED_LIST.add(customizedFloral);
         CUSTOMIZED_ORDER_COUNT ++;
@@ -153,9 +153,9 @@ public class CustomizedMaintenanceControl {
     
     public void updateDatabase()
     {
-        Iterator<CustomizedFloral> customizedList = CUSTOMIZED_LIST.getIterator();
+        Iterator<CustomizedFloralInterface> customizedList = CUSTOMIZED_LIST.getIterator();
         while(customizedList.hasNext()){
-            CustomizedFloral custFloral = customizedList.next();
+            CustomizedFloralInterface custFloral = customizedList.next();
             
             if(customizedDA.getOrderCust(custFloral.getOrderID())== null)
                 customizedDA.addCustOrder(custFloral);

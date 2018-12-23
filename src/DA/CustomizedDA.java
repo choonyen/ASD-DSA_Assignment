@@ -27,14 +27,14 @@ public class CustomizedDA {
     }
     
     
-    public List<CustomizedFloral> getCustomizedOrder(){
+    public List<CustomizedFloralInterface> getCustomizedOrder(){
         String queryStr = "SELECT * FROM " + tableName;
-        List<CustomizedFloral> custFloralList = new LinkedList();
+        List<CustomizedFloralInterface> custFloralList = new LinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                CustomizedFloral custFloral = null;
+                CustomizedFloralInterface custFloral = null;
                 custFloral = new CustomizedFloral(
                         rs.getString("CUSTOMORDERNO"),
                         rs.getString("CUSTID"),
@@ -55,9 +55,9 @@ public class CustomizedDA {
         
     }
     
-    public CustomizedFloral getOrderCustomer(String id){
+    public CustomizedFloralInterface getOrderCustomer(String id){
         String queryStr = "SELECT * FROM " + tableName + " WHERE CUSTID = ?";
-        CustomizedFloral custFloral = null;
+        CustomizedFloralInterface custFloral = null;
         try{
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1,id);
@@ -82,9 +82,9 @@ public class CustomizedDA {
         return custFloral;
     }
     
-    public CustomizedFloral getOrderCust(String id){
+    public CustomizedFloralInterface getOrderCust(String id){
         String queryStr = "SELECT * FROM " + tableName + " WHERE CUSTOMORDERNO = ?";
-        CustomizedFloral custFloral = null;
+        CustomizedFloralInterface custFloral = null;
         try{
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1,id);
@@ -109,7 +109,7 @@ public class CustomizedDA {
         return custFloral;
     }
     
-    public void addCustOrder(CustomizedFloral custFloral){
+    public void addCustOrder(CustomizedFloralInterface custFloral){
         String insertStr = "INSERT INTO " + tableName + " VALUES(?,?,?,?,?,?,?,?)";
         try{
             stmt = conn.prepareStatement(insertStr);

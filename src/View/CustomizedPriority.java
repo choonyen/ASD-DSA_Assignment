@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class CustomizedPriority extends javax.swing.JFrame {
 
     
-    private CustomizedFloral customizedFloral;
+    private CustomizedFloralInterface customizedFloral;
     private CustomizedMaintenanceControl control;
     private double priorPrice;
     private double total;
@@ -29,7 +29,7 @@ public class CustomizedPriority extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CustomizedPriority(CustomizedMaintenanceControl control, CustomizedFloral customizedFloral)
+    public CustomizedPriority(CustomizedMaintenanceControl control, CustomizedFloralInterface customizedFloral)
     {
         this.customizedFloral = customizedFloral;
         this.control = control;     
