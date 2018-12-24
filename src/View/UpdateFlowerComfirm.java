@@ -5,6 +5,7 @@
  */
 package View;
 
+import Control.MaintainCatalogControl;
 import DA.*;
 import Model.*;
 import javax.swing.JOptionPane;
@@ -14,28 +15,29 @@ import javax.swing.JOptionPane;
  */
 public class UpdateFlowerComfirm extends javax.swing.JFrame {
 
-    private Catalog catalog;
-    private CountDA countDA;
-    private CatalogDA catalogDA;
-   
-    public UpdateFlowerComfirm(Catalog catalog) {
+  private CatalogInterface catalog = null;
+    private MaintainCatalogControl control;
+
+    public UpdateFlowerComfirm(MaintainCatalogControl control, CatalogInterface catalog) {
         initComponents();
-        countDA = new CountDA();
-        catalogDA = new CatalogDA();
+        this.control = control;
         this.catalog = catalog;
-        jtfProdID.setText(catalog.getProdid());
-        jtfProdName.setText(catalog.getName());
-        jtfType.setText(String.valueOf(catalog.getType()));
+        jtfProdID.setText(catalog.getProdID());
+        jtfProdName.setText(catalog.getName());        
+        if(catalog.getType() == "Bouquet")
+            jtfType.setText("Bouquet");
+        else
+            jtfType.setText("Floral Arrangement");
+        jtfType.setText(catalog.getType());
         jtfPrice.setText(String.valueOf(catalog.getPrice()));
         jtfDescription.setText(catalog.getDescription());
-         jtfStock.setText(String.valueOf(catalog.getStock()));
+        jtfStock.setText(String.valueOf(catalog.getStock()));
         
     }
-    
-    
     public UpdateFlowerComfirm() {
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,7 +75,7 @@ public class UpdateFlowerComfirm extends javax.swing.JFrame {
         jlblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblHeader.setForeground(new java.awt.Color(153, 0, 0));
         jlblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlblHeader.setText("Catalog Maintenance");
+        jlblHeader.setText("Catalog Update");
 
         jlblProdID.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblProdID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -208,9 +210,9 @@ public class UpdateFlowerComfirm extends javax.swing.JFrame {
 
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         // TODO add your handling code here
-        catalogDA.updateCatalog(catalog);
-        
-        JOptionPane.showMessageDialog(null, "Catalog Updated.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            control.updateCatalog(catalog);
+            
+            JOptionPane.showMessageDialog(null, catalog.getProdID() + " Update success.");
         this.dispose();
     }//GEN-LAST:event_jConfirmActionPerformed
 

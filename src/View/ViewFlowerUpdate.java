@@ -14,29 +14,20 @@ import javax.swing.JOptionPane;
  * @author lamzn
  */
 public class ViewFlowerUpdate extends javax.swing.JFrame {
-
-    private Catalog catalog;
-    private CountDA countDA;
-    private CatalogDA catalogDA;
-   
-   
-        public ViewFlowerUpdate(Catalog catalog) {
+    CatalogInterface catalog = null;
+    private MaintainCatalogControl control;
+    public ViewFlowerUpdate() {
         initComponents();
-        countDA = new CountDA();
-        catalogDA = new CatalogDA();
-        this.catalog = catalog;
-        jtfProdID.setText(catalog.getProdid());
+    }
+public ViewFlowerUpdate(MaintainCatalogControl control,CatalogInterface catalog) {
+        initComponents();
+        this.control = control;
+        this.catalog = catalog;  
+        jtfProdID.setText(catalog.getProdID());
         jtfProdName.setText(catalog.getName());
-        jType.setSelectedItem(catalog.getType());
         jtfPrice.setText(String.valueOf(catalog.getPrice()));
         jtfDescription.setText(catalog.getDescription());
          jtfStock.setText(String.valueOf(catalog.getStock()));
-        
-    }
-    
-    
-    public ViewFlowerUpdate() {
-        initComponents();
         
     }
 
@@ -77,7 +68,7 @@ public class ViewFlowerUpdate extends javax.swing.JFrame {
         jlblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblHeader.setForeground(new java.awt.Color(153, 0, 0));
         jlblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlblHeader.setText("Catalog Maintenance");
+        jlblHeader.setText("Catalog Update");
 
         jlblProdName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblProdName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -207,36 +198,9 @@ public class ViewFlowerUpdate extends javax.swing.JFrame {
 
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         // TODO add your handling code here:
-        boolean valid = true;
-        String warningMsg = "";
-        
-         if(jtfProdName.getText().equals("")){
-            warningMsg += "*Product Name cannot be empty.\n";
-            valid = false;
-        }
-
-        if(jtfPrice.getText().equals("")){
-            warningMsg += "*Price cannot be empty.\n";
-            valid = false;
-        }
-        if(jtfDescription.getText().equals("")){
-            warningMsg += "*Description cannot be empty.\n";
-            valid = false;
-        }
-
-        if(jtfStock.getText().equals("")){
-            warningMsg += "*Stock cannot be empty.\n";
-            valid = false;
-        }
-        if(!stockValidation(jtfStock.getText()) && !jtfStock.getText().equals("")){
-            warningMsg += "*Invalid Stock No Follow the numeric format\n";
-            valid = false;
-        }
-        if(valid){
-            CountDA countDA = new CountDA();
-            Count count = countDA.getCount();
-            String prodid = jtfProdID.getText();
-            String name = jtfProdName.getText();
+       boolean valid = true;
+        String errorMsg;
+          String name = jtfProdName.getText();
             double price = Double.parseDouble(jtfPrice.getText());
             String description = jtfDescription.getText();
             int stock = Integer.parseInt(jtfStock.getText());
@@ -245,21 +209,30 @@ public class ViewFlowerUpdate extends javax.swing.JFrame {
             type = "Bonquet";
             else
             type = "Floral arrangement";
-
-            Catalog catalog;
-
-            catalog = new Catalog(prodid,name, type, price,description,stock);
-
-            UpdateFlowerComfirm updateFlowerUpdate = new UpdateFlowerComfirm(catalog);
-            updateFlowerUpdate.setVisible(true);
-
+        
+        errorMsg = control.isValid(name,type,price,description,stock);
+        catalog.setName(name);
+        catalog.setPrice(price);
+        catalog.setDescription(description);
+        catalog.setStock(stock);
+        catalog.setType(type);
+        
+        if(errorMsg.equals("")){
+       
+            //CatalogInterface catalog = control.createCatalog(name, type, price,description,stock);    
+            control.updateCatalog(catalog);
+            UpdateFlowerComfirm updateFlowerConfirm = new UpdateFlowerComfirm(control,catalog);
+            updateFlowerConfirm.setVisible(true);
+            
+            
         }
         else{
-            JOptionPane.showMessageDialog(null, warningMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, errorMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
 
         }
-
-        ;
+        
+        this.dispose();
+        
     }//GEN-LAST:event_jConfirmActionPerformed
 
         private boolean stockValidation(String stock){
@@ -283,28 +256,6 @@ public class ViewFlowerUpdate extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewFlowerUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewFlowerUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewFlowerUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewFlowerUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

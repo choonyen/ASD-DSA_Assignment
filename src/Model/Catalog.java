@@ -9,7 +9,7 @@ package Model;
  *
  * @author lamzn
  */
-public class Catalog {
+public class Catalog implements CatalogInterface{
     
     private String Prodid;
     private String Name;
@@ -20,6 +20,10 @@ public class Catalog {
   
     
     public Catalog(){
+    }
+
+    public Catalog(String Prodid) {
+        this.Prodid = Prodid;
     }
 
     public Catalog(String Prodid, String Name, String Type,double Price,String Description, int Stock){
@@ -34,11 +38,11 @@ public class Catalog {
 
 
 
-    public String getProdid() {
+    public String getProdID() {
         return Prodid;
     }
 
-    public void setProdid(String Prodid) {
+    public void setProdID(String Prodid) {
         this.Prodid = Prodid;
     }
 
