@@ -6,7 +6,7 @@
 package View;
 import Model.*;
 import DA.*;
-import Control.*;
+import Control.MaintainCatalogControl;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,11 +18,14 @@ public class AddFlowers extends javax.swing.JFrame {
     /**
      * Creates new form AddFlowers
      */
-
+ private MaintainCatalogControl control;
     public AddFlowers() {
         initComponents();
     }
-
+public AddFlowers(MaintainCatalogControl control) {
+        initComponents();
+        this.control = control;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,7 +60,7 @@ public class AddFlowers extends javax.swing.JFrame {
         jlblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblHeader.setForeground(new java.awt.Color(153, 0, 0));
         jlblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlblHeader.setText("Catalog Maintenance");
+        jlblHeader.setText("Add Catalog");
 
         jlblProdName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblProdName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -173,33 +176,8 @@ public class AddFlowers extends javax.swing.JFrame {
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         // TODO add your handling code here:
         boolean valid = true;
-        String warningMsg = "";
-        
-         if(jtfProdName.getText().equals("")){
-            warningMsg += "*Product Name cannot be empty.\n";
-            valid = false;
-        }
-        if(jtfPrice.getText().equals("")){
-            warningMsg += "*Price cannot be empty.\n";
-            valid = false;
-        }
-        if(jtfDescription.getText().equals("")){
-            warningMsg += "*Description cannot be empty.\n";
-            valid = false;     
-        }
-        
-          if(jtfStock.getText().equals("")){
-            warningMsg += "*Stock cannot be empty.\n";
-            valid = false;     
-        }
-        if(!stockValidation(jtfStock.getText()) && !jtfStock.getText().equals("")){
-            warningMsg += "*Invalid Stock No Follow the numeric format\n";
-            valid = false;
-        }
-        if(valid){
-            CountDA countDA = new CountDA();
-            Count count = countDA.getCount();
-            String name = jtfProdName.getText();
+        String errorMsg;
+          String name = jtfProdName.getText();
             double price = Double.parseDouble(jtfPrice.getText());
             String description = jtfDescription.getText();
             int stock = Integer.parseInt(jtfStock.getText());
@@ -208,35 +186,35 @@ public class AddFlowers extends javax.swing.JFrame {
             type = "Bonquet";
             else
             type = "Floral arrangement";
-
-            Catalog catalog;
-           
-            catalog = new Catalog("P"+String.format("%03d", count.getProductCount()),name, type, price,description,stock);
-            
-            AddFlowersConfirm addFlowersConfirm = new AddFlowersConfirm(catalog);
-            addFlowersConfirm.setVisible(true);
+        
+        errorMsg = control.isValid(name,type,price,description,stock);
+        
+         
+        if(errorMsg.equals("")){
+       
+            CatalogInterface catalog = control.createCatalog(name, type, price,description,stock);    
+             AddFlowersConfirm addFlowerConfirm = new AddFlowersConfirm(control,catalog);
+            addFlowerConfirm.setVisible(true);
             
             
         }
         else{
-            JOptionPane.showMessageDialog(null, warningMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, errorMsg, "Invalid Input", JOptionPane.ERROR_MESSAGE);
 
         }
         
 
-      ;
+      this.dispose();
 
+      
+      
+       
+      
+      
     }//GEN-LAST:event_jConfirmActionPerformed
 
 
-        private boolean stockValidation(String stock){
-             if(Character.isDigit(stock.charAt(0)))
-                    {
-                        return true;
-                    }
-            return false;
-            
-        }
+       
     private void jCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -273,7 +251,7 @@ public class AddFlowers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddFlowers().setVisible(true);
+                new AddFlowers(new MaintainCatalogControl()).setVisible(true);
             }
         });
     }

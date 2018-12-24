@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package View;
+import Control.MaintainCatalogControl;
 import DA.*;
 import Model.*;
 import javax.swing.JOptionPane;
@@ -12,17 +13,21 @@ import javax.swing.JOptionPane;
  * @author lamzn
  */
 public class ViewFlower extends javax.swing.JFrame {
-     private Catalog catalog;
-    private CountDA countDA;
-    private CatalogDA catalogDA;
+
+    MaintainCatalogControl control;
+    CatalogInterface catalog = null;
+    
+      public ViewFlower() {
+        initComponents();
+    }
     /**
      * Creates new form ViewFlower
-     */public ViewFlower(Catalog catalog) {
+     */public ViewFlower(MaintainCatalogControl control,CatalogInterface catalog) {
         initComponents();
-        countDA = new CountDA();
-        catalogDA = new CatalogDA();
         this.catalog = catalog;
-        jtfProdID.setText(catalog.getProdid());
+        this.control = control;
+        
+        jtfProdID.setText(catalog.getProdID());
         jtfProdName.setText(catalog.getName());
         jtfType.setText(String.valueOf(catalog.getType()));
         jtfPrice.setText(String.valueOf(catalog.getPrice()));
@@ -30,9 +35,7 @@ public class ViewFlower extends javax.swing.JFrame {
          jtfStock.setText(String.valueOf(catalog.getStock()));
         
     }
-    public ViewFlower() {
-        initComponents();
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,7 +61,6 @@ public class ViewFlower extends javax.swing.JFrame {
         jtfPrice = new javax.swing.JTextField();
         jtfDescription = new javax.swing.JTextField();
         jtfStock = new javax.swing.JTextField();
-        jDelete = new javax.swing.JButton();
         jUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -117,14 +119,6 @@ public class ViewFlower extends javax.swing.JFrame {
 
         jtfStock.setEditable(false);
 
-        jDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jDelete.setText("Delete");
-        jDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDeleteActionPerformed(evt);
-            }
-        });
-
         jUpdate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jUpdate.setText("Update");
         jUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -175,9 +169,7 @@ public class ViewFlower extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(137, 137, 137)
                         .addComponent(jUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
+                        .addGap(200, 200, 200)
                         .addComponent(jCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(148, 148, 148))
@@ -216,7 +208,6 @@ public class ViewFlower extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -227,20 +218,15 @@ public class ViewFlower extends javax.swing.JFrame {
     private void jCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelActionPerformed
         // TODO add your handling code here:
       //new SearchFlower().setVisible(true);
-      
+      this.dispose();
       
     }//GEN-LAST:event_jCancelActionPerformed
 
-    private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
-        catalogDA.DeleteCatalog(catalog);
-        JOptionPane.showMessageDialog(null, "Catalog Delete.", "Success", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();
-    }//GEN-LAST:event_jDeleteActionPerformed
-
     private void jUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateActionPerformed
         // TODO add your handling code here:
-            ViewFlowerUpdate viewFlowerUpdate = new ViewFlowerUpdate(catalog);
+            ViewFlowerUpdate viewFlowerUpdate = new ViewFlowerUpdate(control,catalog);
             viewFlowerUpdate.setVisible(true);
+            this.dispose();
     }//GEN-LAST:event_jUpdateActionPerformed
 
     /**
@@ -273,14 +259,13 @@ public class ViewFlower extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SearchFlower().setVisible(true);
+                new SearchFlower(new MaintainCatalogControl()).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jCancel;
-    private javax.swing.JButton jDelete;
     private javax.swing.JButton jUpdate;
     private javax.swing.JLabel jlblDescription;
     private javax.swing.JLabel jlblHeader;

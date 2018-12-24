@@ -7,10 +7,9 @@ package Model;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 /**
  *
- * @author LENOVO
+ * @author lamzn
  */
 public class LinkedList<T> implements List<T> { //implementation class of List ADT, is store linked collection of object.
     
@@ -118,3 +117,5 @@ public class LinkedList<T> implements List<T> { //implementation class of List A
         }
     }
 }
+
+

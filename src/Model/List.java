@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author LENOVO
+ * @author lamzn
  */
 public interface List<T>{    //interface ADT implementation for ADT List
     
