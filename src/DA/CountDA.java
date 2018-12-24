@@ -90,6 +90,43 @@ public class CountDA {
  
     }
      
+    
+    public void increaseOrderCount(int count){
+        
+        try{
+            stmt = conn.prepareStatement(("Update Count set ORDERCOUNT = " + count));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void increaseDeliveryCount(int count){
+     
+        try{
+            stmt = conn.prepareStatement(("Update Count set DELIVERYCOUNT = " + count));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
+    
+     public void increasePickUpCount(int count){
+       
+        try{
+            stmt = conn.prepareStatement(("Update Count set PICKUPCOUNT = " + count));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
+    
      public void increaseCustomizedCount(int count){
          
         try{
@@ -125,6 +162,7 @@ public class CountDA {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
     
     private void createConnection() {
         try {

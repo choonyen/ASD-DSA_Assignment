@@ -5,22 +5,29 @@
  */
 package Model;
 
+
+
 /**
  *
- * @author MSI GL62 6QF
+ * @author lamzn
  */
 public interface CatalogInterface {
     
-    public String getProdId();
-    public void setProdId(String prodId);
+    
+    public void setProdID(String prodid); 
+    public String getProdID();
     public String getName();
-    public void setName(String name);
-    public String getType();
-    public void setType(String type);
-    public Double getPrice();
-    public void setPrice(Double price);
-    public String getDescription();
-    public void setDescription(String description);
-    public int getStock();
-    public void setStock(int stock);
+    public void setName(String name) ;
+    public String getType() ;
+    public void setType(String type) ;
+    public double getPrice() ;
+    public void setPrice(double price) ;
+    public String getDescription() ;
+    public void setDescription(String description) ;
+    public int getStock() ;
+    public void setStock(int stock) ;
+    
+  
+        
+    
 }

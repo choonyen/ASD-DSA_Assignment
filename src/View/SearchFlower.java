@@ -132,7 +132,7 @@ MaintainCatalogControl maintainCatalogControl;
     private void jSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchActionPerformed
         // TODO add your handling code here:
         String id = jtfProdID.getText();
-        Catalog catalog = maintainCatalogControl.searchCatalog(id);
+        CatalogInterface catalog = maintainCatalogControl.searchCatalog(id);
         
         if(catalog != null)
         {

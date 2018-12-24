@@ -102,6 +102,49 @@ public class DeliveryDA {
         }
         return deliveryList;
     }
+    
+    
+     public void addDelivery(DeliveryInterface delivery){
+        String insertStr = "INSERT INTO " + tableName + " VALUES(?,?,?,?,?)";
+        try{
+            stmt = conn.prepareStatement(insertStr);
+            stmt.setString(1, delivery.getDeliveryNo());
+            stmt.setString(2, delivery.getOrderNo());
+            stmt.setDate(3, new java.sql.Date(delivery.getDeliveryDate().getTime()));
+            stmt.setString(4, delivery.getAddress());
+            stmt.setString(5, delivery.getPostCode());
+            
+            stmt.executeUpdate();
+
+            
+        }catch (SQLException ex) {
+                        ex.printStackTrace();
+
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+     
+     public DeliveryInterface getDeliveryById(String id){
+         String queryStr = "SELECT * FROM " + tableName + " WHERE DELIVERYNO = ?";
+         DeliveryInterface delivery = null;
+         try{
+             stmt = conn.prepareStatement(queryStr);
+             stmt.setString(1, id);
+             ResultSet rs = stmt.executeQuery();
+             if(rs.next()){
+                 delivery = new Delivery(
+                        rs.getString("DELIVERYNO"),
+                        rs.getString("ORDERNO"),
+                        rs.getDate("DELIVERYDATE"),
+                        rs.getString("ADDRESS"),
+                        rs.getString("POSTCODE")
+                );
+             }
+         }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return delivery;
+     } 
 
     private void createConnection() {
         try {

@@ -15,17 +15,17 @@ import javax.swing.JOptionPane;
  */
 public class ViewFlowerUpdate extends javax.swing.JFrame {
 
-    private Catalog catalog;
+    private CatalogInterface catalog;
     private CountDA countDA;
     private CatalogDA catalogDA;
    
    
-        public ViewFlowerUpdate(Catalog catalog) {
+        public ViewFlowerUpdate(CatalogInterface catalog) {
         initComponents();
         countDA = new CountDA();
         catalogDA = new CatalogDA();
         this.catalog = catalog;
-        jtfProdID.setText(catalog.getProdId());
+        jtfProdID.setText(catalog.getProdID());
         jtfProdName.setText(catalog.getName());
         jType.setSelectedItem(catalog.getType());
         jtfPrice.setText(String.valueOf(catalog.getPrice()));

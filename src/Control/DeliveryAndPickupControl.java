@@ -143,7 +143,7 @@ public class DeliveryAndPickupControl {
         CatalogInterface result = null;
         while(catalogList.hasNext()){
             CatalogInterface catalog = catalogList.next();
-            if(catalog.getProdId().equals(prodId)){
+            if(catalog.getProdID().equals(prodId)){
                 result = catalog;
                 break;
             }

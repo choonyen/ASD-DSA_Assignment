@@ -8,6 +8,7 @@ package View;
 import DA.CatalogDA;
 import DA.CountDA;
 import Model.Catalog;
+import Model.CatalogInterface;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,18 +21,18 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
      * Creates new form AddFlowersConfirm
      */
     
-     private Catalog catalog;
+     private CatalogInterface catalog;
     private CountDA countDA;
     private CatalogDA catalogDA;
     /**
      * Creates new form AddCustomerConfirm
      */
-    public AddFlowersConfirm(Catalog catalog) {
+    public AddFlowersConfirm(CatalogInterface catalog) {
         initComponents();
         countDA = new CountDA();
         catalogDA = new CatalogDA();
         this.catalog = catalog;
-        jtfProdID.setText(catalog.getProdId());
+        jtfProdID.setText(catalog.getProdID());
         jtfProdName.setText(catalog.getName());
         jtfType.setText(String.valueOf(catalog.getType()));
         jtfPrice.setText(String.valueOf(catalog.getPrice()));

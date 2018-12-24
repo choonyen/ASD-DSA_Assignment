@@ -14,16 +14,16 @@ import javax.swing.JOptionPane;
  */
 public class UpdateFlowerComfirm extends javax.swing.JFrame {
 
-    private Catalog catalog;
+    private CatalogInterface catalog;
     private CountDA countDA;
     private CatalogDA catalogDA;
    
-    public UpdateFlowerComfirm(Catalog catalog) {
+    public UpdateFlowerComfirm(CatalogInterface catalog) {
         initComponents();
         countDA = new CountDA();
         catalogDA = new CatalogDA();
         this.catalog = catalog;
-        jtfProdID.setText(catalog.getProdId());
+        jtfProdID.setText(catalog.getProdID());
         jtfProdName.setText(catalog.getName());
         jtfType.setText(String.valueOf(catalog.getType()));
         jtfPrice.setText(String.valueOf(catalog.getPrice()));

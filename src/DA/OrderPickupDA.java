@@ -32,6 +32,26 @@ public class OrderPickupDA {
         createConnection();
     }
     
+    public void addPickUp(OrderPickupInterface pickup){
+        String insertStr = "INSERT INTO " + tableName + " VALUES(?,?,?,?,?)";
+        try{
+
+            stmt = conn.prepareStatement(insertStr);
+            stmt.setString(1, pickup.getPickupNo());
+            stmt.setString(2, pickup.getOrderNo());
+            stmt.setDate(3, new java.sql.Date(pickup.getPickupDate().getTime()));
+            stmt.setTime(4, pickup.getPickupTime());
+            stmt.setTime(5, null);
+            
+            
+            stmt.executeUpdate();
+            
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public OrderPickupInterface getPickupByNo(String pickupNo){
         String queryStr = "SELECT * FROM " + tableName + " WHERE PICKUPNO = ?";
         OrderPickupInterface orderPickup = null;
@@ -44,7 +64,8 @@ public class OrderPickupDA {
                         rs.getString("PICKUPNO"),
                         rs.getString("ORDERNO"),         
                         rs.getDate("PICKUPDATE"),
-                        rs.getTime("PICKUPTIME")
+                        rs.getTime("PICKUPTIME"),
+                        rs.getTime("PICKUPEDTIME")
                 );
             }
             
@@ -66,7 +87,8 @@ public class OrderPickupDA {
                         rs.getString("PICKUPNO"),
                         rs.getString("ORDERNO"),         
                         rs.getDate("PICKUPDATE"),
-                        rs.getTime("PICKUPTIME")
+                        rs.getTime("PICKUPTIME"),
+                        rs.getTime("PICKUPEDTIME")
                     );
                     pickupList.add(orderPickup);
                 }
@@ -77,11 +99,11 @@ public class OrderPickupDA {
     }
     
     public void recordTimeStamp(OrderPickupInterface orderPickup){
-        String query = "UPDATE " +tableName +" SET PICKUPTIME = ? WHERE PICKUPNO = ?";
+        String query = "UPDATE " +tableName +" SET PICKUPEDTIME = ? WHERE PICKUPNO = ?";
         try{
             stmt = conn.prepareStatement(query);
             stmt.setString(2, orderPickup.getPickupNo());
-            stmt.setTime(1, orderPickup.getPickupTime());
+            stmt.setTime(1, orderPickup.getPickupedTime());
             
             stmt.executeUpdate();
         }catch(SQLException ex){

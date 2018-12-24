@@ -178,13 +178,16 @@ public class OrderPickupDisplay extends javax.swing.JFrame {
             else{
                 orderPickup = control.getPickupByNo(pickupNo);
            
-                if(orderPickup != null){
+                if(orderPickup != null && orderPickup.getPickupedTime()==null){
                     jButton2.setVisible(true);
                     jCheckBox1.setVisible(true);
                     jLabel3.setVisible(true);
                     jLabel4.setVisible(true);
                     jLabel5.setVisible(true);
                     jLabel4.setText(orderPickup.getOrderNo());
+                }
+                else if(orderPickup.getPickupedTime()!= null){
+                    JOptionPane.showMessageDialog(null, "The order has been picked up.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Pickup Record does not exist.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -198,7 +201,7 @@ public class OrderPickupDisplay extends javax.swing.JFrame {
         if(jCheckBox1.isSelected()){
             Date today = new Date();
 
-            orderPickup.setPickupTime(new Time(today.getTime()));
+            orderPickup.setPickupedTime(new Time(today.getTime()));
 
             control.recordTimeStamp(orderPickup);
             //control.updateDatabase();

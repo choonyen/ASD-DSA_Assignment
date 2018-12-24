@@ -22,4 +22,6 @@ public interface OrderPickupInterface {
     public void setPickupDate(Date pickupDate);
     public Time getPickupTime();
     public void setPickupTime(Time pickupTime);
+    public Time getPickupedTime();
+    public void setPickupedTime(Time pickupedTime);
 }

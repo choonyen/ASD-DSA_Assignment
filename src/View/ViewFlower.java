@@ -12,17 +12,17 @@ import javax.swing.JOptionPane;
  * @author lamzn
  */
 public class ViewFlower extends javax.swing.JFrame {
-     private Catalog catalog;
+     private CatalogInterface catalog;
     private CountDA countDA;
     private CatalogDA catalogDA;
     /**
      * Creates new form ViewFlower
-     */public ViewFlower(Catalog catalog) {
+     */public ViewFlower(CatalogInterface catalog) {
         initComponents();
         countDA = new CountDA();
         catalogDA = new CatalogDA();
         this.catalog = catalog;
-        jtfProdID.setText(catalog.getProdId());
+        jtfProdID.setText(catalog.getProdID());
         jtfProdName.setText(catalog.getName());
         jtfType.setText(String.valueOf(catalog.getType()));
         jtfPrice.setText(String.valueOf(catalog.getPrice()));
@@ -232,7 +232,7 @@ public class ViewFlower extends javax.swing.JFrame {
     }//GEN-LAST:event_jCancelActionPerformed
 
     private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
-        catalogDA.DeleteCatalog(catalog);
+
         JOptionPane.showMessageDialog(null, "Catalog Delete.", "Success", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_jDeleteActionPerformed

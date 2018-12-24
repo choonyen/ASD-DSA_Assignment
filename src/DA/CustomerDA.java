@@ -69,6 +69,18 @@ public class CustomerDA {
         }
     }
     
+    public void updateCoperateCustomerCredit(String customerID,double totalDeduct){
+        String updateStr = "UPDATE " + "CORPORATE_CUSTOMER" + " SET REMAININGCREDITLIMIT = ? WHERE CUSTID = ?";
+        try{
+            stmt = conn.prepareStatement(updateStr);
+             stmt.setDouble(1,totalDeduct);
+            stmt.setString(2, customerID);
+            stmt.executeUpdate();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public CustomerInterface getConsumer(String id){
         String queryStr = "SELECT * FROM " + tableName + " WHERE CUSTID = ?";
         CustomerInterface customer = null;

@@ -18,6 +18,23 @@ public class OrderPickup implements OrderPickupInterface{
     private String orderNo;
     private Date pickupDate;
     private Time pickupTime;
+    private Time pickupedTime;
+
+    public OrderPickup(String pickupNo, String orderNo, Date pickupDate, Time pickupTime, Time pickupedTime) {
+        this.pickupNo = pickupNo;
+        this.orderNo = orderNo;
+        this.pickupDate = pickupDate;
+        this.pickupTime = pickupTime;
+        this.pickupedTime = pickupedTime;
+    }
+
+    public Time getPickupedTime() {
+        return pickupedTime;
+    }
+
+    public void setPickupedTime(Time pickupedTime) {
+        this.pickupedTime = pickupedTime;
+    }
     
     public OrderPickup(){}
     

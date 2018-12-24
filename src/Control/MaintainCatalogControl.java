@@ -46,9 +46,9 @@ public class MaintainCatalogControl {
         }
     }
     
-    public Catalog searchCatalog(String id)
+    public CatalogInterface searchCatalog(String id)
     {
-        Catalog catalog = null;
+        CatalogInterface catalog = null;
         if(!id.equals(""))
         {
             if(idValidation(id))

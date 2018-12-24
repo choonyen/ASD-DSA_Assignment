@@ -1,12 +1,11 @@
 package DA;
-import Model.Catalog;
+import Model.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
-import java.util.*;
 
 public class CatalogDA {
 
@@ -15,85 +14,104 @@ public class CatalogDA {
     private String password = "nbuser";
     private String tableName = "CATALOG";
     private Connection conn;
-    private PreparedStatement stmt;
+    private PreparedStatement stmt; 
     
     public CatalogDA() {
         createConnection();
     }
     
-    public Catalog getCatalog(String ID) {
-        String queryStr = "SELECT * FROM " + tableName + " WHERE Prodid = ?";
-        Catalog catalog = null;
-        try {
+  public CatalogInterface getCatalog(String id){
+        String queryStr = "SELECT * FROM " + tableName + " WHERE PRODID = ?";
+        CatalogInterface catalog = null;
+        try{
             stmt = conn.prepareStatement(queryStr);
-            stmt.setString(1, ID);
+            stmt.setString(1,id);
             ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                catalog = new Catalog(ID, rs.getString("Name"), rs.getString("Type"), rs.getDouble("Price"),rs.getString("Description"), rs.getInt("Stock")) {};
-                //customer.setCustid(ID);
-                //customer.setCustname(rs.getString("Name"));
-                //customer.setCustphoneno(rs.getString("PhoneNo"));
-                
+            if(rs.next()){
+                catalog = new Catalog(
+                        rs.getString("PRODID"),
+                        rs.getString("NAME"),         
+                        rs.getString("TYPE"),
+                        rs.getDouble("PRICE"),
+                        rs.getString("DESCRIPTION"),
+                        rs.getInt("STOCK")
+                 
+                );
             }
-        } catch (SQLException ex) {
+            
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return catalog;
     }
+    
    
-     public void addCatalog(Catalog catalog) {
-       String insertStr = "INSERT INTO "+ tableName +" VALUES(?,?,?,?,?,?)";
-        try {
-              //insert a new table row refer chap 5 slides 28, change .getText to getCode refer programme.java in domain
-              
-              
-              
-               stmt = conn.prepareStatement(insertStr);
-               stmt.setString(1, catalog.getProdId());
-               stmt.setString(2, catalog.getName());
-               stmt.setString(3, catalog.getType());
-               stmt.setDouble(4, catalog.getPrice());
-               stmt.setString(5, catalog.getDescription());
-               stmt.setInt(6, catalog.getStock());
-               stmt.executeUpdate();
-          
+       public void addCatalog(CatalogInterface catalog){
+        String insertStr = "INSERT INTO " + tableName + " VALUES(?,?,?,?,?,?)";
+        
+        try{
+            stmt = conn.prepareStatement(insertStr);
+            stmt.setString(1, catalog.getProdID());
+            stmt.setString(2, catalog.getName());   
+            stmt.setString(3, catalog.getType());
+            stmt.setDouble(4, catalog.getPrice());
+            stmt.setString(5, catalog.getDescription());
+           stmt.setInt(6, catalog.getStock());
+            stmt.executeUpdate();
             
             
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-     public void DeleteCatalog(Catalog catalog){
-         String insertStr ="DELETE FROM CATALOG WHERE Prodid = ?";
-          try {
-
-              stmt = conn.prepareStatement(insertStr);
-                stmt.setString(1,  catalog.getProdId());
-              stmt.executeUpdate();
-        } catch (SQLException ex) {
+   
+     public void updateCatalog(CatalogInterface catalog){
+        String updateStr = "UPDATE " + tableName + " SET "
+                + " NAME = ?, TYPE = ?, PRICE = ?, DESCRIPTION = ?, STOCK = ? WHERE PRODID = ?";
+        try{
+            stmt = conn.prepareStatement(updateStr);
+            stmt.setString(6, catalog.getProdID());
+            stmt.setString(1, catalog.getName());
+            stmt.setString(2, catalog.getType());
+            stmt.setDouble(3, catalog.getPrice());
+            stmt.setString(4, catalog.getDescription());
+            stmt.setInt(5, catalog.getStock());
+            stmt.executeUpdate();
+            
+            
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-     }  
-     public void updateCatalog(Catalog catalog){
-       String insertStr = "UPDATE " + tableName + " SET Name = ?, Type = ?, Price = ?, Description = ?, Stock = ? WHERE Prodid = ?";
-          try {
-
-               stmt = conn.prepareStatement(insertStr);
-               stmt.setString(6, catalog.getProdId());
-               stmt.setString(1, catalog.getName());
-               stmt.setString(2, catalog.getType());
-               stmt.setDouble(3, catalog.getPrice());
-               stmt.setString(4, catalog.getDescription());
-               stmt.setInt(5, catalog.getStock());
-               
-               stmt.executeUpdate();
-    
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+     
+     
+     public List<CatalogInterface> getAllCatalog(){
+        String queryStr = "Select * FROM " + tableName + " WHERE PRODID Like ? ";
+        List<CatalogInterface> catalogList = new LinkedList();
+        try{
+                CatalogInterface catalog;
+                stmt = conn.prepareStatement(queryStr);
+                stmt.setString(1, "P%");
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
+                    catalog = new Catalog(
+                        rs.getString("PRODID"),
+                        rs.getString("NAME"),         
+                        rs.getString("TYPE"),
+                        rs.getDouble("PRICE"),
+                        rs.getString("DESCRIPTION"),
+                        rs.getInt("STOCK")
+                 
+                    );
+                    catalogList.add(catalog);
+                }
+        }catch (SQLException ex) {
+               JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-     }  
-    
+        return catalogList;
+     }
+
+
     private void createConnection() {
         try {
             conn = DriverManager.getConnection(host, user, password);
@@ -103,18 +121,4 @@ public class CatalogDA {
         }
     }
     
-    private void shutDown() {
-        if (conn != null)
-            try {
-            conn.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
-    public static void main(String[] args) {
-        CatalogDA da = new CatalogDA();
-        Catalog catalog = da.getCatalog("P001");
-        System.out.println(catalog);
-    }
 }
