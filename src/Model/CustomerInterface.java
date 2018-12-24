@@ -11,18 +11,18 @@ import java.util.Date;
  *
  * @author LENOVO
  */
-public interface CustomerInterface {
+public interface CustomerInterface {    // An entity ADT for customer.
     
     
     
-
-    public String getCustID(); 
+    // Getter and Setter for the attribute of the customer.
+    public String getCustID();    
     public void setCustID(String custID); 
-    public String getName() ;
-    public void setName(String name) ;
-    public char getGender() ;
-    public void setGender(char gender) ;
-    public String getIc() ;
+    public String getName() ; 
+    public void setName(String name) ; 
+    public char getGender() ; 
+    public void setGender(char gender) ;  
+    public String getIc() ; 
     public void setIc(String ic) ;
     public String getContact() ;
     public void setContact(String contact) ;

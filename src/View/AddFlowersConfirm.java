@@ -5,6 +5,7 @@
  */
 package View;
 
+import Control.MaintainCatalogControl;
 import DA.CatalogDA;
 import DA.CountDA;
 import Model.Catalog;
@@ -20,24 +21,23 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
     /**
      * Creates new form AddFlowersConfirm
      */
-    
-     private CatalogInterface catalog;
-    private CountDA countDA;
-    private CatalogDA catalogDA;
-    /**
-     * Creates new form AddCustomerConfirm
-     */
-    public AddFlowersConfirm(CatalogInterface catalog) {
+    private CatalogInterface catalog = null;
+    private MaintainCatalogControl control;
+
+    public AddFlowersConfirm(MaintainCatalogControl control, CatalogInterface catalog) {
         initComponents();
-        countDA = new CountDA();
-        catalogDA = new CatalogDA();
+        this.control = control;
         this.catalog = catalog;
         jtfProdID.setText(catalog.getProdID());
-        jtfProdName.setText(catalog.getName());
-        jtfType.setText(String.valueOf(catalog.getType()));
+        jtfProdName.setText(catalog.getName());        
+        if(catalog.getType() == "Bouquet")
+            jtfType.setText("Bouquet");
+        else
+            jtfType.setText("Floral Arrangement");
+        jtfType.setText(catalog.getType());
         jtfPrice.setText(String.valueOf(catalog.getPrice()));
         jtfDescription.setText(catalog.getDescription());
-         jtfStock.setText(String.valueOf(catalog.getStock()));
+        jtfStock.setText(String.valueOf(catalog.getStock()));
         
     }
     public AddFlowersConfirm() {
@@ -90,7 +90,7 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
         jlblHeader.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblHeader.setForeground(new java.awt.Color(153, 0, 0));
         jlblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlblHeader.setText("Catalog Maintenance");
+        jlblHeader.setText("Add Catalog");
 
         jlblType.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblType.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -214,9 +214,12 @@ public class AddFlowersConfirm extends javax.swing.JFrame {
 
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         // TODO add your handling code here
-        catalogDA.addCatalog(catalog);
-        countDA.increaseProductCount();
-        JOptionPane.showMessageDialog(null, "Catalog Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+   if(catalog!= null){
+            control.addCatalog(catalog);
+         
+            JOptionPane.showMessageDialog(null, catalog.getProdID() + " added success.");
+            
+        }
         this.dispose();
     }//GEN-LAST:event_jConfirmActionPerformed
 

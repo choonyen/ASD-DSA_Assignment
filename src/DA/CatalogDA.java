@@ -52,7 +52,7 @@ public class CatalogDA {
         try{
             stmt = conn.prepareStatement(insertStr);
             stmt.setString(1, catalog.getProdID());
-            stmt.setString(2, catalog.getName());   
+            stmt.setString(2, catalog.getName());
             stmt.setString(3, catalog.getType());
             stmt.setDouble(4, catalog.getPrice());
             stmt.setString(5, catalog.getDescription());

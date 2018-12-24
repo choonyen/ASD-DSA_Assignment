@@ -9,7 +9,7 @@ package Model;
  *
  * @author Choonyen
  */
-public class CustomizedFloral{
+public class CustomizedFloral implements CustomizedFloralInterface{
     
     private String orderID;
     private String custID;

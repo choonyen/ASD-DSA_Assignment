@@ -9,8 +9,10 @@ package Model;
  *
  * @author LENOVO
  */
-public interface CorporateCustomerInterface extends CustomerInterface{
+public interface CorporateCustomerInterface extends CustomerInterface{     // An Entity ADT that implements Customer ADT
     
+    
+    //Getter and Setter for Corporate Customer's attribute
     public double getCreditLimit();
     public void setCreditLimit(double creditLimit);
     public String getCompanyName();

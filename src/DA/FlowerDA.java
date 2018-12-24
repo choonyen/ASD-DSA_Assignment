@@ -7,7 +7,6 @@ package DA;
 import Model.*;
 import java.sql.*;
 import javax.swing.*;
-import java.util.*;
 
 /**
  *
@@ -26,9 +25,9 @@ public class FlowerDA {
         createConnection();
     }
     
-    public CustomizedList<Flower> getFlowerList(){
+    public List<Flower> getFlowerList(){
         String queryStr = "SELECT * FROM " + tableName;
-        CustomizedList<Flower> flowerList = new CustomizedLinkedList();
+        List<Flower> flowerList = new LinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();

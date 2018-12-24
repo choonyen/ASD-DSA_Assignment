@@ -7,7 +7,6 @@ package DA;
 import Model.*;
 import java.sql.*;
 import javax.swing.*;
-import java.util.*;
 /**
  *
  * @author Choonyen
@@ -25,9 +24,9 @@ public class AccessoryDA {
         createConnection();
     }
     
-    public CustomizedList<Accessory> getAccessoryList(){
+    public List<Accessory> getAccessoryList(){
         String queryStr = "SELECT * FROM " + tableName;
-        CustomizedList<Accessory> accessoryList = new CustomizedLinkedList();
+        List<Accessory> accessoryList = new LinkedList();
         try{
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();

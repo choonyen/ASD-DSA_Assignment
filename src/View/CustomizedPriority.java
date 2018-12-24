@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class CustomizedPriority extends javax.swing.JFrame {
 
     
-    private CustomizedFloral customizedFloral;
+    private CustomizedFloralInterface customizedFloral;
     private CustomizedMaintenanceControl control;
     private double priorPrice;
     private double total;
@@ -29,7 +29,7 @@ public class CustomizedPriority extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CustomizedPriority(CustomizedMaintenanceControl control, CustomizedFloral customizedFloral)
+    public CustomizedPriority(CustomizedMaintenanceControl control, CustomizedFloralInterface customizedFloral)
     {
         this.customizedFloral = customizedFloral;
         this.control = control;     
@@ -151,17 +151,17 @@ public class CustomizedPriority extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jbtConfirm)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(rbtFlexi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textPrice))
+                        .addComponent(rbtFlexi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rbtNormal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rbtExpress)))
+                        .addComponent(rbtExpress))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(textPrice)
+                            .addComponent(jbtConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(

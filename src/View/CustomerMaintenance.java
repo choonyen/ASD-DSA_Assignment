@@ -150,6 +150,7 @@ public class CustomerMaintenance extends javax.swing.JFrame {
     private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
         // TODO add your handling code here:
         control.updateDatabase();
+        this.dispose();
     }//GEN-LAST:event_jbExitActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -22,6 +22,10 @@ public class Catalog implements CatalogInterface{
     public Catalog(){
     }
 
+    public Catalog(String Prodid) {
+        this.Prodid = Prodid;
+    }
+
     public Catalog(String Prodid, String Name, String Type,double Price,String Description, int Stock){
         this.Prodid = Prodid;
         this.Name = Name;

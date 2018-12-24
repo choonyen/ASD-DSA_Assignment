@@ -19,7 +19,7 @@ public class DisplayPrior extends javax.swing.JFrame {
     CustomerInterface customer;
     CustomizedMaintenanceControl control;
     CustomerMaintenanceControl controlCustomer;
-    Iterator<CustomizedFloral> customizedList;
+    Iterator<CustomizedFloralInterface> customizedList;
     /**
      * Creates new form DisplayPrior
      */
@@ -37,7 +37,7 @@ public class DisplayPrior extends javax.swing.JFrame {
 
         while(customizedList.hasNext())
         {       
-            CustomizedFloral custFloral = customizedList.next();
+            CustomizedFloralInterface custFloral = customizedList.next();
             if(custFloral.getPriority().equals("Express"))
             {
                 Vector rowExpress = new Vector();
@@ -55,7 +55,7 @@ public class DisplayPrior extends javax.swing.JFrame {
         customizedList = control.getAllCustomized().getIterator();
         while(customizedList.hasNext())
         {       
-            CustomizedFloral custFloral = customizedList.next();
+            CustomizedFloralInterface custFloral = customizedList.next();
             if(custFloral.getPriority().equals("Normal"))
             {
                 Vector rowNormal = new Vector();
@@ -74,7 +74,7 @@ public class DisplayPrior extends javax.swing.JFrame {
         while(customizedList.hasNext())
         {       
             
-            CustomizedFloral custFloral = customizedList.next();
+            CustomizedFloralInterface custFloral = customizedList.next();
             if(custFloral.getPriority().equals("Flexi"))
             {
                 Vector rowFlexi = new Vector();

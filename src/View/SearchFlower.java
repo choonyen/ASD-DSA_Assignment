@@ -6,21 +6,30 @@
 package View;
 import Model.*;
 import Control.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author lamzn
  */
 public class SearchFlower extends javax.swing.JFrame {
-MaintainCatalogControl maintainCatalogControl;
+MaintainCatalogControl control;
     /**
      * Creates new form SearchFlower
      */
     public SearchFlower() {
-        maintainCatalogControl = new MaintainCatalogControl();
+        
         initComponents();
     }
 
+    
+    public SearchFlower(MaintainCatalogControl control){
+      this.control = control;
+        initComponents();
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,15 +140,33 @@ MaintainCatalogControl maintainCatalogControl;
 
     private void jSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchActionPerformed
         // TODO add your handling code here:
-        String id = jtfProdID.getText();
-        CatalogInterface catalog = maintainCatalogControl.searchCatalog(id);
-        
-        if(catalog != null)
-        {
-            ViewFlower viewflower = new ViewFlower(catalog);
-            viewflower.setVisible(true);
-            this.setVisible(false);
+      String id = jtfProdID.getText();
+
+        if(jtfProdID.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Empty Field!!!!", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        else
+        {
+            CatalogInterface catalog = control.getCatalogById(id);
+            if(control.prodIdValidation(id))
+            {
+                    if(catalog!=null)
+                    {
+                        ViewFlower viewflower = new ViewFlower(control,catalog);
+                        viewflower.setVisible(true);
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null, "ID Does not Exists!", "ERROR", JOptionPane.ERROR_MESSAGE);
+   
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "ID not Valid! Example: P000 ", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            
+                
+        }
+        this.dispose();
     }//GEN-LAST:event_jSearchActionPerformed
 
     /**

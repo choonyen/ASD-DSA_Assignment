@@ -203,10 +203,10 @@ public class PayInvoice extends javax.swing.JFrame {
     private void jbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchActionPerformed
         // TODO add your handling code here:
         String invoiceNo = jtfInvoiceNo.getText();
-        if(invoiceNo != ""){
+        if(!invoiceNo.equals("")){
             if(control.invoiceNoValidation(invoiceNo)){
                 invoice = control.getInvoice(invoiceNo);
-                if(invoice != null){
+                if(invoice != null && !invoice.getIsPaid()){
                     jtfCustomerId.setText(invoice.getCustomer().getCustID());
                     jtfAmount.setText(String.valueOf(invoice.getAmount()));
                     jtfGeneratedDate.setText(dateFormat.format(invoice.getGeneratedDate()));
@@ -219,8 +219,12 @@ public class PayInvoice extends javax.swing.JFrame {
                     jbPay.setVisible(true);
                 
                 }
-                else{
+                else if (invoice == null){
                     JOptionPane.showMessageDialog(null, "Record Not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "This invoice is paid.", "Error", JOptionPane.ERROR_MESSAGE);
+
                 }
             }
             else{

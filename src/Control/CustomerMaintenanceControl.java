@@ -88,7 +88,7 @@ public class CustomerMaintenanceControl {
     }
 
     public CustomerInterface getConsumerByIc(String ic) {
-        
+
         Iterator<CustomerInterface> consumerList = CONSUMER_LIST.getIterator();
         CustomerInterface result = null;
         while (consumerList.hasNext()) {
@@ -164,29 +164,32 @@ public class CustomerMaintenanceControl {
     }
 
     public void generateInvoice() {
-        
+
         Calendar calender = Calendar.getInstance();
         List<Invoice> unpaidList = getUnpaidList();
         if (calender.getActualMaximum(Calendar.DATE) == calender.get(Calendar.DATE)) {
             Iterator<CorporateCustomerInterface> corporateCustomerList = CORPORATE_CUSTOMER_LIST.getIterator();
-            
+
             while (corporateCustomerList.hasNext()) {
                 CorporateCustomerInterface corporateCustomer = corporateCustomerList.next();
                 if (corporateCustomer.getRemainingCreditLimit() < corporateCustomer.getCreditLimit()) {
-                    double amount=0 ;
-                    if(unpaidList!=null){
+                    double amount = 0;
+                    if (unpaidList != null) {
                         Iterator<Invoice> unpaidIterator = unpaidList.getIterator();
-                    while (unpaidIterator.hasNext()) {
-                        Invoice invoice = unpaidIterator.next();
-                        if (invoice.getCustomer().getCustID().equals(corporateCustomer.getCustID())) {
-                            amount += invoice.getAmount();
+                        while (unpaidIterator.hasNext()) {
+                            Invoice invoice = unpaidIterator.next();
+                            if (invoice.getCustomer().getCustID().equals(corporateCustomer.getCustID())) {
+                                amount += invoice.getAmount();
+                            }
                         }
-                    }
                     }
                     if (amount == 0) {
                         amount = corporateCustomer.getCreditLimit() - corporateCustomer.getRemainingCreditLimit();
                     } else {
                         amount = corporateCustomer.getCreditLimit() - corporateCustomer.getRemainingCreditLimit() - amount;
+                        if (amount == 0) {
+                            continue;
+                        }
                     }
                     Invoice invoice = new Invoice(String.format("I%03d", INVOICE_COUNT++), corporateCustomer, amount, new Date(), false);
                     INVOICE_LIST.add(invoice);
@@ -196,18 +199,18 @@ public class CustomerMaintenanceControl {
 
     }
 
-    public List<Invoice> getUnpaidList() {
+    private List<Invoice> getUnpaidList() {
         Iterator<Invoice> invoiceList = INVOICE_LIST.getIterator();
         List<Invoice> unpaidInvoice = new LinkedList();
         while (invoiceList.hasNext()) {
             Invoice invoice = invoiceList.next();
             if (!invoice.getIsPaid()) {
                 unpaidInvoice.add(invoice);
-                
+
             }
 
         }
-        
+
         return unpaidInvoice;
     }
 
@@ -229,7 +232,7 @@ public class CustomerMaintenanceControl {
         if (cal.get(Calendar.DAY_OF_MONTH) > 7) {
             Iterator<Invoice> invoiceList = getUnpaidList().getIterator();
             while (invoiceList.hasNext()) {
-                Invoice invoice = invoiceList.next();               
+                Invoice invoice = invoiceList.next();
                 CorporateCustomerInterface corporateCustomer = getCorporateCustomerById(invoice.getCustomer().getCustID());
                 corporateCustomer.setIsActive(false);
                 updateCorporateCustomer(corporateCustomer);

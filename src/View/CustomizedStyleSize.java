@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class CustomizedStyleSize extends javax.swing.JFrame {
     CustomizedMaintenanceControl control;
-    CustomizedFloral customizedFloral;
+    CustomizedFloralInterface customizedFloral;
     CustomerInterface customer;
     Iterator <Style> styleList;
     Iterator <Size> sizeList;

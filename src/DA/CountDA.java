@@ -62,13 +62,22 @@ public class CountDA {
         }
  
     }
-    public void increaseProductCount(){
-        Count count = this.getCount();
-        int productCount = count.getProductCount() + 1;
+    public void increaseCatalogCount(int count){
 
         try{
-            stmt = conn.prepareStatement("Update Count set PRODUCTCOUNT = ? ");
-            stmt.setInt(1, productCount);
+            stmt = conn.prepareStatement(("Update Count set PRODUCTCOUNT = " + count));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
+    
+     public void increasePromotionCount(int count){
+
+        try{
+            stmt = conn.prepareStatement(("Update Count set PROMOTIONCOUNT = " + count));
             stmt.executeUpdate();
                   
         }catch (SQLException ex) {
