@@ -63,10 +63,22 @@ public class CountDA {
  
     }
     
-     public void increaseCorporateCustomerCount(int count){ 
+    public void increaseCorporateCustomerCount(int count){ 
 
         try{
             stmt = conn.prepareStatement(("Update Count set CORPORATECUSTOMERCOUNT = " + count));
+            stmt.executeUpdate();
+                  
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+ 
+    }
+    
+    public void increaseInvoiceCount(int count){ 
+
+        try{
+            stmt = conn.prepareStatement(("Update Count set INVOICECOUNT = " + count));
             stmt.executeUpdate();
                   
         }catch (SQLException ex) {

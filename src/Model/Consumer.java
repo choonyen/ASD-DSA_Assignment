@@ -37,6 +37,10 @@ public class Consumer implements CustomerInterface{
         this.contact = contact;
     }
     
+    public Consumer(String custID){
+        this.custID = custID;
+    }
+    
     public String getCustID() {
         return custID;
     }

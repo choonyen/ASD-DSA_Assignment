@@ -13,25 +13,16 @@ import java.util.Iterator;
  */
 public class CustomerMaintenance extends javax.swing.JFrame {
     private CustomerMaintenanceControl control;
-    private List<CustomerInterface> consumerList;
-    private List<CorporateCustomerInterface> corporateCustomerList;
+
     /**
      * Creates new form CustomerMaintenance
      */
     public CustomerMaintenance() {
         initComponents();
         control = new CustomerMaintenanceControl();
-        consumerList = control.getAllConsumer();
-        corporateCustomerList = control.getAllCorporateCustomer();
-        Iterator<CustomerInterface> consumerIterator = consumerList.getIterator();
-        while(consumerIterator.hasNext()){
-            System.out.println(consumerIterator.next().getName());
-        }
-        System.out.println("");
-        Iterator<CorporateCustomerInterface> corporateCustomerIterator = corporateCustomerList.getIterator();
-        while(corporateCustomerIterator.hasNext()){
-            System.out.println(corporateCustomerIterator.next().getName());
-        }
+        control.generateInvoice();
+        control.unactiveCustomer();
+        
         
     }
 
@@ -89,6 +80,11 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         });
 
         jButton4.setText("Monthly Invoice");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jbExit.setText("Exit");
         jbExit.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +163,12 @@ public class CustomerMaintenance extends javax.swing.JFrame {
         CustomerDisplay customerDisplay = new CustomerDisplay(control);
         customerDisplay.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        InvoiceUI invoiceUI = new InvoiceUI(control);
+        invoiceUI.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
